@@ -12,7 +12,7 @@ class Inicio extends React.Component {
         <img src={logo} alt="logo"/>
         <Titulo texto="Quizzando"/>
         <input type="text" placeholder="Digite seu nome"/>
-        <button>jogar</button>
+        <button>Jogar</button>
       </div>
     );
   }

@@ -1,10 +1,17 @@
 import * as React from 'react';
-import './inicio.scss';
+import './temas.scss';
+import Titulo from "../../components/titulo/titulo";
 
-function Temas(){
-  return (
-    <div></div>
-  );
+class Temas extends React.Component {
+
+  render() {
+    return (
+        <div>
+          <Titulo texto="Tema"/>
+        </div>
+    );
+  }
+
 }
 
 export default Temas;
