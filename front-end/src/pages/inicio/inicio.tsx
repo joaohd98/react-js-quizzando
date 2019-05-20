@@ -16,6 +16,7 @@ class Inicio extends React.Component {
       valor: "",
       valido: null,
       erro_mensagem: "",
+      ref: React.createRef(),
       validations: [
         {
           regra: "required",
@@ -34,7 +35,7 @@ class Inicio extends React.Component {
 
     event.preventDefault();
 
-    alert(Validations.validarFormulario(this.state, this.setState.bind(this)) ? "valido" : "invalido");
+    console.log(Validations.validarFormulario(this.state, this.setState.bind(this)) ? "valido" : "invalido");
 
     console.log(this.state);
 

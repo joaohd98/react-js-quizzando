@@ -25,7 +25,15 @@ export class Validations{
 
         if(!Validations.validarCampo(validation.regra, campo.valor)){
 
+          if(formularioValido) {
+
+            campo.ref.current.focus();
+            campo.class = 'input-invalido-formulario';
+
+          }
+
           campo.erro_mensagem = validation.texto;
+
           valido = false;
           formularioValido = false;
 
