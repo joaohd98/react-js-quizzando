@@ -2,7 +2,8 @@ import * as React from 'react';
 import './inicio.scss';
 import logo from '../../assets/icons/logo.svg';
 import Titulo from "../../components/titulo/titulo";
-import Input from "../../components/input/input";
+import Input, {StateInterface} from "../../components/input/input";
+import {Validations} from "../../validations/validations";
 
 
 class Inicio extends React.Component {
@@ -10,17 +11,20 @@ class Inicio extends React.Component {
   constructor(props: any){
     super(props);
 
+    let nome: StateInterface = {
+      valor: "",
+      valido: null,
+      erro_mensagem: "",
+      validations: [
+        {
+          regra: "required",
+          texto: "Campo nome é obrigatório."
+        }
+      ]
+    };
+
     this.state = {
-      nome: {
-        valor: "",
-        valido: null,
-        validations: [
-          {
-            regra: "required",
-            texto: "Campo nome é obrigatório."
-          }
-        ]
-      },
+      nome: nome
     };
 
   }
@@ -28,6 +32,8 @@ class Inicio extends React.Component {
   comecarJogo = (event: any) => {
 
     event.preventDefault();
+
+    alert(Validations.validarFormulario(this.state, this.setState.bind(this)) ? "valido" : "invalido");
 
     console.log(this.state);
 

@@ -1,12 +1,52 @@
+import {StateInterface} from "../components/input/input";
+
 export class Validations{
 
-  static validar(tipo: string, valor: string){
+  static validarCampo(tipo: string, valor: string){
 
     switch (tipo) {
       case "required": return this.required(valor);
     }
 
   }
+
+  static validarFormulario(state: any, funcState: Function){
+
+    let formularioValido = true;
+
+    for(let chave in state){
+
+      let campo: StateInterface = state[chave];
+      let valido = true;
+
+      for(let i = 0; campo.validations && i < campo.validations.length; i++){
+
+        let validation = campo.validations[i];
+
+        if(!Validations.validarCampo(validation.regra, campo.valor)){
+
+          campo.erro_mensagem = validation.texto;
+          valido = false;
+          formularioValido = false;
+
+          break;
+
+        }
+
+      }
+
+      campo.valido = valido;
+
+      funcState({
+        [chave]: campo
+      });
+
+    }
+
+    return formularioValido;
+
+  }
+
 
   static required(valor: string){
 

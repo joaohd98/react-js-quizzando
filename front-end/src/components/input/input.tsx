@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import './input.scss';
 import {Validations} from "../../validations/validations";
 
+export interface StateInterface {
+  valor: string,
+  valido: any,
+  erro_mensagem?: string;
+  validations?: [
+    {
+      regra: string,
+      texto: string
+    }
+  ]
+}
+
 interface InputInterface {
   state: any,
   funcState: Function,
@@ -11,8 +23,6 @@ interface InputInterface {
 }
 
 class Input extends Component<InputInterface> {
-
-  erroTexto: string = "";
 
   constructor(props: any){
     super(props);
@@ -26,7 +36,7 @@ class Input extends Component<InputInterface> {
 
     const nome = this.props.nome;
 
-    let state = this.props.state[nome];
+    let state: StateInterface = this.props.state[nome];
     state.valor = event.target.value;
 
     this.props.funcState({
@@ -51,15 +61,15 @@ class Input extends Component<InputInterface> {
   validar = () => {
 
     const nome = this.props.nome;
-    let state = this.props.state[nome];
+    let state:StateInterface = this.props.state[nome];
     let valido = true;
 
-    for(let i = 0; i < state.validations.length; i++){
+    for(let i = 0; state.validations && i < state.validations.length; i++){
 
       let validation = state.validations[i];
 
-      if(!Validations.validar(validation.regra, state.valor)){
-        this.erroTexto = validation.texto;
+      if(!Validations.validarCampo(validation.regra, state.valor)){
+        state.erro_mensagem = validation.texto;
         valido = false;
         break;
       }
@@ -79,7 +89,7 @@ class Input extends Component<InputInterface> {
     return (
       <div className="input-container">
         <input className={this.pegarClasseInput()} onBlur={this.validar} type={this.props.tipo} name={this.props.nome} autoComplete="off" onChange={this.mudarInput} value={this.props.state[this.props.nome].valor} placeholder={this.props.placeholder}/>
-        { this.pegarClasseInput() == 'input-invalido' ? (<span>{this.erroTexto}</span>) : ''}
+        { this.pegarClasseInput() === 'input-invalido' ? (<span>{this.props.state[this.props.nome].erro_mensagem}</span>) : ''}
       </div>
     );
 
