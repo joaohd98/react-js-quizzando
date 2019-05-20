@@ -3,7 +3,7 @@
   input {
 
     display: block;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 20px;
     background: transparent;
     border: none;
@@ -14,8 +14,23 @@
     outline: none;
     font-weight: 700;
 
+    &.input-valido{
+      border-bottom-color: var(--color-success);
+    }
+
+    &.input-invalido{
+      border-bottom-color: var(--color-danger);
+      margin-bottom: 0;
+    }
+
   }
 
+  span{
+
+    color: var(--color-danger);
+    font-size: 17px;
+
+  }
 
   ::placeholder {
 

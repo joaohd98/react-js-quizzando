@@ -11,7 +11,16 @@ class Inicio extends React.Component {
     super(props);
 
     this.state = {
-      nome: "",
+      nome: {
+        valor: "",
+        valido: null,
+        validations: [
+          {
+            regra: "required",
+            texto: "Campo nome é obrigatório."
+          }
+        ]
+      },
     };
 
   }
@@ -22,7 +31,6 @@ class Inicio extends React.Component {
 
     console.log(this.state);
 
-
   };
 
   render() {
@@ -31,7 +39,7 @@ class Inicio extends React.Component {
         <img src={logo} alt="logo"/>
         <Titulo texto="Quizzando"/>
         <form onSubmit={this.comecarJogo} method="post">
-          <Input state={this.state} funcState={this.setState.bind(this)} nome="nome" tipo="text" placeholder="Digite o seu nome"/>
+          <Input state={this.state} funcState={this.setState.bind(this)} nome="nome" placeholder="Digite o seu nome"/>
           <button>Jogar</button>
         </form>
       </div>
