@@ -5,9 +5,12 @@ import Titulo from "../../components/titulo/titulo";
 import Input, {StateInterface} from "../../components/input/input";
 import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
+import {Redirect} from "react-router";
 
 
 class Inicio extends React.Component {
+
+  paginaDestino = "";
 
   constructor(props: any){
     super(props);
@@ -31,17 +34,26 @@ class Inicio extends React.Component {
 
   }
 
+
   comecarJogo = (event: any) => {
 
     event.preventDefault();
 
-    console.log(Validations.validarFormulario(this.state, this.setState.bind(this)) ? "valido" : "invalido");
+    let retorno = Validations.validarFormulario(this.state, this.setState.bind(this));
 
-    console.log(this.state);
+    if(!retorno)
+      return;
+
+    this.paginaDestino = "/temas";
+
 
   };
 
   render() {
+
+    if(this.paginaDestino)
+      return <Redirect to={this.paginaDestino}/>;
+
     return (
       <div className="inicio">
         <form onSubmit={this.comecarJogo} method="post">
@@ -52,6 +64,7 @@ class Inicio extends React.Component {
         </form>
       </div>
     );
+
   }
 
 }

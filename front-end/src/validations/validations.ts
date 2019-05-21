@@ -13,11 +13,14 @@ export class Validations{
   static validarFormulario(state: any, funcState: Function){
 
     let formularioValido = true;
+    let retorno = [];
 
     for(let chave in state){
 
       let campo: StateInterface = state[chave];
       let valido = true;
+
+      retorno.push({chave: campo.valor});
 
       for(let i = 0; campo.validations && i < campo.validations.length; i++){
 
@@ -51,8 +54,7 @@ export class Validations{
 
     }
 
-
-    return formularioValido;
+    return formularioValido ? retorno : false;
 
   }
 
