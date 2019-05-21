@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './temas.scss';
 import Titulo from "../../components/titulo/titulo";
-import {Usuario} from "../../guard/Usuario";
+import {Usuario} from "../../guard/usuario";
 
 class Temas extends React.Component {
 

@@ -1,14 +1,15 @@
 import * as React from "react";
-import {BrowserRouter, Route} from "react-router-dom";
-import Inicio from "../pages/inicio/inicio";
+import {BrowserRouter} from "react-router-dom";
 import Temas from "../pages/temas/temas";
+import {GuestRoute, LoggedRoute} from "../guard/guard";
+import Inicio from "../pages/inicio/inicio";
 
 function Layout() {
 
   return (
     <BrowserRouter>
-      <Route path={"/"} exact={true} component={Inicio}/>
-      <Route path={"/temas"} component={Temas}/>
+      <LoggedRoute path={"/"} pathRedirect={"/login"} exact="true" component={Temas} />
+      <GuestRoute path={"/login"} pathRedirect={"/"} exact="true" component={Inicio} />
     </BrowserRouter>
   );
 }

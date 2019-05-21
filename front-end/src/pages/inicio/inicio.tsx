@@ -6,7 +6,7 @@ import Input, {StateInterface} from "../../components/input/input";
 import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
 import {Redirect} from "react-router";
-import {Usuario} from "../../guard/Usuario";
+import {Usuario} from "../../guard/usuario";
 
 
 class Inicio extends React.Component {
@@ -48,7 +48,7 @@ class Inicio extends React.Component {
 
     Usuario.entrar(retorno["nome"]);
 
-    this.paginaDestino = "/temas";
+    this.paginaDestino = "/";
 
   };
 

@@ -2,7 +2,7 @@ export class LocalStorage {
 
   static pegarDados(parametro: string){
 
-    return JSON.parse(localStorage.getItem(parametro) || "");
+    return localStorage.getItem(parametro) ? JSON.parse(localStorage.getItem(parametro) || "") :  null;
 
   }
 
