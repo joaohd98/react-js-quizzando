@@ -2,18 +2,11 @@ import {StateInterface} from "../components/input/input";
 
 export class Validations{
 
-  static validarCampo(tipo: string, valor: string | undefined){
+  static validarCampo(tipo: string, valor: string = ''){
 
-    if(valor) {
-
-      switch (tipo) {
-        case "required":
-          return this.required(valor);
-      }
-
+    switch (tipo) {
+      case "required": return Validations.required(valor);
     }
-    else
-      return true;
 
   }
 
@@ -61,7 +54,7 @@ export class Validations{
 
     }
 
-    return formularioValido ? retorno : {};
+    return formularioValido ? retorno : null;
 
   }
 

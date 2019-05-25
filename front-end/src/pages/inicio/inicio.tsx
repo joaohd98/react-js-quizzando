@@ -17,7 +17,6 @@ class Inicio extends React.Component {
     super(props);
 
     let nome: StateInterface = {
-      ref: React.createRef(),
       validations: [
         {
           regra: "required",
@@ -32,7 +31,6 @@ class Inicio extends React.Component {
 
   }
 
-
   comecarJogo = (event: any) => {
 
     event.preventDefault();
@@ -41,7 +39,6 @@ class Inicio extends React.Component {
 
     if(!retorno)
       return;
-
 
     Usuario.entrar(retorno["nome"]);
 
@@ -60,7 +57,6 @@ class Inicio extends React.Component {
           <div className="img-container">
             <img src={logo} alt="logo"/>
           </div>
-
           <Titulo texto="Quizzando"/>
           <Input state={this.state} funcState={this.setState.bind(this)} nome="nome" placeholder="Digite o seu nome"/>
           <ButtonSubmit texto="JOGAR"></ButtonSubmit>

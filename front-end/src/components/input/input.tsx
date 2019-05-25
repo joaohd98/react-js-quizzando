@@ -7,7 +7,7 @@ export interface StateInterface {
   valido?: any,
   erro_mensagem?: string;
   class?: string;
-  ref: any;
+  ref?: any;
   validations?: [
     {
       regra: string,
@@ -29,23 +29,27 @@ class Input extends Component<InputInterface> {
   constructor(props: any){
     super(props);
 
+    this.inicializar();
+
+  }
+
+  inicializar = () => {
+
     let state: StateInterface = this.props.state[this.props.nome];
+
+    state.class = "";
+    state.valido = null;
+    state.ref = React.createRef();
 
     if(!state.valor)
       state.valor = "";
-
-    if(!state.class)
-      state.class = "";
-
-    if(!state.valido)
-      state.valido = null;
 
     this.props.state[this.props.nome] = state;
 
     if(this.props.state[this.props.nome].valor)
       this.validar();
 
-  }
+  };
 
   mudarInput = (event: any) => {
 
