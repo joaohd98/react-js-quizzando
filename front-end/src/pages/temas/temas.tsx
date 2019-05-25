@@ -7,20 +7,28 @@ class Temas extends React.Component {
 
   usuario: Usuario = Usuario.pegarUsuario();
 
-  sair(){
+  sair = () => {
 
     Usuario.sair();
 
-  }
+    this.setState({
+      'pagina_destino': "/login"
+    });
+
+  };
 
   render() {
+
+    if(this.state && this.state['pagina_destino'])
+      return <Redirect to={this.state['pagina_destino']}/>;
+
     return (
         <div className="temas">
           <div className="row-header">
             <p>{`Olá, ${this.usuario.nome}`}</p>
-            <button onClick={this.sair}>
+            <p onClick={this.sair}>
               Sair
-            </button>
+            </p>
           </div>
         </div>
     );

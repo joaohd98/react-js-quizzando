@@ -8,10 +8,7 @@ import ButtonSubmit from "../../components/button-submit/button-submit";
 import {Redirect} from "react-router";
 import {Usuario} from "../../guard/usuario";
 
-
 class Inicio extends React.Component {
-
-  paginaDestino = "";
 
   constructor(props: any){
     super(props);
@@ -42,14 +39,16 @@ class Inicio extends React.Component {
 
     Usuario.entrar(retorno["nome"]);
 
-    this.paginaDestino = "/";
+    this.setState({
+      'pagina_destino': "/"
+    });
 
   };
 
   render() {
 
-    if(this.paginaDestino)
-      return <Redirect to={this.paginaDestino}/>;
+    if(this.state && this.state['pagina_destino'])
+      return <Redirect to={this.state['pagina_destino']}/>;
 
     return (
       <div className="inicio">
@@ -59,7 +58,7 @@ class Inicio extends React.Component {
           </div>
           <Titulo texto="Quizzando"/>
           <Input state={this.state} funcState={this.setState.bind(this)} nome="nome" placeholder="Digite o seu nome"/>
-          <ButtonSubmit texto="JOGAR"></ButtonSubmit>
+          <ButtonSubmit texto="JOGAR"/>
         </form>
       </div>
     );
