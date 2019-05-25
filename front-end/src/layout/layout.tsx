@@ -8,8 +8,8 @@ function Layout() {
 
   return (
     <BrowserRouter>
-      <LoggedRoute path={"/"} pathRedirect={"/login"} exact="true" component={Temas} />
-      <GuestRoute path={"/login"} pathRedirect={"/"} exact="true" component={Inicio} />
+      <LoggedRoute path={"/"} pathRedirect={"/login"} exact={true} component={Temas} />
+      <GuestRoute path={"/login"} pathRedirect={"/"} exact={true} component={Inicio} />
     </BrowserRouter>
   );
 }

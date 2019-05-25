@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './temas.scss';
-import Titulo from "../../components/titulo/titulo";
 import {Usuario} from "../../guard/usuario";
 
 class Temas extends React.Component {
@@ -9,8 +8,13 @@ class Temas extends React.Component {
 
   render() {
     return (
-        <div>
-          <Titulo texto={`Olá, ${this.usuario.nome}`}/>
+        <div className="temas">
+          <div className="row-header">
+            <p>{`Olá, ${this.usuario.nome}`}</p>
+            <p>
+              Sair
+            </p>
+          </div>
         </div>
     );
   }

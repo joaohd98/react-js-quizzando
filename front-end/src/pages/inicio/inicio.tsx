@@ -17,9 +17,6 @@ class Inicio extends React.Component {
     super(props);
 
     let nome: StateInterface = {
-      valor: "",
-      valido: null,
-      erro_mensagem: "",
       ref: React.createRef(),
       validations: [
         {
@@ -60,7 +57,9 @@ class Inicio extends React.Component {
     return (
       <div className="inicio">
         <form onSubmit={this.comecarJogo} method="post">
-          <img src={logo} alt="logo"/>
+          <div className="img-container">
+            <img src={logo} alt="logo"/>
+          </div>
           <Titulo texto="Quizzando"/>
           <Input state={this.state} funcState={this.setState.bind(this)} nome="nome" placeholder="Digite o seu nome"/>
           <ButtonSubmit texto="JOGAR"></ButtonSubmit>

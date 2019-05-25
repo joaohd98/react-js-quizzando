@@ -2,11 +2,18 @@ import {StateInterface} from "../components/input/input";
 
 export class Validations{
 
-  static validarCampo(tipo: string, valor: string){
+  static validarCampo(tipo: string, valor: string | undefined){
 
-    switch (tipo) {
-      case "required": return this.required(valor);
+    if(valor) {
+
+      switch (tipo) {
+        case "required":
+          return this.required(valor);
+      }
+
     }
+    else
+      return true;
 
   }
 

@@ -3,8 +3,8 @@ import './input.scss';
 import {Validations} from "../../validations/validations";
 
 export interface StateInterface {
-  valor: string,
-  valido: any,
+  valor?: string,
+  valido?: any,
   erro_mensagem?: string;
   class?: string;
   ref: any;
@@ -28,6 +28,19 @@ class Input extends Component<InputInterface> {
 
   constructor(props: any){
     super(props);
+
+    let state: StateInterface = this.props.state[this.props.nome];
+
+    if(!state.valor)
+      state.valor = "";
+
+    if(!state.class)
+      state.class = "";
+
+    if(!state.valido)
+      state.valido = null;
+
+    this.props.state[this.props.nome] = state;
 
     if(this.props.state[this.props.nome].valor)
       this.validar();
