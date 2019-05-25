@@ -1,10 +1,10 @@
 .input-container{
 
   width: 100%;
+  text-align: center;
 
   input {
 
-    display: block;
     margin-top: 15px;
     margin-bottom: 20px;
     background: transparent;
@@ -15,6 +15,9 @@
     outline: none;
     font-weight: 700;
     width: 100%;
+    max-width: 500px;
+
+
     &.input-valido{
       border-bottom-color: var(--color-success);
     }
