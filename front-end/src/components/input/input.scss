@@ -1,8 +1,10 @@
 .input-container{
 
   width: 50%;
-  margin-right: 25%;
-  margin-left: 25%;
+  margin: auto;
+  max-width: 500px;
+  min-width: 200px;
+
   input {
 
     display: block;
@@ -16,7 +18,6 @@
     outline: none;
     font-weight: 700;
     width: 100%;
-    max-width: 500px;
 
 
     &.input-valido{

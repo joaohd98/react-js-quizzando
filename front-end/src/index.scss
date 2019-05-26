@@ -17,14 +17,15 @@ body {
   background-color: var(--color-principal);
 
   width: 80%;
-  height: 100%;
-  margin: 0 10%;
+  height: 90%;
+  margin: 5% 10%;
 
 
   #root{
 
     height: 100%;
-    display: grid;
+    width: 100%;
+    display: inline-grid;
     align-content: center;
 
   }
