@@ -5,13 +5,14 @@ import {Redirect} from "react-router";
 import Titulo from "../../components/titulo/titulo";
 import ButtonSubmit from "../../components/button-submit/button-submit";
 import {Tema} from "../../models/tema";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Temas extends React.Component {
 
   usuario: Usuario = Usuario.pegarUsuario();
   temas: Array<Tema>;
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.temas = [
@@ -24,6 +25,7 @@ class Temas extends React.Component {
         id: 1,
         texto: "Quadrinhos",
         img: "https://images.livrariasaraiva.com.br/imagemnet/imagem.aspx/?pro_id=9371883&qld=90&l=430&a=-1=1003410132",
+        ativo: true
       },
       {
         id: 2,
@@ -39,7 +41,6 @@ class Temas extends React.Component {
         id: 4,
         texto: "Futebol",
         img: "https://assets.nike.com.br/Html/hotsites/t4content/futebol/slp-masculino/skin/img/mobile/central-cr7-cristiano-futebol-nike.jpg",
-        ativo: true
       },
     ];
 
@@ -47,7 +48,7 @@ class Temas extends React.Component {
 
   }
 
-  inicializarTema(){
+  inicializarTema() {
 
 
   }
@@ -67,9 +68,9 @@ class Temas extends React.Component {
     let tamanho = this.temas.length;
     let index = -1;
 
-    for(let i = 0; i < tamanho; i++){
+    for (let i = 0; i < tamanho; i++) {
 
-      if(this.temas[i].ativo){
+      if (this.temas[i].ativo) {
 
         index = i;
         break;
@@ -85,21 +86,22 @@ class Temas extends React.Component {
     indexPosterior = indexPosterior < tamanho ? indexPosterior : 0;
 
     return (
-      <div>
-          <div className={"card left"}>
-              <img src={this.temas[indexAnterior].img} alt={this.temas[indexAnterior].texto}/>
-              <p>{this.temas[indexAnterior].texto}</p>
-          </div>
-          <div className={"card card-selected"}>
-            <img src={this.temas[index].img} alt={this.temas[index].texto}/>
-            <p>{this.temas[index].texto}</p>
-          </div>
-          <div className={"card right"}>
-            <img src={this.temas[indexPosterior].img} alt={this.temas[indexPosterior].texto}/>
-            <p>{this.temas[indexPosterior].texto}</p>
-          </div>
+      <div className={`row selecionar-tema`}>
+        <div className={"card left"}>
+          <img src={this.temas[indexAnterior].img} alt={this.temas[indexAnterior].texto}/>
+          <p>{this.temas[indexAnterior].texto}</p>
+        </div>
+        <div className={"card card-selected"}>
+          <img src={this.temas[index].img} alt={this.temas[index].texto}/>
+          <p>{this.temas[index].texto}</p>
+        </div>
+        <div className={"card right"}>
+          <img src={this.temas[indexPosterior].img} alt={this.temas[indexPosterior].texto}/>
+          <p>{this.temas[indexPosterior].texto}</p>
+        </div>
       </div>
     )
+
   };
 
   selecionadoTema = () => {
@@ -109,27 +111,30 @@ class Temas extends React.Component {
 
   render() {
 
-    if(this.state && this.state['pagina_destino'])
+    if (this.state && this.state['pagina_destino'])
       return <Redirect to={this.state['pagina_destino']}/>;
 
     return (
-        <div className="temas">
-          <form onSubmit={this.selecionadoTema} method="post">
-            <div className={`row row-header`}>
-              <p>{`Olá, ${this.usuario.nome}`}</p>
-              <p onClick={this.sair}>
-                Sair
-              </p>
-            </div>
-            <div className={`row row-sub-header`}>
-              <Titulo texto="TEMAS"/>
-            </div>
-            <div className={`row selecionar-tema`}>
-            { this.mostrarTemas()}
-            </div>
-            <ButtonSubmit texto="Selecionar"/>
-          </form>
-        </div>
+      <div className="temas">
+        <form onSubmit={this.selecionadoTema} method="post">
+          <div className={`row row-header`}>
+            <p>{`Olá, ${this.usuario.nome}`}</p>
+            <p onClick={this.sair}>
+              <FontAwesomeIcon icon="sign-out-alt" color="white" />
+              Sair
+            </p>
+          </div>
+          <div className={`row row-sub-header`}>
+            <Titulo texto="TEMAS"/>
+          </div>
+          {this.mostrarTemas()}
+          <div className={`row arrows-container`}>
+            <FontAwesomeIcon icon="arrow-left" color="white" />
+            <FontAwesomeIcon icon="arrow-right" color="white" />
+          </div>
+          <ButtonSubmit texto="Selecionar"/>
+        </form>
+      </div>
     );
   }
 

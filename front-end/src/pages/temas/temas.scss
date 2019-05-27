@@ -23,6 +23,10 @@
       width: 50%;
     }
 
+    svg{
+      margin-right: 10px;
+    }
+
     p:first-child{
       text-align: left;
     }
@@ -38,6 +42,7 @@
     justify-content: center;
     perspective: 800px;
 
+
     .card{
 
       height: 40vh;
@@ -50,19 +55,10 @@
       display: inline-block;
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
-      &.left{
-
-
-      }
-
-      &.right{
-
-
-      }
 
       &.card-selected{
 
-        transform: translateZ(100px);
+        transform: translateZ(150px);
         margin-left: -80px;
         margin-right: -80px;
 
@@ -88,6 +84,35 @@
         letter-spacing: 2px;
 
       }
+
+    }
+
+  }
+
+  .arrows-container {
+
+    padding-top: 30px;
+    margin-bottom: 0;
+
+    svg{
+
+      padding: 8px;
+      font-size: 25px;
+      border: 1px solid gray;
+      background-color: gray;
+
+
+    }
+
+    svg:first-child{
+
+      margin-right: 7.5px;
+
+    }
+
+    svg:last-child{
+
+      margin-left: 7.5px;
 
     }
 
