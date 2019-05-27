@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Redirect, Route} from "react-router";
-import {Usuario} from "./usuario";
+import {Usuario} from "../models/usuario";
 
 
 export const LoggedRoute = ({component: Component,  pathRedirect, ...rest}) => (

@@ -6,7 +6,7 @@ import Input, {StateInterface} from "../../components/input/input";
 import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
 import {Redirect} from "react-router";
-import {Usuario} from "../../guard/usuario";
+import {Usuario} from "../../models/usuario";
 
 class Inicio extends React.Component {
 
