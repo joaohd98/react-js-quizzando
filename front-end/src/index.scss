@@ -16,15 +16,16 @@ body {
 
   background-color: var(--color-principal);
 
-  width: 80%;
-  height: 90%;
-  margin: 5% 10%;
+  width: 90%;
+  margin: 0 5%;
 
+  height: 100%;
 
   #root{
 
     height: 100%;
     width: 100%;
+    margin: auto;
     display: inline-grid;
     align-content: center;
 

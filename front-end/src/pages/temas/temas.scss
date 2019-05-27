@@ -36,16 +36,37 @@
   .selecionar-tema{
 
     justify-content: center;
+    perspective: 800px;
 
     .card{
 
-      height: 300px;
-      width: 250px;
+      height: 40vh;
+      width: 40vw;
+      max-width: 250px;
+      max-height: 300px;
       text-align: center;
       border-radius: 30px;
       background-color: white;
       display: inline-block;
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+      &.left{
+
+
+      }
+
+      &.right{
+
+
+      }
+
+      &.card-selected{
+
+        transform: translateZ(100px);
+        margin-left: -80px;
+        margin-right: -80px;
+
+      }
 
       img{
 
@@ -65,7 +86,6 @@
         font-weight: bold;
         margin: 0;
         letter-spacing: 2px;
-
 
       }
 

@@ -41,9 +41,17 @@ class Temas extends React.Component {
               <Titulo texto="TEMAS"/>
             </div>
             <div className={`row selecionar-tema`}>
-              <div className="card">
+              <div className={"card left"}>
                 <img src="https://www.guiabh.com.br/Repositorio/Upload/Destaque/320x320/cinema-com-desconto-em-bh-imagem.jpg" alt=""/>
-                <p>Historia da humanidade</p>
+                <p>Cinema</p>
+              </div>
+              <div className={"card card-selected"}>
+                <img src="https://images.livrariasaraiva.com.br/imagemnet/imagem.aspx/?pro_id=9371883&qld=90&l=430&a=-1=1003410132" alt=""/>
+                <p>Quadrinhos</p>
+              </div>
+              <div className={"card right"}>
+                <img src="https://ih0.redbubble.net/image.451897458.7410/flat,550x550,075,f.u1.jpg" alt=""/>
+                <p>Video games</p>
               </div>
             </div>
             <ButtonSubmit texto="Selecionar"/>
