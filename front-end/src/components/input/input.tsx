@@ -22,6 +22,7 @@ interface InputInterface {
   nome: string,
   tipo?: "text",
   placeholder: string
+  onChangeFunc?: Function
 }
 
 class Input extends Component<InputInterface> {
@@ -64,6 +65,9 @@ class Input extends Component<InputInterface> {
 
     this.validar();
     this.pegarClasseInput();
+
+    if(this.props.onChangeFunc)
+      this.props.onChangeFunc(event.target.value)
 
   };
 

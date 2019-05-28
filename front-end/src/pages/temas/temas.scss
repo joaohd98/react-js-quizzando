@@ -37,11 +37,25 @@
 
   }
 
+  .row-sub-header{
+
+    margin-bottom: 0;
+
+  }
+
   .selecionar-tema{
 
     justify-content: center;
     perspective: 800px;
+    height: 35vh;
 
+    .sem-temas{
+
+      margin: auto;
+      font-size: 25px;
+      font-weight: bold;
+      color: white;
+    }
 
     .card{
 
@@ -93,6 +107,7 @@
 
     padding-top: 30px;
     margin-bottom: 0;
+    height: 5vh;
 
     svg{
 

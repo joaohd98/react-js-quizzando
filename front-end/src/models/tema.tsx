@@ -3,7 +3,18 @@ export class Tema {
   id: number = 0;
   texto: string = "";
   img: string = "";
-  ativo?: boolean = false;
+  ativo?: boolean;
+  mostrar?: boolean;
+
+  constructor() {
+
+    if(this.ativo === undefined)
+      this.ativo = false;
+
+    if(this.mostrar === undefined)
+      this.mostrar = true;
+
+  }
 
 }
 
@@ -20,7 +31,9 @@ export class TemasAtuais{
 
   }
 
-  definirAtuais(temas: Array<Tema>){
+  definirAtuais(temas: Array<Tema>, func: Function | null = null){
+
+    temas = temas.filter((tema) => tema.mostrar);
 
     let tamanho = temas.length;
     let index = -1;
@@ -43,6 +56,9 @@ export class TemasAtuais{
 
     let indexPosterior = index + 1;
     this.indexProximo = indexPosterior < tamanho ? indexPosterior : 0;
+
+    if(func)
+      func();
 
   }
 
