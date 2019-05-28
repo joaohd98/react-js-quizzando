@@ -142,7 +142,8 @@ class Temas extends React.Component {
             <Titulo texto="TEMAS"/>
           </div>
           { this.mostrarTemas() }
-          { this.temas.length > 1 ?
+          {
+            this.temas.length > 1 ?
             <div className={`row arrows-container`}>
               <i onClick={() => this.moverSelecionado("esquerda")}>
                 <FontAwesomeIcon icon="arrow-left" color="#7F37D9" />
@@ -153,7 +154,6 @@ class Temas extends React.Component {
             </div>
             : ''
           }
-
           <ButtonSubmit texto="Selecionar"/>
         </form>
       </div>
