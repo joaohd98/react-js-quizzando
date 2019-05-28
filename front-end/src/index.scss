@@ -6,31 +6,22 @@
 
 }
 
-html{
+html, body{
 
   height: 100%;
   width: 100%;
+  background-color: var(--color-principal);
+  margin: 0;
+  position: relative;
 
 }
-body {
 
-  background-color: var(--color-principal);
+#root {
 
-  width: 90%;
-  margin: 0 5%;
-
-  height: 100%;
-
-  #root{
-
-    height: 100%;
-    width: 100%;
-    margin: auto;
-    display: inline-grid;
-    align-content: center;
-
-  }
-
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
 }
 
