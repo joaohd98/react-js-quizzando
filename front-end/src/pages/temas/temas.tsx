@@ -4,16 +4,24 @@ import {Usuario} from "../../models/usuario";
 import {Redirect} from "react-router";
 import Titulo from "../../components/titulo/titulo";
 import ButtonSubmit from "../../components/button-submit/button-submit";
-import {Tema} from "../../models/tema";
+import {Tema, TemasAtuais} from "../../models/tema";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Temas extends React.Component {
 
+  atual:  TemasAtuais;
   usuario: Usuario = Usuario.pegarUsuario();
   temas: Array<Tema>;
 
   constructor(props) {
+
     super(props);
+
+    this.inicializarTema();
+
+  }
+
+  inicializarTema() {
 
     this.temas = [
       {
@@ -44,12 +52,7 @@ class Temas extends React.Component {
       },
     ];
 
-    this.inicializarTema();
-
-  }
-
-  inicializarTema() {
-
+    this.atual = new TemasAtuais(this.temas);
 
   }
 
@@ -63,46 +66,45 @@ class Temas extends React.Component {
 
   };
 
+  pegarAtuais(){
+
+
+  }
+
   mostrarTemas = () => {
 
-    let tamanho = this.temas.length;
-    let index = -1;
-
-    for (let i = 0; i < tamanho; i++) {
-
-      if (this.temas[i].ativo) {
-
-        index = i;
-        break;
-
-      }
-
-    }
-
-    let indexAnterior = index - 1;
-    indexAnterior = indexAnterior >= 0 ? indexAnterior : tamanho - 1;
-
-    let indexPosterior = index + 1;
-    indexPosterior = indexPosterior < tamanho ? indexPosterior : 0;
 
     return (
       <div className={`row selecionar-tema`}>
-        <div className={"card left"}>
-          <img src={this.temas[indexAnterior].img} alt={this.temas[indexAnterior].texto}/>
-          <p>{this.temas[indexAnterior].texto}</p>
+        <div className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
+          <img src={this.temas[this.atual.indexAnterior].img} alt={this.temas[this.atual.indexAnterior].texto}/>
+          <p>{this.temas[this.atual.indexAnterior].texto}</p>
         </div>
         <div className={"card card-selected"}>
-          <img src={this.temas[index].img} alt={this.temas[index].texto}/>
-          <p>{this.temas[index].texto}</p>
+          <img src={this.temas[this.atual.indexAtual].img} alt={this.temas[this.atual.indexAtual].texto}/>
+          <p>{this.temas[this.atual.indexAtual].texto}</p>
         </div>
-        <div className={"card right"}>
-          <img src={this.temas[indexPosterior].img} alt={this.temas[indexPosterior].texto}/>
-          <p>{this.temas[indexPosterior].texto}</p>
+        <div className={"card right"} onClick={() => this.moverSelecionado("direita")}>
+          <img src={this.temas[this.atual.indexProximo].img} alt={this.temas[this.atual.indexProximo].texto}/>
+          <p>{this.temas[this.atual.indexProximo].texto}</p>
         </div>
       </div>
     )
 
   };
+
+  moverSelecionado(direcao: "esquerda" | "direita"){
+
+    let novoIndex = direcao === "esquerda" ? this.atual.indexAnterior : this.atual.indexProximo;
+
+    this.temas[this.atual.indexAtual].ativo = false;
+    this.temas[novoIndex].ativo = true;
+
+    this.atual.definirAtuais(this.temas);
+
+    this.forceUpdate();
+
+  }
 
   selecionadoTema = () => {
 
@@ -120,17 +122,21 @@ class Temas extends React.Component {
           <div className={`row row-header`}>
             <p>{`Olá, ${this.usuario.nome}`}</p>
             <p onClick={this.sair}>
-              <FontAwesomeIcon icon="sign-out-alt" color="white" />
+                <FontAwesomeIcon icon="sign-out-alt" color="white" />
               Sair
             </p>
           </div>
           <div className={`row row-sub-header`}>
             <Titulo texto="TEMAS"/>
           </div>
-          {this.mostrarTemas()}
+          { this.mostrarTemas() }
           <div className={`row arrows-container`}>
-            <FontAwesomeIcon icon="arrow-left" color="white" />
-            <FontAwesomeIcon icon="arrow-right" color="white" />
+            <i onClick={() => this.moverSelecionado("esquerda")}>
+              <FontAwesomeIcon icon="arrow-left" color="white" />
+            </i>
+            <i onClick={() => this.moverSelecionado("direita")}>
+              <FontAwesomeIcon icon="arrow-right" color="white" />
+            </i>
           </div>
           <ButtonSubmit texto="Selecionar"/>
         </form>
