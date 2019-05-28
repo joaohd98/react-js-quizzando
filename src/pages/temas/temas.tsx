@@ -105,7 +105,7 @@ class Temas extends React.Component {
 
     }
 
-    else if(tamanho == 1){
+    else if(tamanho === 1){
 
       return (
         <div className={`row selecionar-tema`}>
@@ -167,6 +167,8 @@ class Temas extends React.Component {
       else
         tema.mostrar = true;
 
+      return true;
+
     });
 
     if(!valor)
@@ -214,7 +216,7 @@ class Temas extends React.Component {
                 : ''
             }
           </div>
-          <ButtonSubmit texto="Selecionar" disabled={this.temas.filter(tema => tema.mostrar).length == 0}/>
+          <ButtonSubmit texto="Selecionar" disabled={this.temas.filter(tema => tema.mostrar).length === 0}/>
         </form>
       </div>
     );
