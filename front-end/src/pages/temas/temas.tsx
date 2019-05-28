@@ -9,8 +9,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Temas extends React.Component {
 
-  atual:  TemasAtuais;
   usuario: Usuario = Usuario.pegarUsuario();
+  atual:  TemasAtuais;
   temas: Array<Tema>;
 
   constructor(props) {
@@ -28,6 +28,7 @@ class Temas extends React.Component {
         id: 0,
         texto: "Cinema",
         img: "https://www.guiabh.com.br/Repositorio/Upload/Destaque/320x320/cinema-com-desconto-em-bh-imagem.jpg",
+        ativo: true
       },
       {
         id: 1,
@@ -66,30 +67,41 @@ class Temas extends React.Component {
 
   };
 
-  pegarAtuais(){
-
-
-  }
-
   mostrarTemas = () => {
 
+    if(this.temas.length > 1){
 
-    return (
-      <div className={`row selecionar-tema`}>
-        <div className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
-          <img src={this.temas[this.atual.indexAnterior].img} alt={this.temas[this.atual.indexAnterior].texto}/>
-          <p>{this.temas[this.atual.indexAnterior].texto}</p>
+      return (
+        <div className={`row selecionar-tema`}>
+          <div className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
+            <img src={this.temas[this.atual.indexAnterior].img} alt={this.temas[this.atual.indexAnterior].texto}/>
+            <p>{this.temas[this.atual.indexAnterior].texto}</p>
+          </div>
+          <div className={"card card-selected"}>
+            <img src={this.temas[this.atual.indexAtual].img} alt={this.temas[this.atual.indexAtual].texto}/>
+            <p>{this.temas[this.atual.indexAtual].texto}</p>
+          </div>
+          <div className={"card right"} onClick={() => this.moverSelecionado("direita")}>
+            <img src={this.temas[this.atual.indexProximo].img} alt={this.temas[this.atual.indexProximo].texto}/>
+            <p>{this.temas[this.atual.indexProximo].texto}</p>
+          </div>
         </div>
-        <div className={"card card-selected"}>
-          <img src={this.temas[this.atual.indexAtual].img} alt={this.temas[this.atual.indexAtual].texto}/>
-          <p>{this.temas[this.atual.indexAtual].texto}</p>
+      )
+
+    }
+
+    else{
+
+      return (
+        <div className={`row selecionar-tema`}>
+          <div className={"card card-selected"}>
+            <img src={this.temas[this.atual.indexAtual].img} alt={this.temas[this.atual.indexAtual].texto}/>
+            <p>{this.temas[this.atual.indexAtual].texto}</p>
+          </div>
         </div>
-        <div className={"card right"} onClick={() => this.moverSelecionado("direita")}>
-          <img src={this.temas[this.atual.indexProximo].img} alt={this.temas[this.atual.indexProximo].texto}/>
-          <p>{this.temas[this.atual.indexProximo].texto}</p>
-        </div>
-      </div>
-    )
+      )
+
+    }
 
   };
 
@@ -122,7 +134,7 @@ class Temas extends React.Component {
           <div className={`row row-header`}>
             <p>{`Olá, ${this.usuario.nome}`}</p>
             <p onClick={this.sair}>
-                <FontAwesomeIcon icon="sign-out-alt" color="white" />
+              <FontAwesomeIcon icon="sign-out-alt" color="white" />
               Sair
             </p>
           </div>
@@ -130,14 +142,18 @@ class Temas extends React.Component {
             <Titulo texto="TEMAS"/>
           </div>
           { this.mostrarTemas() }
-          <div className={`row arrows-container`}>
-            <i onClick={() => this.moverSelecionado("esquerda")}>
-              <FontAwesomeIcon icon="arrow-left" color="white" />
-            </i>
-            <i onClick={() => this.moverSelecionado("direita")}>
-              <FontAwesomeIcon icon="arrow-right" color="white" />
-            </i>
-          </div>
+          { this.temas.length > 1 ?
+            <div className={`row arrows-container`}>
+              <i onClick={() => this.moverSelecionado("esquerda")}>
+                <FontAwesomeIcon icon="arrow-left" color="#7F37D9" />
+              </i>
+              <i onClick={() => this.moverSelecionado("direita")}>
+                <FontAwesomeIcon icon="arrow-right" color="#7F37D9" />
+              </i>
+            </div>
+            : ''
+          }
+
           <ButtonSubmit texto="Selecionar"/>
         </form>
       </div>
