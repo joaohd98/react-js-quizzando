@@ -214,7 +214,7 @@ class Temas extends React.Component {
                 : ''
             }
           </div>
-          <ButtonSubmit texto="Selecionar"/>
+          <ButtonSubmit texto="Selecionar" disabled={this.temas.filter(tema => tema.mostrar).length == 0}/>
         </form>
       </div>
     );
