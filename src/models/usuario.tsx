@@ -3,7 +3,7 @@ import {LocalStorage} from "../helpers/LocalStorage";
 export class Usuario {
 
   nome: string = "";
-  vidas: number = 0;
+  vidas: number = 3;
   qt_questoes: number = 0;
 
   static entrar(nome: string) {
@@ -24,7 +24,27 @@ export class Usuario {
 
   static pegarUsuario(){
 
-    return LocalStorage.pegarDados("usuario");
+    let usuario: Usuario = LocalStorage.pegarDados("usuario");
+
+    let usuarioObject = new Usuario();
+    usuarioObject.nome = usuario.nome;
+    usuarioObject.vidas = usuario.vidas;
+    usuarioObject.qt_questoes = usuario.qt_questoes;
+
+    return usuarioObject;
+
+
+  }
+
+  iniciarJogo(){
+
+    let usuario = new Usuario();
+
+    usuario.nome = this.nome;
+    usuario.vidas = 3;
+    usuario.qt_questoes = 0;
+
+    LocalStorage.salvarDados("usuario", usuario);
 
   }
 

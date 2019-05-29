@@ -180,6 +180,8 @@ class Temas extends React.Component {
 
     let tema = this.temas.filter(tema => tema.mostrar)[this.atual.indexAtual];
 
+    this.usuario.iniciarJogo();
+
     this.setState({
       pagina_destino: {
         pathname: '/questoes',

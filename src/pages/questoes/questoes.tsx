@@ -16,6 +16,7 @@ class Questoes extends React.Component {
   usuario: Usuario = Usuario.pegarUsuario();
   questao: Questao = new Questao();
   questoesProvider: QuestoesProvider = new QuestoesProvider();
+  tempo: number = 15;
 
   componentWillMount(){
 
@@ -45,7 +46,7 @@ class Questoes extends React.Component {
     let selecionarResposta = (id: number) => {
 
       this.questao.alternativas.forEach(
-        (alternativa: Alternativa, index: number) => alternativa.selecionada = index == id);
+        (alternativa: Alternativa, index: number) => alternativa.selecionada = index === id);
 
       this.forceUpdate();
 
@@ -55,7 +56,8 @@ class Questoes extends React.Component {
       <div className={`row row-alternativas`}>
         {
           this.questao.alternativas.map((alternativa: Alternativa, index) => (
-            <div className={`alternativa ${alternativa.selecionada ? 'alternativa-selecionada' : '' }`}
+            <div key={alternativa.texto}
+                 className={`alternativa ${alternativa.selecionada ? 'alternativa-selecionada' : '' }`}
                  onClick={() => selecionarResposta(index)}>
               <p>{alternativa.texto}</p>
             </div>
@@ -64,6 +66,17 @@ class Questoes extends React.Component {
       </div>
     );
 
+  }
+
+  gerarVidas(){
+
+    return(
+      <p>
+        <img src={happy_mini} alt="sad-face"/>
+        <img src={this.usuario.vidas >= 2 ? happy_mini : sad_mini} alt="sad-face"/>
+        <img src={this.usuario.vidas === 3 ? happy_mini : sad_mini} alt="sad-face"/>
+      </p>
+    )
   }
 
   render() {
@@ -78,11 +91,7 @@ class Questoes extends React.Component {
             <p>
               <Link to={"/"}>Desistir</Link>
             </p>
-            <p>
-              <img src={happy_mini} alt="sad-face"/>
-              <img src={happy_mini} alt="sad-face"/>
-              <img src={sad_mini} alt="sad-face"/>
-            </p>
+            {this.gerarVidas()}
           </div>
           <div className={`row row-pergunta`}>
             <p>
@@ -91,7 +100,7 @@ class Questoes extends React.Component {
           </div>
           <div className={`row row-tempo`}>
             <div className={`barra barra-total`}>
-              15s
+              {this.tempo}s
               <FontAwesomeIcon icon="clock" color="white"/>
             </div>
           </div>
