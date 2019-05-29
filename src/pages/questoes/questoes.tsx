@@ -29,7 +29,7 @@ class Questoes extends React.Component {
 
       this.questoesProvider.pegarQuestao(this.questao);
 
-      this.forceUpdate();
+      this.calcularTempo();
 
     }
 
@@ -37,7 +37,7 @@ class Questoes extends React.Component {
 
   componentDidMount() {
 
-      window.history.replaceState({}, '/questoes');
+    window.history.replaceState({}, '/questoes');
 
   }
 
@@ -79,6 +79,26 @@ class Questoes extends React.Component {
     )
   }
 
+  calcularTempo(){
+
+    let interval = setInterval(() => {
+
+      if(this.tempo <= 0)
+        clearInterval(interval);
+
+      this.tempo--;
+
+      this.forceUpdate();
+
+      if(this.tempo <= 0)
+        clearInterval(interval);
+
+    }, 1000);
+
+
+
+  }
+
   render() {
 
     if (this.state && this.state['pagina_destino'])
@@ -100,7 +120,7 @@ class Questoes extends React.Component {
           </div>
           <div className={`row row-tempo`}>
             <div className={`barra barra-total`}>
-              {this.tempo}s
+              {this.tempo + "s"}
               <FontAwesomeIcon icon="clock" color="white"/>
             </div>
           </div>
