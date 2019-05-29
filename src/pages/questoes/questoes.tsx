@@ -7,7 +7,7 @@ import sad_mini from '../../assets/imgs/sad-mini.png';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Usuario} from "../../models/usuario";
-import {Questao} from "../../models/questao";
+import {Alternativa, Questao} from "../../models/questao";
 import {QuestoesProvider} from "../../providers/questoesProvider";
 
 class Questoes extends React.Component {
@@ -15,23 +15,54 @@ class Questoes extends React.Component {
   tema: Tema;
   usuario: Usuario = Usuario.pegarUsuario();
   questao: Questao = new Questao();
+  questoesProvider: QuestoesProvider = new QuestoesProvider();
 
-  componentDidMount() {
+  componentWillMount(){
 
     if (this.props['location'].state === undefined || this.props['location'].state.tema === undefined)
-      return this.setState({pagina_destino: '/'});
+      this.setState({pagina_destino: '/'});
 
     else {
 
       this.tema = this.props['location'].state.tema;
 
-      new QuestoesProvider().pegarQuestao(this.questao);
-
-      window.history.replaceState({}, '/questoes');
+      this.questoesProvider.pegarQuestao(this.questao);
 
       this.forceUpdate();
 
     }
+
+  }
+
+  componentDidMount() {
+
+      window.history.replaceState({}, '/questoes');
+
+  }
+
+  gerarAlternativas(){
+
+    let selecionarResposta = (id: number) => {
+
+      this.questao.alternativas.forEach(
+        (alternativa: Alternativa, index: number) => alternativa.selecionada = index == id);
+
+      this.forceUpdate();
+
+    };
+
+    return (
+      <div className={`row row-alternativas`}>
+        {
+          this.questao.alternativas.map((alternativa: Alternativa, index) => (
+            <div className={`alternativa ${alternativa.selecionada ? 'alternativa-selecionada' : '' }`}
+                 onClick={() => selecionarResposta(index)}>
+              <p>{alternativa.texto}</p>
+            </div>
+          ))
+        }
+      </div>
+    );
 
   }
 
@@ -64,20 +95,7 @@ class Questoes extends React.Component {
               <FontAwesomeIcon icon="clock" color="white"/>
             </div>
           </div>
-          <div className={`row row-alternativas`}>
-            <div className="alternativa">
-              <p>PS1</p>
-            </div>
-            <div className="alternativa">
-              <p>PS2</p>
-            </div>
-            <div className="alternativa">
-              <p>Super Nintendo</p>
-            </div>
-            <div className="alternativa">
-              <p>Game boy</p>
-            </div>
-          </div>
+          { this.gerarAlternativas() }
         </form>
       </div>
     );

@@ -9,5 +9,6 @@ export class Alternativa{
 
   texto: string;
   correta: boolean;
+  selecionada: boolean = false;
 
 }
