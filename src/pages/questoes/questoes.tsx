@@ -6,10 +6,15 @@ import happy_mini from '../../assets/imgs/happy-mini.png';
 import sad_mini from '../../assets/imgs/sad-mini.png';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Usuario} from "../../models/usuario";
+import {Questao} from "../../models/questao";
+import {QuestoesProvider} from "../../providers/questoesProvider";
 
 class Questoes extends React.Component {
 
   tema: Tema;
+  usuario: Usuario = Usuario.pegarUsuario();
+  questao: Questao = new Questao();
 
   componentDidMount() {
 
@@ -20,7 +25,11 @@ class Questoes extends React.Component {
 
       this.tema = this.props['location'].state.tema;
 
+      new QuestoesProvider().pegarQuestao(this.questao);
+
       window.history.replaceState({}, '/questoes');
+
+      this.forceUpdate();
 
     }
 
@@ -46,7 +55,7 @@ class Questoes extends React.Component {
           </div>
           <div className={`row row-pergunta`}>
             <p>
-              Crash Bandicoot foi usado como mascote de qual videogame ?
+              {this.usuario.qt_questoes + 1}) {this.questao.texto}
             </p>
           </div>
           <div className={`row row-tempo`}>

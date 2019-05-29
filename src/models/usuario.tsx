@@ -3,6 +3,8 @@ import {LocalStorage} from "../helpers/LocalStorage";
 export class Usuario {
 
   nome: string = "";
+  vidas: number = 0;
+  qt_questoes: number = 0;
 
   static entrar(nome: string) {
 

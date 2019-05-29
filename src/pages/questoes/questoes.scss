@@ -105,7 +105,6 @@
       text-align: left;
       width: 100%;
       border-radius: 15px;
-      height: 5vh;
       background-color: white;
       display: block;
 
@@ -116,8 +115,18 @@
         color: var(--color-secondary);
 
       }
+
     }
 
+    .alternativa:active, .alternativa-selecionada{
+
+      background-color: var(--color-warning);
+      transform: translateY(4px);
+
+      p{
+        color: white !important;
+      }
+    }
 
   }
 
