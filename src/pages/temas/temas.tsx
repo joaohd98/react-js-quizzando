@@ -170,8 +170,10 @@ class Temas extends React.Component {
 
   }
 
-  selecionadoTema = () => {
+  selecionadoTema = (e) => {
 
+    e.preventDefault();
+    
     let tema = this.temas.filter(tema => tema.mostrar)[this.atual.indexAtual];
 
     this.setState({
