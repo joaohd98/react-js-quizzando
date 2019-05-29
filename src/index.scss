@@ -6,24 +6,18 @@
 
 }
 
-html, body{
-
-  height: 100%;
-  width: 100%;
+html,
+body{
+  margin: 5% 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: -apple-system, sans-serif;
   background-color: var(--color-principal);
-  margin: 0;
-  position: relative;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 300;
+  width: 100%;
+  height: 100%;
 }
-
-#root {
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-top: 15px;
-  margin-bottom: 15px;
-
-}
-

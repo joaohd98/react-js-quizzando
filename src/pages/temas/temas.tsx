@@ -12,7 +12,7 @@ import {Helpers} from "../../helpers/helpers";
 class Temas extends React.Component {
 
   usuario: Usuario = Usuario.pegarUsuario();
-  atual:  TemasAtuais;
+  atual: TemasAtuais;
   temas: Array<Tema>;
 
   constructor(props) {
@@ -84,7 +84,7 @@ class Temas extends React.Component {
     let temas = this.temas.filter(tema => tema.mostrar);
     let tamanho = temas.filter(tema => tema.mostrar).length;
 
-    if(tamanho > 1){
+    if (tamanho > 1) {
 
       return (
         <div className={`row selecionar-tema`}>
@@ -103,9 +103,7 @@ class Temas extends React.Component {
         </div>
       )
 
-    }
-
-    else if(tamanho === 1){
+    } else if (tamanho === 1) {
 
       return (
         <div className={`row selecionar-tema`}>
@@ -116,9 +114,7 @@ class Temas extends React.Component {
         </div>
       )
 
-    }
-
-    else{
+    } else {
 
       return (
         <div className={`row selecionar-tema`}>
@@ -130,7 +126,7 @@ class Temas extends React.Component {
 
   };
 
-  moverSelecionado(direcao: "esquerda" | "direita"){
+  moverSelecionado(direcao: "esquerda" | "direita") {
 
     let novoIndex = direcao === "esquerda" ? this.atual.indexAnterior : this.atual.indexProximo;
 
@@ -142,48 +138,56 @@ class Temas extends React.Component {
 
   }
 
-  filtrar(valor: string){
+  filtrar(valor: string) {
 
     let primeiro = true;
 
     this.temas.map((tema: Tema) => {
 
-      if(valor) {
+      if (valor) {
 
         tema.mostrar = Helpers.removerAcentosMinusculo(tema.texto).includes(Helpers.removerAcentosMinusculo(valor));
 
-        if(tema.mostrar){
+        if (tema.mostrar) {
 
           tema.ativo = primeiro;
           primeiro = false;
 
-        }
-
-        else
+        } else
           tema.ativo = false;
 
-      }
-
-      else
+      } else
         tema.mostrar = true;
 
       return true;
 
     });
 
-    if(!valor)
+    if (!valor)
       this.temas[0].ativo = true;
 
     this.atual.definirAtuais(this.temas, this.forceUpdate.bind(this));
 
   }
 
-  selecionadoTema = () => {};
+  selecionadoTema = () => {
+
+    let tema = this.temas.filter(tema => tema.mostrar)[this.atual.indexAtual];
+
+    this.setState({
+      pagina_destino: {
+        pathname: '/questoes',
+        state: { tema: tema }
+      },
+      push: true,
+    });
+
+  };
 
   render() {
 
     if (this.state && this.state['pagina_destino'])
-      return <Redirect to={this.state['pagina_destino']}/>;
+      return <Redirect to={this.state['pagina_destino']} push={this.state['push']}   />;
 
     return (
       <div className="temas">
@@ -191,7 +195,7 @@ class Temas extends React.Component {
           <div className={`row row-header`}>
             <p>{`Olá, ${this.usuario.nome}`}</p>
             <p onClick={this.sair}>
-              <FontAwesomeIcon icon="sign-out-alt" color="white" />
+              <FontAwesomeIcon icon="sign-out-alt" color="white"/>
               Sair
             </p>
           </div>
@@ -199,18 +203,19 @@ class Temas extends React.Component {
             <Titulo texto="TEMAS"/>
           </div>
           <div className={`row row-filtro`}>
-            <Input nome="filtro" placeholder="Pesquise pelo seu tema..." funcState={this.setState.bind(this)} onChangeFunc={this.filtrar.bind(this)} state={this.state}/>
+            <Input nome="filtro" placeholder="Pesquise pelo seu tema..." funcState={this.setState.bind(this)}
+                   onChangeFunc={this.filtrar.bind(this)} state={this.state}/>
           </div>
-          { this.mostrarTemas() }
+          {this.mostrarTemas()}
           <div className={`arrows-container`}>
             {
               this.temas.filter(tema => tema.mostrar).length > 1 ?
                 <div className={`row`}>
                   <i onClick={() => this.moverSelecionado("esquerda")}>
-                    <FontAwesomeIcon icon="arrow-left" color="#7F37D9" />
+                    <FontAwesomeIcon icon="arrow-left" color="#7F37D9"/>
                   </i>
                   <i onClick={() => this.moverSelecionado("direita")}>
-                    <FontAwesomeIcon icon="arrow-right" color="#7F37D9" />
+                    <FontAwesomeIcon icon="arrow-right" color="#7F37D9"/>
                   </i>
                 </div>
                 : ''
