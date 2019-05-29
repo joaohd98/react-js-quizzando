@@ -1,4 +1,120 @@
 .questoes {
 
+
+  .row {
+
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    justify-content: center;
+
+  }
+
+  .row-header {
+
+    margin-top: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+
+    font-weight: bold;
+    font-size: 20px;
+
+    a{
+      color: white;
+    }
+
+    p {
+      width: 50%;
+    }
+
+    svg {
+      margin-right: 10px;
+    }
+
+    p:first-child {
+      margin-top: 32px;
+      text-align: left;
+    }
+
+    p:last-child {
+      text-align: right;
+    }
+
+  }
+
+  .row-pergunta{
+
+    text-align: left;
+    background-color: white;
+    border-radius: 15px;
+    height: 20vh;
+
+    p{
+
+      font-weight: bold;
+      padding: 0 10px;
+      color: var(--color-secondary);
+
+    }
+
+  }
+
+  .row-tempo{
+
+    .barra{
+
+      padding: 5px 10px;
+      border-radius: 2px;
+      color: white;
+      text-align: right;
+      font-size: 20px;
+
+      svg{
+        padding-left: 5px;
+      }
+
+    }
+
+    .barra-total{
+
+      background-color: var(--color-success);
+      width: 100%;
+
+    }
+
+    .barra-tempo-restante{
+
+      width: 50%;
+
+    }
+
+  }
+
+  .row-alternativas{
+
+    display: block;
+
+    .alternativa{
+
+      text-align: left;
+      width: 100%;
+      border-radius: 15px;
+      height: 5vh;
+      background-color: white;
+      display: block;
+
+      p{
+
+        font-weight: bold;
+        padding: 12px 10px;
+        color: var(--color-secondary);
+
+      }
+    }
+
+
+  }
+
 }
 

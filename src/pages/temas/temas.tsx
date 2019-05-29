@@ -103,7 +103,9 @@ class Temas extends React.Component {
         </div>
       )
 
-    } else if (tamanho === 1) {
+    }
+
+    else if (tamanho === 1) {
 
       return (
         <div className={`row selecionar-tema`}>
@@ -114,7 +116,9 @@ class Temas extends React.Component {
         </div>
       )
 
-    } else {
+    }
+
+    else {
 
       return (
         <div className={`row selecionar-tema`}>
@@ -173,7 +177,7 @@ class Temas extends React.Component {
   selecionadoTema = (e) => {
 
     e.preventDefault();
-    
+
     let tema = this.temas.filter(tema => tema.mostrar)[this.atual.indexAtual];
 
     this.setState({
