@@ -64,10 +64,23 @@ class Questoes extends React.Component {
 
     else{
 
+      let correta = false;
+
       let definirClasse = (alternativa: Alternativa) => {
 
-        if(alternativa.selecionada)
-            return alternativa.correta ? 'alternativa-certa' : 'alternativa-errada';
+        if(alternativa.selecionada) {
+
+         if(alternativa.correta){
+
+           correta = true;
+           return 'alternativa-certa';
+
+         }
+
+         else
+           return 'alternativa-errada';
+
+        }
 
         else if(alternativa.correta)
           return 'alternativa-certa';
@@ -76,17 +89,30 @@ class Questoes extends React.Component {
 
       };
 
+      setTimeout(() => {
+
+        this.setState({
+            'pagina_destino': `/questoes/${correta ? 'acerto' : 'erro'}`
+        });
+
+      }, 2500);
+
       return (
         <div className={`row row-alternativas`}>
           {
-            this.questao.alternativas.map((alternativa: Alternativa) => (
-              <div key={alternativa.texto}
-                   className={`alternativa ${definirClasse(alternativa)}`}>
-                <p>{alternativa.texto}</p>
-              </div>
-            ))
+            this.questao.alternativas.map((alternativa: Alternativa) => {
+
+              return (
+                <div key={alternativa.texto}
+                     className={`alternativa ${definirClasse(alternativa)}`}>
+                  <p>{alternativa.texto}</p>
+                </div>
+              )
+
+            })
           }
         </div>
+
       );
 
     }
@@ -131,7 +157,6 @@ class Questoes extends React.Component {
     }
 
     this.finalizado = true;
-    this.forceUpdate();
 
   }
 
