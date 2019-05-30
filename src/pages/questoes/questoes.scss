@@ -1,6 +1,5 @@
 .questoes {
 
-
   .row {
 
     display: flex;
@@ -103,12 +102,6 @@
         color: var(--color-secondary);
 
       }
-
-    }
-
-    .alternativa:active {
-
-      transform: translateY(4px);
 
     }
 

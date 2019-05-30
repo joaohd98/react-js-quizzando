@@ -108,18 +108,16 @@ class Questoes extends React.Component {
 
     let interval = setInterval(() => {
 
-      this.tempo--;
-      this.forceUpdate();
-
       if(this.finalizado)
         clearInterval(interval);
 
-      else if(this.tempo <= 0)
+      this.tempo--;
+      this.forceUpdate();
+
+      if(this.tempo <= 0)
         this.finalizarJogada();
 
     }, 1000);
-
-
 
   }
 
@@ -129,8 +127,6 @@ class Questoes extends React.Component {
 
       this.questao.alternativas.forEach((alternativa: Alternativa) => alternativa.selecionada = false);
       this.questao.alternativas[index].selecionada = true;
-
-      console.log(this.questao.alternativas);
 
     }
 
@@ -160,7 +156,7 @@ class Questoes extends React.Component {
             </p>
           </div>
           <div className={`row row-tempo`}>
-            <span style={{color: (this.tempo <= 3 ? "var(--color-danger)" : "var(--color-primary)")}}>
+            <span style={{color: (this.tempo <= 3 ? "var(--color-danger)" : "white")}}>
               {this.tempo + "s"}
               <FontAwesomeIcon icon="clock" />
             </span>
