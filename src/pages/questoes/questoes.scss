@@ -21,7 +21,7 @@
     font-weight: bold;
     font-size: 20px;
 
-    a{
+    a {
       color: white;
     }
 
@@ -44,7 +44,7 @@
 
   }
 
-  .row-pergunta{
+  .row-pergunta {
 
     text-align: left;
     background-color: white;
@@ -52,7 +52,7 @@
     height: 20vh;
     max-width: 600px;
 
-    p{
+    p {
 
       font-weight: bold;
       padding: 0 10px;
@@ -62,32 +62,34 @@
 
   }
 
-  .row-tempo{
+  .row-tempo {
 
     max-width: 600px;
+    border-radius: 5px;
 
-    .barra{
+    span{
 
-      padding: 5px 10px;
-      border-radius: 2px;
-      color: white;
-      text-align: right;
+      width: 100%;
+      float: right;
       font-size: 20px;
+      color: white;
 
-      svg{
+      svg {
         padding-left: 5px;
       }
 
     }
 
-    .barra-total{
 
-      background-color: var(--color-success);
+    .barra-total {
+
+      //background-color: var(--color-primary);
+
       width: 100%;
 
     }
 
-    .barra-tempo-restante{
+    .barra-tempo-restante {
 
       width: 50%;
 
@@ -95,12 +97,12 @@
 
   }
 
-  .row-alternativas{
+  .row-alternativas {
 
     display: block;
     max-width: 600px;
 
-    .alternativa{
+    .alternativa {
 
       text-align: left;
       width: 100%;
@@ -108,7 +110,7 @@
       background-color: white;
       display: block;
 
-      p{
+      p {
 
         font-weight: bold;
         padding: 12px 10px;
@@ -118,14 +120,37 @@
 
     }
 
-    .alternativa:active, .alternativa-selecionada{
+    .alternativa:active, .alternativa-selecionada {
 
       background-color: var(--color-warning);
       transform: translateY(4px);
 
-      p{
+      p {
         color: white !important;
       }
+
+    }
+
+    .alternativa-certa {
+
+      background-color: var(--color-success);
+      transform: translateY(4px);
+
+      p {
+        color: white !important;
+      }
+
+    }
+
+    .alternativa-errada {
+
+      background-color: var(--color-danger);
+      transform: translateY(4px);
+
+      p {
+        color: white !important;
+      }
+
     }
 
   }

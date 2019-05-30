@@ -119,11 +119,13 @@ class Questoes extends React.Component {
             </p>
           </div>
           <div className={`row row-tempo`}>
-            <div className={`barra barra-total`}>
+            <div className={`barra barra-restante`} />
+            <div className={`barra barra-total`} />
+            <span>
               {this.tempo + "s"}
               <FontAwesomeIcon icon="clock" color="white"/>
+            </span>
             </div>
-          </div>
           { this.gerarAlternativas() }
         </form>
       </div>

@@ -26,6 +26,9 @@ export class Usuario {
 
     let usuario: Usuario = LocalStorage.pegarDados("usuario");
 
+    if(!usuario)
+      return usuario;
+
     let usuarioObject = new Usuario();
     usuarioObject.nome = usuario.nome;
     usuarioObject.vidas = usuario.vidas;
