@@ -12,11 +12,12 @@ import {QuestoesProvider} from "../../providers/questoesProvider";
 
 class Questoes extends React.Component {
 
-  tema: Tema;
   usuario: Usuario = Usuario.pegarUsuario();
+  tema: Tema;
   questao: Questao = new Questao();
   questoesProvider: QuestoesProvider = new QuestoesProvider();
-  tempo: number = 15;
+  tempo: number = 10;
+  finalizado: boolean = false;
 
   componentWillMount(){
 
@@ -43,28 +44,52 @@ class Questoes extends React.Component {
 
   gerarAlternativas(){
 
-    let selecionarResposta = (id: number) => {
+    if(!this.finalizado){
 
-      this.questao.alternativas.forEach(
-        (alternativa: Alternativa, index: number) => alternativa.selecionada = index === id);
+      return (
+        <div className={`row row-alternativas`}>
+          {
+            this.questao.alternativas.map((alternativa: Alternativa, index) => (
+              <div key={alternativa.texto}
+                   className={`alternativa ${alternativa.selecionada ? 'alternativa-selecionada' : '' }`}
+                   onClick={() => this.finalizarJogada(index)}>
+                <p>{alternativa.texto}</p>
+              </div>
+            ))
+          }
+        </div>
+      );
 
-      this.forceUpdate();
+    }
 
-    };
+    else{
 
-    return (
-      <div className={`row row-alternativas`}>
-        {
-          this.questao.alternativas.map((alternativa: Alternativa, index) => (
-            <div key={alternativa.texto}
-                 className={`alternativa ${alternativa.selecionada ? 'alternativa-selecionada' : '' }`}
-                 onClick={() => selecionarResposta(index)}>
-              <p>{alternativa.texto}</p>
-            </div>
-          ))
-        }
-      </div>
-    );
+      let definirClasse = (alternativa: Alternativa) => {
+
+        if(alternativa.selecionada)
+            return alternativa.correta ? 'alternativa-certa' : 'alternativa-errada';
+
+        else if(alternativa.correta)
+          return 'alternativa-certa';
+
+        return '';
+
+      };
+
+      return (
+        <div className={`row row-alternativas`}>
+          {
+            this.questao.alternativas.map((alternativa: Alternativa) => (
+              <div key={alternativa.texto}
+                   className={`alternativa ${definirClasse(alternativa)}`}>
+                <p>{alternativa.texto}</p>
+              </div>
+            ))
+          }
+        </div>
+      );
+
+    }
 
   }
 
@@ -83,15 +108,14 @@ class Questoes extends React.Component {
 
     let interval = setInterval(() => {
 
-      if(this.tempo <= 0)
-        clearInterval(interval);
-
       this.tempo--;
-
       this.forceUpdate();
 
-      if(this.tempo <= 0)
+      if(this.finalizado)
         clearInterval(interval);
+
+      else if(this.tempo <= 0)
+        this.finalizarJogada();
 
     }, 1000);
 
@@ -99,7 +123,24 @@ class Questoes extends React.Component {
 
   }
 
+  finalizarJogada(index = -1){
+
+    if(index > -1) {
+
+      this.questao.alternativas.forEach((alternativa: Alternativa) => alternativa.selecionada = false);
+      this.questao.alternativas[index].selecionada = true;
+
+      console.log(this.questao.alternativas);
+
+    }
+
+    this.finalizado = true;
+    this.forceUpdate();
+
+  }
+
   render() {
+
 
     if (this.state && this.state['pagina_destino'])
       return <Redirect to={this.state['pagina_destino']} push={this.state['push']}/>;
@@ -119,13 +160,11 @@ class Questoes extends React.Component {
             </p>
           </div>
           <div className={`row row-tempo`}>
-            <div className={`barra barra-restante`} />
-            <div className={`barra barra-total`} />
-            <span>
+            <span style={{color: (this.tempo <= 3 ? "var(--color-danger)" : "var(--color-primary)")}}>
               {this.tempo + "s"}
-              <FontAwesomeIcon icon="clock" color="white"/>
+              <FontAwesomeIcon icon="clock" />
             </span>
-            </div>
+          </div>
           { this.gerarAlternativas() }
         </form>
       </div>

@@ -67,31 +67,17 @@
     max-width: 600px;
     border-radius: 5px;
 
-    span{
+    span {
 
+      text-align: right;
       width: 100%;
-      float: right;
+      margin-right: 7px;
       font-size: 20px;
-      color: white;
+      font-weight: bold;
 
       svg {
         padding-left: 5px;
       }
-
-    }
-
-
-    .barra-total {
-
-      //background-color: var(--color-primary);
-
-      width: 100%;
-
-    }
-
-    .barra-tempo-restante {
-
-      width: 50%;
 
     }
 
@@ -120,14 +106,9 @@
 
     }
 
-    .alternativa:active, .alternativa-selecionada {
+    .alternativa:active {
 
-      background-color: var(--color-warning);
       transform: translateY(4px);
-
-      p {
-        color: white !important;
-      }
 
     }
 
