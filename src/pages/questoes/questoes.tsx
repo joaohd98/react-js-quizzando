@@ -137,11 +137,11 @@ class Questoes extends React.Component {
       if(this.finalizado)
         clearInterval(interval);
 
+      else if(this.tempo <= 0)
+        this.finalizarJogada();
+
       this.tempo--;
       this.forceUpdate();
-
-      if(this.tempo <= 0)
-        this.finalizarJogada();
 
     }, 1000);
 
@@ -161,7 +161,6 @@ class Questoes extends React.Component {
   }
 
   render() {
-
 
     if (this.state && this.state['pagina_destino'])
       return <Redirect to={this.state['pagina_destino']} push={this.state['push']}/>;

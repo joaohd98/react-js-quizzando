@@ -75,10 +75,11 @@ class Input extends Component<InputInterface> {
 
     let state: StateInterface = this.props.state[this.props.nome];
 
-    if(state.valido == null)
+    if(state.valido === null || state.validations === undefined)
       state.class = "";
 
-    state.class = state.valido ? "input-valido" : "input-invalido";
+    else
+      state.class = state.valido ? "input-valido" : "input-invalido";
 
   };
 
