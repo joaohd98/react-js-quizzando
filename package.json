@@ -17,7 +17,8 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "react-app-env": "^1.2.3"
   },
   "scripts": {
     "build": "react-app-env --env-file=environments/${BUILD_ENV}.env build",
@@ -46,7 +47,6 @@
     ]
   },
   "devDependencies": {
-    "react-app-env": "^1.2.3",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1"
   }
