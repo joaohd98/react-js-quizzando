@@ -20,15 +20,18 @@
     "typescript": "^3.4.5"
   },
   "scripts": {
+
+    "start": "BUILD_ENV=production npm run build",
     "build": "react-app-env --env-file=environments/${BUILD_ENV}.env build",
-    "start": "react-app-env --env-file=environments/${BUILD_ENV}.env start",
+    "init": "react-app-env --env-file=environments/${BUILD_ENV}.env start",
+
     "build:dev":  "BUILD_ENV=development npm run build",
     "build:prod": "BUILD_ENV=production npm run build",
-    "start:dev":  "BUILD_ENV=development npm run start",
-    "start:prod": "BUILD_ENV=production npm run start",
+    "start:dev":  "BUILD_ENV=development npm run init",
+    "start:prod": "BUILD_ENV=production npm run init",
 
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
   },
   "eslintConfig": {
     "extends": "react-app"
