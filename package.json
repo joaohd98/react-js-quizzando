@@ -17,21 +17,19 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
+    "react-app-env": "^1.2.3",
     "typescript": "^3.4.5"
   },
   "scripts": {
-
     "build": "react-app-env --env-file=environments/${BUILD_ENV}.env build",
     "start": "react-app-env --env-file=environments/${BUILD_ENV}.env start",
-
-    "build:dev":  "BUILD_ENV=development npm run build",
+    "build:dev": "BUILD_ENV=development npm run build",
     "build:prod": "BUILD_ENV=production npm run build",
-    "start:dev":  "BUILD_ENV=development npm run start",
+    "start:dev": "BUILD_ENV=development npm run start",
     "start:prod": "BUILD_ENV=production npm run start",
-
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "react-scripts build"
+    "heroku-postbuild": "BUILD_ENV=production npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,7 +47,6 @@
     ]
   },
   "devDependencies": {
-    "react-app-env": "^1.2.3",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1"
   }
