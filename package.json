@@ -22,7 +22,7 @@
   "scripts": {
 
     "build": "react-app-env --env-file=environments/${BUILD_ENV}.env build",
-    "start": "react-app-env --env-file=environments/production.env start",
+    "start": "react-app-env --env-file=environments/${BUILD_ENV}.env start",
 
     "build:dev":  "BUILD_ENV=development npm run build",
     "build:prod": "BUILD_ENV=production npm run build",
@@ -31,7 +31,7 @@
 
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build:prod"
   },
   "eslintConfig": {
     "extends": "react-app"
