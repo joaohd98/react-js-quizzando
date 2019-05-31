@@ -17,19 +17,13 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
-    "react-app-env": "^1.2.3",
     "typescript": "^3.4.5"
   },
   "scripts": {
-    "build": "react-app-env --env-file=environments/${BUILD_ENV}.env build",
-    "start": "react-app-env --env-file=environments/${BUILD_ENV}.env start",
-    "build:dev": "BUILD_ENV=development npm run build",
-    "build:prod": "BUILD_ENV=production npm run build",
-    "start:dev": "BUILD_ENV=development npm run start",
-    "start:prod": "BUILD_ENV=production npm run start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "BUILD_ENV=production npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
