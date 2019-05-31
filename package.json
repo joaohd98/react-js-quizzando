@@ -21,17 +21,17 @@
   },
   "scripts": {
 
-    "start": "BUILD_ENV=production npm run build",
     "build": "react-app-env --env-file=environments/${BUILD_ENV}.env build",
-    "init": "react-app-env --env-file=environments/${BUILD_ENV}.env start",
+    "start": "react-app-env --env-file=environments/${BUILD_ENV}.env start",
 
     "build:dev":  "BUILD_ENV=development npm run build",
     "build:prod": "BUILD_ENV=production npm run build",
-    "start:dev":  "BUILD_ENV=development npm run init",
-    "start:prod": "BUILD_ENV=production npm run init",
+    "start:dev":  "BUILD_ENV=development npm run start",
+    "start:prod": "BUILD_ENV=production npm run start",
 
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
