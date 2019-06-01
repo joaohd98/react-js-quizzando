@@ -18,7 +18,9 @@
     outline: none;
     font-weight: 700;
     width: 100%;
-
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding-left: 2px;
 
     &.input-valido{
       border-bottom-color: var(--color-success);
