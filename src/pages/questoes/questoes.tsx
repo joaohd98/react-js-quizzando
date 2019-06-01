@@ -92,7 +92,7 @@ class Questoes extends React.Component {
       setTimeout(() => {
 
         this.setState({
-            'pagina_destino': `/questoes/${correta ? 'acerto' : 'erro'}`
+            'pagina_destino': `/questoes/carregando`
         });
 
       }, 2500);

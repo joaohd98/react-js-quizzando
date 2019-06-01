@@ -13,11 +13,25 @@ html, body{
 
   font-family: -apple-system, sans-serif;
   background-color: var(--color-principal);
+  height: 100%;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
 
 }
 
 @media (min-width:320px)  {
 
+  html, body{
+    justify-content: center;
+  }
+
+  #root{
+
+    margin: auto;
+
+  }
 
 }
 
@@ -36,9 +50,8 @@ html, body{
     -webkit-box-align: center;
 
     align-items: center;
-
-    height: 100%;
     width: 100%;
+
 
     #root{
 
