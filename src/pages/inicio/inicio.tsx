@@ -12,9 +12,7 @@ class Inicio extends React.Component {
 
   constructor(props: any){
     super(props);
-
-    alert(process.env.REACT_APP_SECRET_CODE);
-
+    
     let nome: StateInterface = {
       validations: [
         {
