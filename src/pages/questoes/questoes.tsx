@@ -24,7 +24,6 @@ class Questoes extends React.Component {
   questao: Questao;
 
   questoesProvider: QuestoesProvider = new QuestoesProvider();
-  alertProvider: AlertProvider = new AlertProvider();
 
   tempo: number = 10;
   finalizado: boolean = false;
@@ -187,7 +186,9 @@ class Questoes extends React.Component {
 
   desistir() {
 
-    this.alertProvider.desistir(() => {
+    let alertProvider: AlertProvider = new AlertProvider();
+
+    alertProvider.desistir(() => {
 
       this.setState({
         pagina_destino: `/`,

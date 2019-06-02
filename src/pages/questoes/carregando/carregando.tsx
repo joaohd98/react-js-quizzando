@@ -10,6 +10,8 @@ import {Usuario} from "../../../models/usuario";
 import {Tema} from "../../../models/tema";
 import {Questao} from "../../../models/questao";
 import {QuestoesInterface} from "../questoes";
+import Header from "../../../components/header/header";
+import {AlertProvider} from "../../../providers/alertProvider";
 
 class Carregando extends React.Component {
 
@@ -92,7 +94,6 @@ class Carregando extends React.Component {
 
     return (
       <div className="acerto">
-        <p>6 questões certas</p>
         <div className="twitter-box">
           <div className="header-twitter">
             <img src={this.twitter.foto} alt={this.twitter.nome}/>
@@ -164,6 +165,23 @@ class Carregando extends React.Component {
 
   };
 
+  desistir() {
+
+    let alertProvider: AlertProvider = new AlertProvider();
+
+    alertProvider.desistir(() => {
+
+      this.setState({
+        pagina_destino: `/`,
+        push: false,
+        state: {
+          desistir: true,
+        }
+      })
+
+    });
+  };
+
   render() {
 
     if (this.state && this.state['pagina_destino'])
@@ -171,6 +189,10 @@ class Carregando extends React.Component {
 
     return (
       <div className="carregando">
+        <Header
+          left={<a onClick={this.desistir.bind(this)}>Desistir</a>}
+          right={`Pontuação: ${this.usuario.qt_questoes}`}
+        />
         { this.correta ? this.sucesso() : this.erro() }
         <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao.bind(this)}/>
       </div>
