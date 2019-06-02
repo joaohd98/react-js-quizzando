@@ -8,6 +8,7 @@ import {Tema, TemasAtuais} from "../../models/tema";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Input, {StateInterface} from "../../components/input/input";
 import {Helpers} from "../../helpers/helpers";
+import {AlertProvider} from "../../providers/alertProvider";
 
 class Temas extends React.Component {
 
@@ -71,10 +72,16 @@ class Temas extends React.Component {
 
   sair = () => {
 
-    Usuario.sair();
+    let alert: AlertProvider = new AlertProvider();
 
-    this.setState({
-      'pagina_destino': "/login"
+    alert.sair(() => {
+
+      Usuario.sair();
+
+      this.setState({
+        'pagina_destino': "/login"
+      });
+
     });
 
   };
