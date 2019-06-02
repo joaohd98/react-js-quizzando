@@ -4,18 +4,21 @@ import {Redirect} from "react-router";
 import {Tema} from "../../models/tema";
 import happy_mini from '../../assets/imgs/happy-mini.png';
 import sad_mini from '../../assets/imgs/sad-mini.png';
-import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Usuario} from "../../models/usuario";
 import {Alternativa, Questao} from "../../models/questao";
 import {QuestoesProvider} from "../../providers/questoesProvider";
+import {AlertProvider} from "../../providers/alertProvider";
 
 class Questoes extends React.Component {
 
   usuario: Usuario = Usuario.pegarUsuario();
   tema: Tema;
   questao: Questao = new Questao();
+
   questoesProvider: QuestoesProvider = new QuestoesProvider();
+  alertProvider: AlertProvider = new AlertProvider();
+
   tempo: number = 10;
   finalizado: boolean = false;
 
@@ -64,18 +67,12 @@ class Questoes extends React.Component {
 
     else{
 
-      let correta = false;
-
       let definirClasse = (alternativa: Alternativa) => {
 
         if(alternativa.selecionada) {
 
-         if(alternativa.correta){
-
-           correta = true;
+         if(alternativa.correta)
            return 'alternativa-certa';
-
-         }
 
          else
            return 'alternativa-errada';
@@ -88,15 +85,6 @@ class Questoes extends React.Component {
         return '';
 
       };
-
-      setTimeout(() => {
-
-        this.setState({
-            'pagina_destino': `/questoes/carregando`,
-            'correta': correta
-        });
-
-      }, 2500);
 
       return (
         <div className={`row row-alternativas`}>
@@ -157,9 +145,35 @@ class Questoes extends React.Component {
 
     }
 
+    setTimeout(() => {
+
+      this.setState({
+        'pagina_destino': `/questoes/carregando`,
+        'state': {
+        }
+      });
+
+    }, 2500);
+
     this.finalizado = true;
 
   }
+
+  desistir = () =>{
+
+    this.alertProvider.desistir(() => {
+
+      this.setState({
+        pagina_destino: `/`,
+        push: false,
+        state: {
+          desistir: true,
+        }
+      });
+
+    });
+
+  };
 
   render() {
 
@@ -170,8 +184,8 @@ class Questoes extends React.Component {
       <div className="questoes">
         <form>
           <div className={`row row-header`}>
-            <p>
-              <Link to={"/"}>Desistir</Link>
+            <p onClick={this.desistir}>
+              Desistir
             </p>
             {this.gerarVidas()}
           </div>
