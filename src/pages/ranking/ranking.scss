@@ -1,0 +1,76 @@
+.ranking {
+
+  @import url('https://fonts.googleapis.com/css?family=Sacramento');
+
+  table {
+
+    font-family: 'Sacramento', cursive;
+    background-color: white;
+    border-collapse: collapse;
+    width: 90vw;
+    max-width: 900px;
+    text-align: center;
+    margin: auto;
+    border-radius: 15px;
+
+  }
+
+  th{
+
+    width: 40%;
+    padding: 5px;
+    text-align: center;
+    color: var(--color-primary);
+    font-size: 35px;
+    border-bottom: 1px solid var(--color-danger);
+
+  }
+
+  th:first-child{
+
+    width: 10%;
+    min-width: 40px;
+    border-right: 1px solid var(--color-danger);
+
+  }
+
+  th:last-child{
+
+    border-left: 1px solid var(--color-danger);
+
+  }
+
+  tr{
+
+    &.usuario{
+
+      background-color: var(--color-twitter-background);
+
+    }
+
+    td{
+
+      padding: 10px 5px;
+      font-size: 25px;
+
+    }
+
+    td:first-child{
+      border-right: 1px solid var(--color-danger);
+
+    }
+
+    td:last-child{
+      border-left: 1px solid var(--color-danger);
+    }
+
+  }
+
+  button{
+
+    margin-top: 5%;
+
+  }
+
+}
+

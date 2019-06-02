@@ -152,9 +152,11 @@ class Carregando extends React.Component {
       tema: this.tema,
     };
 
+    let pathname = (this.usuario.vidas == 0) ? "/ranking" : "/questoes";
+
     this.setState({
       pagina_destino: {
-        pathname: '/questoes',
+        pathname: pathname,
         state: questoesInterface
       },
       push: false,
