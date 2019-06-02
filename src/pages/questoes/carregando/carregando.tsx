@@ -12,7 +12,15 @@ class Carregando extends React.Component {
 
   twitter: Twitter = new Twitter();
 
-  erro(){
+  componentDidMount() {
+    window.addEventListener('resize', () => this.forceUpdate())
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', () => this.forceUpdate())
+  }
+
+  erro() {
 
     return (
       <div className="erro">
@@ -22,13 +30,37 @@ class Carregando extends React.Component {
           <img src={sad} alt={sad}/>
         </div>
         <p>2 vidas</p>
-        <ButtonSubmit texto="CONTINUAR" />
+        <ButtonSubmit texto="CONTINUAR"/>
       </div>
     );
 
   }
 
-  sucesso(){
+  sucesso() {
+
+    let gerarRetweetsCurtidas = () => {
+
+      let listaUsuarios: JSX.Element[] = [];
+      let altura = window.innerWidth;
+      let alturaMinima = 320;
+
+      for (let i = 0; i < 9; i++) {
+
+        if(altura > alturaMinima){
+          listaUsuarios.push(
+            <li>
+              <img src={this.twitter.gerarFotoAleatoria(0)} alt="user"/>
+            </li>
+          );
+        }
+
+        alturaMinima += 70;
+
+      }
+
+      return listaUsuarios;
+
+    };
 
     return (
       <div className="acerto">
@@ -43,7 +75,7 @@ class Carregando extends React.Component {
             </div>
           </div>
           <div className="content-twitter">
-            You are the champion
+            You are the champion of the world
           </div>
           <div className="time-twitter">
             13:37 - 1 de jun de 2019
@@ -60,24 +92,7 @@ class Carregando extends React.Component {
                   Curtidas
                 </span>
               </li>
-              <li>
-                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
-              </li>
-              <li>
-                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
-              </li>
-              <li>
-                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
-              </li>
-              <li>
-                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
-              </li>
-              <li>
-                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
-              </li>
-              <li>
-                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
-              </li>
+              {gerarRetweetsCurtidas()}
             </ul>
           </div>
           <div className="footer-button-twitter">
@@ -97,6 +112,7 @@ class Carregando extends React.Component {
             </ul>
           </div>
         </div>
+        <ButtonSubmit texto="CONTINUAR"/>
       </div>
     )
 
@@ -105,11 +121,11 @@ class Carregando extends React.Component {
   render() {
 
     if (this.state && this.state['pagina_destino'])
-      return <Redirect to={this.state['pagina_destino']} push={this.state['push']}   />;
+      return <Redirect to={this.state['pagina_destino']} push={this.state['push']}/>;
 
     return (
       <div className="carregando">
-        { this.sucesso() }
+        {this.sucesso()}
       </div>
     );
   }
@@ -117,3 +133,4 @@ class Carregando extends React.Component {
 }
 
 export default Carregando;
+

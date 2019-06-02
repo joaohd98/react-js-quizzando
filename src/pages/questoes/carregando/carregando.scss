@@ -15,14 +15,13 @@
 
   .acerto {
 
+    width: 90vw;
+    max-width: 600px;
+    margin: auto;
+
     .twitter-box {
 
-      margin-left: auto;
-      margin-right: auto;
       margin-top: 25px;
-      height: 25vh;
-      min-height: fit-content;
-      width: fit-content;
       border: 1px solid var(--color-twitter-background);
       background-color: white;
       border-radius: 5px;
@@ -67,8 +66,8 @@
 
       .content-twitter {
 
-        margin: 10px 35px 10px 65px;
-        font-size: 27px;
+        margin: 10px 10px 10px 65px;
+        font-size: 20px;
         line-height: 32px;
         letter-spacing: .01em;
         word-wrap: break-word;
@@ -79,7 +78,7 @@
 
       .time-twitter {
 
-        margin: 10px 35px 10px 65px;
+        margin: 10px 10px 10px 65px;
         font-size: 14px;
         line-height: 24px;
         color: #657786;
@@ -108,7 +107,6 @@
 
         li:first-child {
 
-          border-right: 1px solid #e6ecf0;
           padding: 7px 5px 7px 0;
 
           strong {
@@ -134,6 +132,10 @@
 
         }
 
+        li:nth-child(2){
+          border-left: 1px solid #e6ecf0;
+        }
+
         li:not(first-child){
 
           img {
@@ -151,7 +153,7 @@
 
       .footer-button-twitter{
 
-        margin: 10px 35px 10px 65px;
+        margin: 10px 10px 10px 65px;
 
         ul, li {
 
@@ -164,8 +166,14 @@
         li {
 
           color: #657786;
-          font-size: 16px;
-          line-height: 1;
+          font-size: 12px;
+
+          @media (min-width: 350px) {
+
+            font-size: 16px;
+
+          }
+
           padding: 0 2px;
           margin-right: 12px;
 
@@ -181,6 +189,7 @@
 
 
       }
+
     }
 
   }

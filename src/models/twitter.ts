@@ -8,9 +8,9 @@ export class Twitter {
     "Congratulations."
   ];
 
-  gerarFotoAleatoria(){
+  gerarFotoAleatoria(index){
 
-    return 'https://source.unsplash.com/random/24x24';
+    return `https://source.unsplash.com/random/24x24`;
 
   }
 }
