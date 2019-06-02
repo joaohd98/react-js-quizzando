@@ -4,10 +4,18 @@
 
     text-align: center;
 
+    p{
+
+      font-size: 50px;
+
+    }
+
     img {
 
       width: 30%;
       height: 30%;
+      max-width: 200px;
+      max-height: 200px;
 
     }
 
@@ -18,6 +26,10 @@
     width: 90vw;
     max-width: 600px;
     margin: auto;
+
+    p{
+      font-size: 18px;
+    }
 
     .twitter-box {
 
@@ -200,7 +212,6 @@
     margin-top: 30px;
     margin-bottom: 0;
     color: white;
-    font-size: 3vw;
     text-transform: uppercase;
     letter-spacing: 3px;
 

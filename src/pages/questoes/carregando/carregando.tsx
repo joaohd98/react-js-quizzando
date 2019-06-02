@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './carregando.scss';
-import {Tema} from "../../../models/tema";
 import {Redirect} from "react-router";
 import happy from '../../../assets/imgs/happy.png';
 import sad from '../../../assets/imgs/sad.png';
@@ -49,12 +48,12 @@ class Carregando extends React.Component {
         if(altura > alturaMinima){
           listaUsuarios.push(
             <li>
-              <img src={this.twitter.gerarFotoAleatoria(0)} alt="user"/>
+              <img src={this.twitter.gerarFotoAleatoria(i)} alt="user"/>
             </li>
           );
         }
 
-        alturaMinima += 70;
+        alturaMinima += 60;
 
       }
 

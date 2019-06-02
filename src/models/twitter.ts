@@ -10,7 +10,7 @@ export class Twitter {
 
   gerarFotoAleatoria(index){
 
-    return `https://source.unsplash.com/random/24x24`;
+    return `https://picsum.photos/28?random=${index}`;
 
   }
 }
