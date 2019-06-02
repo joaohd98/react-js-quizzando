@@ -31,13 +31,25 @@
     max-width: 600px;
     border-radius: 5px;
 
-    span {
+    span{
 
-      text-align: right;
-      width: 100%;
-      margin-right: 7px;
+      width: 50%;
       font-size: 20px;
       font-weight: bold;
+
+    }
+
+    span:first-child{
+
+      color: white;
+      text-align: left;
+
+    }
+
+    span:last-child {
+
+      text-align: right;
+      margin-right: 7px;
 
       svg {
         padding-left: 5px;

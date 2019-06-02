@@ -216,10 +216,13 @@ class Questoes extends React.Component {
           />
           <div className={`row row-pergunta`}>
             <p>
-              {this.usuario.qt_questoes + 1}) {this.questao.texto}
+              {this.questao.texto}
             </p>
           </div>
           <div className={`row row-tempo`}>
+            <span>
+              {this.usuario.qt_questoes + 1}˚ pergunta.
+            </span>
             <span style={{color: (this.tempo <= 3 ? "var(--color-danger)" : "white")}}>
               {this.tempo + "s"}
               <FontAwesomeIcon icon="clock" />
