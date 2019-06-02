@@ -132,7 +132,7 @@ class Questoes extends React.Component {
         this.finalizarJogada();
 
       else
-        this.tempo = 1;
+        this.tempo--;
 
       this.forceUpdate();
 
