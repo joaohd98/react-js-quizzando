@@ -105,6 +105,17 @@
 
     }
 
+    .alternativa:active{
+
+      background-color: var(--color-warning);
+      transform: translateY(4px);
+
+      p {
+        color: white !important;
+      }
+
+    }
+
     .alternativa-certa {
 
       background-color: var(--color-success);

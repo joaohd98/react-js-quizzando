@@ -142,6 +142,8 @@ class Carregando extends React.Component {
 
   }
 
+  irPara
+
   render() {
 
     if (this.state && this.state['pagina_destino'])

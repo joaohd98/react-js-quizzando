@@ -60,35 +60,17 @@ class Questoes extends React.Component {
 
   gerarAlternativas(){
 
-    if(!this.finalizado){
+    let definirClasse = (alternativa: Alternativa) => {
 
-      return (
-        <div className={`row row-alternativas`}>
-          {
-            this.questao.alternativas.map((alternativa: Alternativa, index) => (
-              <div key={alternativa.texto}
-                   className={`alternativa ${alternativa.selecionada ? 'alternativa-selecionada' : '' }`}
-                   onClick={() => this.finalizarJogada(index)}>
-                <p>{alternativa.texto}</p>
-              </div>
-            ))
-          }
-        </div>
-      );
-
-    }
-
-    else{
-
-      let definirClasse = (alternativa: Alternativa) => {
+      if(this.finalizado){
 
         if(alternativa.selecionada) {
 
-         if(alternativa.correta)
-           return 'alternativa-certa';
+          if(alternativa.correta)
+            return 'alternativa-certa';
 
-         else
-           return 'alternativa-errada';
+          else
+            return 'alternativa-errada';
 
         }
 
@@ -97,27 +79,31 @@ class Questoes extends React.Component {
 
         return '';
 
-      };
+      }
 
-      return (
-        <div className={`row row-alternativas`}>
-          {
-            this.questao.alternativas.map((alternativa: Alternativa) => {
+      else
+        return alternativa.selecionada ? 'alternativa-selecionada' : ''
 
-              return (
-                <div key={alternativa.texto}
-                     className={`alternativa ${definirClasse(alternativa)}`}>
-                  <p>{alternativa.texto}</p>
-                </div>
-              )
+    };
 
-            })
-          }
+    let listaAlternativas: Array<JSX.Element> = [];
+    let pointer: "none" | "auto" = this.finalizado ? "none" : "auto";
+
+    this.questao.alternativas.map((alternativa: Alternativa, index) => {
+
+      listaAlternativas.push(
+        <div key={alternativa.texto}
+             className={`alternativa ${definirClasse(alternativa)}`}
+             style={{pointerEvents: pointer}}
+             onClick={() => this.finalizarJogada(index)}>
+          <p>{alternativa.texto}</p>
         </div>
+      )
 
-      );
+    });
 
-    }
+    return listaAlternativas;
+
 
   }
 
@@ -155,7 +141,6 @@ class Questoes extends React.Component {
 
     if(index > -1) {
 
-      this.questao.alternativas.forEach((alternativa: Alternativa) => alternativa.selecionada = false);
       this.questao.alternativas[index].selecionada = true;
 
     }
@@ -176,7 +161,6 @@ class Questoes extends React.Component {
         tema: this.tema,
         correta: correta
       };
-
 
       this.setState({
         pagina_destino: {
@@ -233,7 +217,9 @@ class Questoes extends React.Component {
               <FontAwesomeIcon icon="clock" />
             </span>
           </div>
-          { this.gerarAlternativas() }
+          <div className={`row row-alternativas`}>
+            { this.gerarAlternativas() }
+          </div>
         </form>
       </div>
     );
