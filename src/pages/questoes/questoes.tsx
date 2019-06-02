@@ -181,7 +181,7 @@ class Questoes extends React.Component {
 
   }
 
-  desistir = () => {
+  desistir() {
 
     this.alertProvider.desistir(() => {
 
@@ -206,7 +206,7 @@ class Questoes extends React.Component {
       <div className="questoes">
         <form>
           <div className={`row row-header`}>
-            <p onClick={this.desistir}>
+            <p onClick={this.desistir.bind(this)}>
               Desistir
             </p>
             {this.gerarVidas()}

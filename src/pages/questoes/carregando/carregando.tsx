@@ -145,7 +145,7 @@ class Carregando extends React.Component {
 
   }
 
-  irParaQuestao = () =>{
+  irParaQuestao() {
 
     let questoesInterface: QuestoesInterface = {
       usuario: this.usuario,
@@ -172,7 +172,7 @@ class Carregando extends React.Component {
     return (
       <div className="carregando">
         { this.correta ? this.sucesso() : this.erro() }
-        <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao}/>
+        <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao.bind(this)}/>
       </div>
     );
   }
