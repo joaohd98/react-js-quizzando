@@ -4,22 +4,101 @@ import {Tema} from "../../../models/tema";
 import {Redirect} from "react-router";
 import happy from '../../../assets/imgs/happy.png';
 import sad from '../../../assets/imgs/sad.png';
+import ButtonSubmit from "../../../components/button-submit/button-submit";
+import {Twitter} from "../../../models/twitter";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Carregando extends React.Component {
 
+  twitter: Twitter = new Twitter();
 
-  acerto(){
+  erro(){
 
     return (
-      <div className="acerto">
-        <div className="vidas">
+      <div className="erro">
+        <div>
           <img src={happy} alt={happy}/>
           <img src={happy} alt={happy}/>
           <img src={sad} alt={sad}/>
         </div>
         <p>2 vidas</p>
+        <ButtonSubmit texto="CONTINUAR" />
       </div>
     );
+
+  }
+
+  sucesso(){
+
+    return (
+      <div className="acerto">
+        <p>6 questões certas</p>
+        <div className="twitter-box">
+          <div className="header-twitter">
+            <img src={this.twitter.foto} alt={this.twitter.nome}/>
+            <div>
+              <span className="nome">{this.twitter.nome}</span>
+              <br/>
+              <span className="hashtag">{this.twitter.hashtag}</span>
+            </div>
+          </div>
+          <div className="content-twitter">
+            You are the champion
+          </div>
+          <div className="time-twitter">
+            13:37 - 1 de jun de 2019
+          </div>
+          <div className="footer-twitter">
+            <ul>
+              <li>
+                <span>
+                  <strong>5.756</strong>
+                  Retweets
+                </span>
+                <span>
+                  <strong>21.328</strong>
+                  Curtidas
+                </span>
+              </li>
+              <li>
+                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
+              </li>
+              <li>
+                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
+              </li>
+              <li>
+                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
+              </li>
+              <li>
+                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
+              </li>
+              <li>
+                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
+              </li>
+              <li>
+                <img src={this.twitter.gerarFotoAleatoria()} alt="user"/>
+              </li>
+            </ul>
+          </div>
+          <div className="footer-button-twitter">
+            <ul>
+              <li>
+                <FontAwesomeIcon icon="comment"/>
+                5,4 mil
+              </li>
+              <li>
+                <FontAwesomeIcon icon="retweet"/>
+                11 mil
+              </li>
+              <li>
+                <FontAwesomeIcon icon="heart"/>
+                43 mil
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    )
 
   }
 
@@ -30,7 +109,7 @@ class Carregando extends React.Component {
 
     return (
       <div className="carregando">
-        { this.acerto() }
+        { this.sucesso() }
       </div>
     );
   }

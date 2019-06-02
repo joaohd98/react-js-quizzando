@@ -4,9 +4,13 @@ import * as serviceWorker from './serviceWorker';
 import './index.scss';
 import Layout from "./layout/layout.tsx";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {fas, faArrowLeft, faArrowRight, faSignOutAlt, faClock} from '@fortawesome/free-solid-svg-icons'
+import {
+    fas, faArrowLeft, faArrowRight,
+    faSignOutAlt, faClock, faRetweet,
+    faHeart, faComment
+} from '@fortawesome/free-solid-svg-icons'
 
-library.add(fas, faSignOutAlt, faArrowLeft, faArrowRight, faClock);
+library.add(fas, faSignOutAlt, faArrowLeft, faArrowRight, faClock, faRetweet, faHeart, faComment);
 
 ReactDOM.render(
     <Layout />,
