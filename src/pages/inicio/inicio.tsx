@@ -18,7 +18,16 @@ class Inicio extends React.Component {
         {
           regra: "required",
           texto: "Campo nome é obrigatório."
-        }
+        },
+        {
+          regra: "min-length",
+          paramtros: { numero: 3 },
+          texto: "Campo tem que ter no mínimo 3 letras."
+        },{
+          regra: "max-length",
+          paramtros: { numero: 20 },
+          texto: "Campo tem que ter no máximo 20 letras."
+        },
       ]
     };
 

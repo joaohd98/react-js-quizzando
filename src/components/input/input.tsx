@@ -8,12 +8,11 @@ export interface StateInterface {
   erro_mensagem?: string;
   class?: string;
   ref?: any;
-  validations?: [
-    {
-      regra: string,
-      texto: string
-    }
-  ]
+  validations?: Array<{
+    regra: string,
+    texto: string
+    paramtros?: object
+  }>
 }
 
 interface InputInterface {
@@ -93,7 +92,7 @@ class Input extends Component<InputInterface> {
 
       let validation = state.validations[i];
 
-      if(!Validations.validarCampo(validation.regra, state.valor)){
+      if(!Validations.validarCampo(validation.regra, state.valor, validation.paramtros)){
 
         state.erro_mensagem = validation.texto;
         valido = false;
