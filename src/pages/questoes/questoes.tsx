@@ -104,7 +104,6 @@ class Questoes extends React.Component {
 
     return listaAlternativas;
 
-
   }
 
   gerarVidas(){
@@ -155,6 +154,12 @@ class Questoes extends React.Component {
           correta = true;
 
       });
+
+      if(correta)
+        this.usuario.pontuar();
+
+      else
+        this.usuario.perderVida();
 
       let questoesInterface: QuestoesInterface = {
         usuario: this.usuario,

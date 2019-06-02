@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Usuario} from "../../../models/usuario";
 import {Tema} from "../../../models/tema";
 import {Questao} from "../../../models/questao";
+import {QuestoesInterface} from "../questoes";
 
 class Carregando extends React.Component {
 
@@ -51,11 +52,13 @@ class Carregando extends React.Component {
     return (
       <div className="erro">
         <div>
-          <img src={happy} alt={happy}/>
-          <img src={happy} alt={happy}/>
-          <img src={sad} alt={sad}/>
+          <img src={this.usuario.vidas >= 1 ? happy : sad} alt='estrela'/>
+          <img src={this.usuario.vidas >= 2 ? happy : sad} alt='estrela' />
+          <img src={this.usuario.vidas >= 3 ? happy : sad} alt='estrela' />
         </div>
-        <p>2 vidas</p>
+        <p>
+          {this.usuario.vidas > 0 ? `${this.usuario.vidas} vidas` : "BOM JOGO" }
+        </p>
       </div>
     );
 
@@ -142,7 +145,22 @@ class Carregando extends React.Component {
 
   }
 
-  irPara
+  irParaQuestao = () =>{
+
+    let questoesInterface: QuestoesInterface = {
+      usuario: this.usuario,
+      tema: this.tema,
+    };
+
+    this.setState({
+      pagina_destino: {
+        pathname: '/questoes',
+        state: questoesInterface
+      },
+      push: false,
+    });
+
+  };
 
   render() {
 
@@ -152,7 +170,7 @@ class Carregando extends React.Component {
     return (
       <div className="carregando">
         { this.correta ? this.sucesso() : this.erro() }
-        <ButtonSubmit texto="CONTINUAR"/>
+        <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao}/>
       </div>
     );
   }

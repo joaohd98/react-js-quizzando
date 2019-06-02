@@ -42,4 +42,11 @@ export class Usuario {
 
   }
 
+  pontuar() {
+    this.qt_questoes++;
+  }
+
+  perderVida() {
+    this.vidas--;
+  }
 }
