@@ -8,6 +8,7 @@ export interface StateInterface {
   erro_mensagem?: string;
   class?: string;
   ref?: any;
+  mostrarValidacao?: boolean;
   validations?: Array<{
     regra: string,
     texto: string
@@ -39,6 +40,7 @@ class Input extends Component<InputInterface> {
 
     state.class = "";
     state.valido = null;
+    state.mostrarValidacao = false;
     state.ref = React.createRef();
 
     if(!state.valor)
@@ -62,7 +64,9 @@ class Input extends Component<InputInterface> {
       [nome]: state
     });
 
-    this.validar();
+    if(state.mostrarValidacao || state.class !== "")
+      this.validar();
+
     this.pegarClasseInput();
 
     if(this.props.onChangeFunc)
@@ -103,6 +107,7 @@ class Input extends Component<InputInterface> {
 
     }
 
+    state.mostrarValidacao = true;
     state.valido = valido;
 
     this.props.funcState({
