@@ -9,6 +9,7 @@ import {Usuario} from "../../models/usuario";
 import {Alternativa, Questao} from "../../models/questao";
 import {QuestoesProvider} from "../../providers/questoesProvider";
 import {AlertProvider} from "../../providers/alertProvider";
+import Header from "../../components/header/header";
 
 export interface QuestoesInterface {
   usuario: Usuario,
@@ -108,13 +109,16 @@ class Questoes extends React.Component {
 
   gerarVidas(){
 
-    return(
-      <p>
-        <img src={happy_mini} alt="sad-face"/>
-        <img src={this.usuario.vidas >= 2 ? happy_mini : sad_mini} alt="sad-face"/>
-        <img src={this.usuario.vidas === 3 ? happy_mini : sad_mini} alt="sad-face"/>
-      </p>
-    )
+    let vidasElement: Array<JSX.Element> = [];
+
+    for(let i = 3; i > 0; i--){
+      vidasElement.push(
+        <img src={this.usuario.vidas >= i ? happy_mini : sad_mini} alt="sad-face"/>
+      )
+    }
+
+    return vidasElement;
+
   }
 
   calcularTempo(){
@@ -128,7 +132,7 @@ class Questoes extends React.Component {
         this.finalizarJogada();
 
       else
-        this.tempo--;
+        this.tempo = 1;
 
       this.forceUpdate();
 
@@ -205,12 +209,10 @@ class Questoes extends React.Component {
     return (
       <div className="questoes">
         <form>
-          <div className={`row row-header`}>
-            <p onClick={this.desistir.bind(this)}>
-              Desistir
-            </p>
-            {this.gerarVidas()}
-          </div>
+          <Header
+            left={<a onClick={this.desistir.bind(this)}>Desistir</a>}
+            right={this.gerarVidas()}
+          />
           <div className={`row row-pergunta`}>
             <p>
               {this.usuario.qt_questoes + 1}) {this.questao.texto}
@@ -234,3 +236,8 @@ class Questoes extends React.Component {
 }
 
 export default Questoes;
+
+/*
+
+
+ */

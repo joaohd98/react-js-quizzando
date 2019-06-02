@@ -52,7 +52,7 @@ class Input extends Component<InputInterface> {
       this.validar();
 
   };
-
+  
   mudarInput = (event: any) => {
 
     const nome = this.props.nome;

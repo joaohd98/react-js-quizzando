@@ -1,52 +1,11 @@
 .temas{
 
-  .row{
-
-    display: flex;
-    width: 100%;
-    margin-bottom: 30px;
-    justify-content: center;
-
-  }
-
-  .row-header{
-
-    margin-left: auto;
-    margin-right: auto;
-
-    font-weight: bold;
-    font-size: 20px;
-    color: white;
-
-    p{
-      width: 50%;
-    }
-
-    svg{
-      margin-right: 10px;
-    }
-
-    p:first-child{
-      text-align: left;
-    }
-
-    p:last-child{
-      text-align: right;
-    }
-
-  }
-
-  .row-sub-header{
-
-    margin-bottom: 0;
-
-  }
-
   .selecionar-tema{
 
     justify-content: center;
     perspective: 800px;
     height: 35vh;
+    width: 60vh;
     max-height: 300px;
 
     .sem-temas{

@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Input, {StateInterface} from "../../components/input/input";
 import {Helpers} from "../../helpers/helpers";
 import {AlertProvider} from "../../providers/alertProvider";
+import Header from "../../components/header/header";
 
 class Temas extends React.Component {
 
@@ -207,13 +208,9 @@ class Temas extends React.Component {
     return (
       <div className="temas">
         <form onSubmit={this.selecionadoTema} method="post">
-          <div className={`row row-header`}>
-            <p>{`Olá, ${this.usuario.nome}`}</p>
-            <p onClick={this.sair}>
-              <FontAwesomeIcon icon="sign-out-alt" color="white"/>
-              Sair
-            </p>
-          </div>
+          <Header
+            left={`Olá, ${this.usuario.nome}`}
+            right={<a onClick={this.sair}><FontAwesomeIcon icon="sign-out-alt" color="white"/>Sair</a>}/>
           <div className={`row row-sub-header`}>
             <Titulo texto="TEMAS"/>
           </div>
