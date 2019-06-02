@@ -59,7 +59,7 @@ class Carregando extends React.Component {
           <img src={this.usuario.vidas >= 3 ? happy : sad} alt='estrela' />
         </div>
         <p>
-          {this.usuario.vidas > 0 ? `${this.usuario.vidas} vidas` : "BOM JOGO" }
+          {this.usuario.vidas > 0 ? `${this.usuario.vidas} vida${this.usuario.vidas > 1 ? 's' : ''}` : "BOM JOGO" }
         </p>
       </div>
     );
