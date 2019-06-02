@@ -2,7 +2,8 @@ import {Alternativa, Questao} from "../models/questao";
 
 export class QuestoesProvider {
 
-  pegarQuestao(questao: Questao){
+  pegarQuestao(questao: Questao, idRespondidas: Array<number>){
+
 
     questao.texto = "Crash Bandicoot foi usado como mascote de qual videogame ?";
 

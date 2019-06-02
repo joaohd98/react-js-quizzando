@@ -6,17 +6,44 @@ import sad from '../../../assets/imgs/sad.png';
 import ButtonSubmit from "../../../components/button-submit/button-submit";
 import {Twitter} from "../../../models/twitter";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Usuario} from "../../../models/usuario";
+import {Tema} from "../../../models/tema";
+import {Questao} from "../../../models/questao";
 
 class Carregando extends React.Component {
 
+  usuario: Usuario;
+  tema: Tema;
+  correta: boolean;
   twitter: Twitter = new Twitter();
 
+  componentWillMount() {
+
+    if (this.props['location'].state === undefined || this.props['location'].state.tema === undefined)
+      this.setState({pagina_destino: '/'});
+
+    else {
+
+      this.usuario = this.props['location'].state.usuario;
+      this.tema    = this.props['location'].state.tema;
+      this.correta = this.props['location'].state.correta;
+
+    }
+
+
+  }
+
   componentDidMount() {
+
+    window.history.replaceState({}, '/questoes/carregando');
     window.addEventListener('resize', () => this.forceUpdate())
+
   }
 
   componentWillUnmount() {
+
     window.removeEventListener('resize', () => this.forceUpdate())
+
   }
 
   erro() {
@@ -29,7 +56,6 @@ class Carregando extends React.Component {
           <img src={sad} alt={sad}/>
         </div>
         <p>2 vidas</p>
-        <ButtonSubmit texto="CONTINUAR"/>
       </div>
     );
 
@@ -111,7 +137,6 @@ class Carregando extends React.Component {
             </ul>
           </div>
         </div>
-        <ButtonSubmit texto="CONTINUAR"/>
       </div>
     )
 
@@ -124,7 +149,8 @@ class Carregando extends React.Component {
 
     return (
       <div className="carregando">
-        {this.sucesso()}
+        { this.correta ? this.sucesso() : this.erro() }
+        <ButtonSubmit texto="CONTINUAR"/>
       </div>
     );
   }

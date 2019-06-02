@@ -10,11 +10,17 @@ import {Alternativa, Questao} from "../../models/questao";
 import {QuestoesProvider} from "../../providers/questoesProvider";
 import {AlertProvider} from "../../providers/alertProvider";
 
+export interface QuestoesInterface {
+  usuario: Usuario,
+  tema: Tema,
+  correta?: boolean
+}
+
 class Questoes extends React.Component {
 
-  usuario: Usuario = Usuario.pegarUsuario();
+  usuario: Usuario;
   tema: Tema;
-  questao: Questao = new Questao();
+  questao: Questao;
 
   questoesProvider: QuestoesProvider = new QuestoesProvider();
   alertProvider: AlertProvider = new AlertProvider();
@@ -29,9 +35,16 @@ class Questoes extends React.Component {
 
     else {
 
+      if(this.props['location'].state.usuario !== undefined)
+        this.usuario = this.props['location'].state.usuario;
+
+      else
+        this.usuario = Usuario.pegarUsuario();
+
       this.tema = this.props['location'].state.tema;
 
-      this.questoesProvider.pegarQuestao(this.questao);
+      this.questao = new Questao();
+      this.questoesProvider.pegarQuestao(this.questao, this.usuario.idRespondidas);
 
       this.calcularTempo();
 
@@ -123,13 +136,15 @@ class Questoes extends React.Component {
 
     let interval = setInterval(() => {
 
-      if(this.finalizado)
+      if(this.finalizado || this.tempo <= 0)
         clearInterval(interval);
 
-      else if(this.tempo <= 0)
+      if(this.tempo <= 0)
         this.finalizarJogada();
 
-      this.tempo--;
+      else
+        this.tempo--;
+
       this.forceUpdate();
 
     }, 1000);
@@ -147,10 +162,28 @@ class Questoes extends React.Component {
 
     setTimeout(() => {
 
+      let correta = false;
+
+      this.questao.alternativas.forEach((alternativa: Alternativa) => {
+
+        if(alternativa.selecionada && alternativa.correta)
+          correta = true;
+
+      });
+
+      let questoesInterface: QuestoesInterface = {
+        usuario: this.usuario,
+        tema: this.tema,
+        correta: correta
+      };
+
+
       this.setState({
-        'pagina_destino': `/questoes/carregando`,
-        'state': {
-        }
+        pagina_destino: {
+          pathname: '/questoes/carregando',
+          state: questoesInterface
+        },
+        push: false,
       });
 
     }, 2500);
@@ -159,7 +192,7 @@ class Questoes extends React.Component {
 
   }
 
-  desistir = () =>{
+  desistir = () => {
 
     this.alertProvider.desistir(() => {
 
@@ -169,7 +202,7 @@ class Questoes extends React.Component {
         state: {
           desistir: true,
         }
-      });
+      })
 
     });
 
