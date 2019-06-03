@@ -1,14 +1,11 @@
 import * as React from 'react';
 import './carregando.scss';
 import {Redirect} from "react-router";
-import happy from '../../../assets/imgs/happy.png';
-import sad from '../../../assets/imgs/sad.png';
 import ButtonSubmit from "../../../components/button-submit/button-submit";
 import {Twitter} from "../../../models/twitter";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Usuario} from "../../../models/usuario";
 import {Tema} from "../../../models/tema";
-import {Questao} from "../../../models/questao";
 import {QuestoesInterface} from "../questoes";
 import Header from "../../../components/header/header";
 import {AlertProvider} from "../../../providers/alert-provider";
@@ -51,6 +48,9 @@ class Carregando extends React.Component {
   }
 
   erro() {
+
+    let happy = "https://cdn3.iconfinder.com/data/icons/happy-shapes-colored/640/star-face-emoji-shapes-happy-emoticons-smiley-2-512.png";
+    let sad = "https://cdn0.iconfinder.com/data/icons/star-emoji-8/64/emoji-emotion-star-sad-cry-face-512.png";
 
     return (
       <div className="erro">
