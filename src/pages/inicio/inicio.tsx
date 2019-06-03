@@ -7,6 +7,7 @@ import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
 import {Redirect} from "react-router";
 import {Usuario} from "../../models/usuario";
+import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 
 class Inicio extends React.Component {
 
@@ -63,7 +64,7 @@ class Inicio extends React.Component {
       <div className="inicio">
         <form onSubmit={this.comecarJogo} method="post">
           <div className="img-container">
-            <img src={logo} alt="logo"/>
+            <LazyLoadImg img={logo} alt="logo"/>
           </div>
           <Titulo texto="Quizzando"/>
           <Input state={this.state} funcState={this.setState.bind(this)} nome="nome" placeholder="Digite o seu nome"/>

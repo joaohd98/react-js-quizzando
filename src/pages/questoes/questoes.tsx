@@ -7,9 +7,10 @@ import sad_mini from '../../assets/imgs/sad-mini.png';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Usuario} from "../../models/usuario";
 import {Alternativa, Questao} from "../../models/questao";
-import {QuestoesProvider} from "../../providers/questoesProvider";
-import {AlertProvider} from "../../providers/alertProvider";
+import {QuestoesProvider} from "../../providers/questoes-provider";
+import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
+import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 
 export interface QuestoesInterface {
   usuario: Usuario,
@@ -112,7 +113,7 @@ class Questoes extends React.Component {
 
     for(let i = 3; i > 0; i--){
       vidasElement.push(
-        <img src={this.usuario.vidas >= i ? happy_mini : sad_mini} alt="sad-face"/>
+        <LazyLoadImg img={this.usuario.vidas >= i ? happy_mini : sad_mini} alt="sad-face"/>
       )
     }
 

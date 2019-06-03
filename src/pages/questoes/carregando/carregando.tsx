@@ -11,7 +11,8 @@ import {Tema} from "../../../models/tema";
 import {Questao} from "../../../models/questao";
 import {QuestoesInterface} from "../questoes";
 import Header from "../../../components/header/header";
-import {AlertProvider} from "../../../providers/alertProvider";
+import {AlertProvider} from "../../../providers/alert-provider";
+import LazyLoadImg from "../../../components/lazy-load-img/lazy-load-img";
 
 class Carregando extends React.Component {
 
@@ -54,9 +55,9 @@ class Carregando extends React.Component {
     return (
       <div className="erro">
         <div>
-          <img src={this.usuario.vidas >= 1 ? happy : sad} alt='estrela'/>
-          <img src={this.usuario.vidas >= 2 ? happy : sad} alt='estrela' />
-          <img src={this.usuario.vidas >= 3 ? happy : sad} alt='estrela' />
+          <LazyLoadImg img={this.usuario.vidas >= 1 ? happy : sad} alt='estrela'/>
+          <LazyLoadImg img={this.usuario.vidas >= 2 ? happy : sad} alt='estrela' />
+          <LazyLoadImg img={this.usuario.vidas >= 3 ? happy : sad} alt='estrela' />
         </div>
         <p>
           {this.usuario.vidas > 0 ? `${this.usuario.vidas} vida${this.usuario.vidas > 1 ? 's' : ''}` : "BOM JOGO" }
@@ -79,7 +80,7 @@ class Carregando extends React.Component {
         if(altura > alturaMinima){
           listaUsuarios.push(
             <li>
-              <img src={this.twitter.gerarFotoAleatoria(i)} alt="user"/>
+              <LazyLoadImg img={this.twitter.gerarFotoAleatoria(i)} alt={"user"} />
             </li>
           );
         }
@@ -96,7 +97,7 @@ class Carregando extends React.Component {
       <div className="acerto">
         <div className="twitter-box">
           <div className="header-twitter">
-            <img src={this.twitter.foto} alt={this.twitter.nome}/>
+            <LazyLoadImg img={this.twitter.foto} alt={this.twitter.nome} />
             <div>
               <span className="nome">{this.twitter.nome}</span>
               <br/>

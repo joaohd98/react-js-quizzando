@@ -8,8 +8,9 @@ import {Tema, TemasAtuais} from "../../models/tema";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Input, {StateInterface} from "../../components/input/input";
 import {Helpers} from "../../helpers/helpers";
-import {AlertProvider} from "../../providers/alertProvider";
+import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
+import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 
 class Temas extends React.Component {
 
@@ -97,15 +98,15 @@ class Temas extends React.Component {
       return (
         <div className={`row selecionar-tema`}>
           <div className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
-            <img src={temas[this.atual.indexAnterior].img} alt={temas[this.atual.indexAnterior].texto}/>
+            <LazyLoadImg img={temas[this.atual.indexAnterior].img} alt={temas[this.atual.indexAnterior].texto} />
             <p>{temas[this.atual.indexAnterior].texto}</p>
           </div>
           <div className={"card card-selected"}>
-            <img src={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto}/>
+            <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
             <p>{temas[this.atual.indexAtual].texto}</p>
           </div>
           <div className={"card right"} onClick={() => this.moverSelecionado("direita")}>
-            <img src={temas[this.atual.indexProximo].img} alt={temas[this.atual.indexProximo].texto}/>
+            <LazyLoadImg img={temas[this.atual.indexProximo].img} alt={temas[this.atual.indexProximo].texto} />
             <p>{temas[this.atual.indexProximo].texto}</p>
           </div>
         </div>
@@ -118,7 +119,7 @@ class Temas extends React.Component {
       return (
         <div className={`row selecionar-tema`}>
           <div className={"card card-selected"}>
-            <img src={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto}/>
+            <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
             <p>{temas[this.atual.indexAtual].texto}</p>
           </div>
         </div>
