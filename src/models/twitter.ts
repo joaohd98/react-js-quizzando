@@ -1,8 +1,8 @@
 export class Twitter {
 
-  nome: string = "Donald J. Trump";
-  hashtag: string = "@realDonaldTrump";
-  foto: string = "https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_bigger.jpg";
+  nome: string = "Robert Downey Jr";
+  hashtag: string = "@RobertDowneyJr";
+  foto: string = "https://pbs.twimg.com/profile_images/712016346775564289/ajnm_P3F_bigger.jpg";
   mensagem: string;
   dataFormatada: string;
   qtComentarios: number;

@@ -12,6 +12,7 @@ import {AlertProvider} from "../../../providers/alert-provider";
 import LazyLoadImg from "../../../components/lazy-load-img/lazy-load-img";
 import happy from '../../../assets/imgs/happy.png';
 import sad from '../../../assets/imgs/sad.png';
+import twitter from '../../../assets/icons/twitter.svg';
 import {Helpers} from "../../../helpers/helpers";
 
 class Carregando extends React.Component {
@@ -100,12 +101,13 @@ class Carregando extends React.Component {
       <div className="acerto">
         <div className="twitter-box">
           <div className="header-twitter">
-            <LazyLoadImg img={this.twitter.foto} alt={this.twitter.nome} />
+            <LazyLoadImg img={this.twitter.foto} alt={this.twitter.nome} classe="perfil"/>
             <div>
               <span className="nome">{this.twitter.nome}</span>
               <br/>
               <span className="hashtag">{this.twitter.hashtag}</span>
             </div>
+            <LazyLoadImg img={twitter}  alt="twitter"/>
           </div>
           <div className="content-twitter">
             {this.twitter.mensagem}

@@ -5,6 +5,7 @@ import LazyLoad from 'react-lazy-load';
 export interface LazyLoadImgInterface {
   img: string,
   alt: string,
+  classe?: string
 }
 
 class LazyLoadImg extends Component<LazyLoadImgInterface> {
@@ -13,7 +14,7 @@ class LazyLoadImg extends Component<LazyLoadImgInterface> {
 
     return (
       <LazyLoad>
-        <img src={this.props.img} alt={this.props.alt}/>
+        <img src={this.props.img} alt={this.props.alt} className={this.props.classe}/>
       </LazyLoad>
     );
 
