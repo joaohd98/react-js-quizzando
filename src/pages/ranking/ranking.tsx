@@ -6,11 +6,6 @@ import ButtonSubmit from "../../components/button-submit/button-submit";
 
 class Ranking extends React.Component {
 
-  constructor(props: any){
-    super(props);
-
-  }
-
   irParaTemas(){
 
     this.setState({

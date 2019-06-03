@@ -211,7 +211,7 @@ class Temas extends React.Component {
         <form onSubmit={this.selecionadoTema} method="post">
           <Header
             left={`Olá, ${this.usuario.nome}`}
-            right={<a onClick={this.sair}><FontAwesomeIcon icon="sign-out-alt" color="white"/>Sair</a>}/>
+            right={<span className="span-link" onClick={this.sair}><FontAwesomeIcon icon="sign-out-alt" color="white"/>Sair</span>}/>
           <div className={`row row-sub-header`}>
             <Titulo texto="TEMAS"/>
           </div>

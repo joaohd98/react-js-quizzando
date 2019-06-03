@@ -90,7 +90,7 @@ class Questoes extends React.Component {
     let listaAlternativas: Array<JSX.Element> = [];
     let pointer: "none" | "auto" = this.finalizado ? "none" : "auto";
 
-    this.questao.alternativas.map((alternativa: Alternativa, index) => {
+    this.questao.alternativas.forEach((alternativa: Alternativa, index) => {
 
       listaAlternativas.push(
         <div key={alternativa.texto}
@@ -212,7 +212,7 @@ class Questoes extends React.Component {
       <div className="questoes">
         <form>
           <Header
-            left={<a onClick={this.desistir.bind(this)}>Desistir</a>}
+            left={<span className="span-link" onClick={this.desistir.bind(this)}>Desistir</span>}
             right={this.gerarVidas()}
           />
           <div className={`row row-pergunta`}>

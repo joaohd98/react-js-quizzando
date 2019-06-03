@@ -9,10 +9,6 @@ export interface LazyLoadImgInterface {
 
 class LazyLoadImg extends Component<LazyLoadImgInterface> {
 
-  constructor(props: any){
-    super(props);
-  }
-
   render() {
 
     return (

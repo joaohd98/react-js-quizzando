@@ -153,7 +153,7 @@ class Carregando extends React.Component {
       tema: this.tema,
     };
 
-    let pathname = (this.usuario.vidas == 0) ? "/ranking" : "/questoes";
+    let pathname = (this.usuario.vidas === 0) ? "/ranking" : "/questoes";
 
     this.setState({
       pagina_destino: {
@@ -190,7 +190,7 @@ class Carregando extends React.Component {
     return (
       <div className="carregando">
         <Header
-          left={<a onClick={this.desistir.bind(this)}>Desistir</a>}
+          left={<span className="span-link" onClick={this.desistir.bind(this)}>Desistir</span>}
           right={`Pontuação: ${this.usuario.qt_questoes}`}
         />
         { this.correta ? this.sucesso() : this.erro() }
