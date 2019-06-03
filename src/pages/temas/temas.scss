@@ -1,5 +1,8 @@
 .temas{
 
+  .row-sub-header{
+    margin: 0;
+  }
   .selecionar-tema{
 
     justify-content: center;
@@ -7,6 +10,8 @@
     height: 35vh;
     width: 50vh;
     max-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
 
     .sem-temas{
 

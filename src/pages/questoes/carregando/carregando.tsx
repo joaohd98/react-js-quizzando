@@ -12,6 +12,7 @@ import {AlertProvider} from "../../../providers/alert-provider";
 import LazyLoadImg from "../../../components/lazy-load-img/lazy-load-img";
 import happy from '../../../assets/imgs/happy.png';
 import sad from '../../../assets/imgs/sad.png';
+import {Helpers} from "../../../helpers/helpers";
 
 class Carregando extends React.Component {
 
@@ -78,11 +79,14 @@ class Carregando extends React.Component {
 
         if(altura > alturaMinima){
           listaUsuarios.push(
-            <li>
-              <LazyLoadImg img={this.twitter.gerarFotoAleatoria(i)} alt={"user"} />
+            <li key={i}>
+              <img src={this.twitter.gerarFotoAleatoria(i)} alt={"user"} />
             </li>
           );
         }
+
+        else
+          break;
 
         alturaMinima += 60;
 
@@ -104,20 +108,20 @@ class Carregando extends React.Component {
             </div>
           </div>
           <div className="content-twitter">
-            You are the champion of the world
+            {this.twitter.mensagem}
           </div>
           <div className="time-twitter">
-            13:37 - 1 de jun de 2019
+            {this.twitter.dataFormatada}
           </div>
           <div className="footer-twitter">
             <ul>
               <li>
                 <span>
-                  <strong>5.756</strong>
+                  <strong>{Helpers.formatarPonto(this.twitter.qtRetweets)}</strong>
                   Retweets
                 </span>
                 <span>
-                  <strong>21.328</strong>
+                  <strong>{Helpers.formatarPonto(this.twitter.qtCurtidas)}</strong>
                   Curtidas
                 </span>
               </li>
@@ -128,15 +132,15 @@ class Carregando extends React.Component {
             <ul>
               <li>
                 <FontAwesomeIcon icon="comment"/>
-                5,4 mil
+                <strong>{Helpers.pegarPrimeirosDigitos(this.twitter.qtComentarios)}</strong> mil
               </li>
               <li>
                 <FontAwesomeIcon icon="retweet"/>
-                11 mil
+                <strong>{Helpers.pegarPrimeirosDigitos(this.twitter.qtRetweets)}</strong> mil
               </li>
               <li>
                 <FontAwesomeIcon icon="heart"/>
-                43 mil
+                <strong>{Helpers.pegarPrimeirosDigitos(this.twitter.qtCurtidas)}</strong> mil
               </li>
             </ul>
           </div>

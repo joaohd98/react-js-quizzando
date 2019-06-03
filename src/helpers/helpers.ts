@@ -14,4 +14,37 @@ export class Helpers {
 
   }
 
+  static formatarPonto(numero: number | string){
+
+    let numeroString = numero.toString();
+
+    let tamanho = numeroString.length;
+    let numeroFormatado = numeroString;
+    let alteracoes = 0;
+
+    for(let i = tamanho - 3; i > -1; i -= 3) {
+
+      if (i - 1 > -1) {
+
+        numeroFormatado = [numeroFormatado.slice(0, i + alteracoes), ".", numeroFormatado.slice(i)].join('')
+        alteracoes++;
+
+      }
+
+    }
+
+    return numeroFormatado;
+
+  }
+
+  static pegarPrimeirosDigitos(numero: number | string){
+
+    let numeroString = numero.toString();
+
+    numeroString = Helpers.formatarPonto(numeroString);
+
+    return numeroString.split(".")[0];
+
+  }
+
 }

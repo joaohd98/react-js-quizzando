@@ -113,7 +113,7 @@ class Questoes extends React.Component {
 
     for(let i = 3; i > 0; i--){
       vidasElement.push(
-        <LazyLoadImg img={this.usuario.vidas >= i ? happy_mini : sad_mini} alt="sad-face"/>
+        <LazyLoadImg key={i} img={this.usuario.vidas >= i ? happy_mini : sad_mini} alt="sad-face"/>
       )
     }
 
@@ -222,7 +222,7 @@ class Questoes extends React.Component {
           </div>
           <div className={`row row-tempo`}>
             <span>
-              {this.usuario.qt_questoes + 1}˚ pergunta.
+              Pontuação: {this.usuario.qt_questoes}
             </span>
             <span style={{color: (this.tempo <= 3 ? "var(--color-danger)" : "white")}}>
               {this.tempo + "s"}

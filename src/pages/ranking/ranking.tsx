@@ -24,11 +24,14 @@ class Ranking extends React.Component {
       <div className="ranking">
         <Titulo texto="Quadrinhos"/>
         <table>
-          <tr>
-            <th>˚</th>
-            <th>Nome</th>
-            <th>Pontuação</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>˚</th>
+              <th>Nome</th>
+              <th>Pontuação</th>
+            </tr>
+          </thead>
+          <tbody>
           <tr>
             <td>1</td>
             <td>Peter Parker o nme</td>
@@ -49,6 +52,7 @@ class Ranking extends React.Component {
             <td>Cleveland</td>
             <td>250</td>
           </tr>
+          </tbody>
         </table>
         <ButtonSubmit texto="JOGAR NOVAMENTE" func={this.irParaTemas.bind(this)} />
       </div>
