@@ -10,6 +10,8 @@ import {QuestoesInterface} from "../questoes";
 import Header from "../../../components/header/header";
 import {AlertProvider} from "../../../providers/alert-provider";
 import LazyLoadImg from "../../../components/lazy-load-img/lazy-load-img";
+import happy from '../../../assets/imgs/happy.png';
+import sad from '../../../assets/imgs/sad.png';
 
 class Carregando extends React.Component {
 
@@ -48,9 +50,6 @@ class Carregando extends React.Component {
   }
 
   erro() {
-
-    let happy = "https://cdn3.iconfinder.com/data/icons/happy-shapes-colored/640/star-face-emoji-shapes-happy-emoticons-smiley-2-512.png";
-    let sad = "https://cdn0.iconfinder.com/data/icons/star-emoji-8/64/emoji-emotion-star-sad-cry-face-512.png";
 
     return (
       <div className="erro">
