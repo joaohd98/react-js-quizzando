@@ -17,6 +17,7 @@ class Temas extends React.Component {
   usuario: Usuario = Usuario.pegarUsuario();
   atual: TemasAtuais;
   temas: Array<Tema>;
+  carregando: boolean = true;
 
   constructor(props) {
 
@@ -29,6 +30,13 @@ class Temas extends React.Component {
     };
 
     this.inicializarTema();
+
+    setTimeout(() => {
+
+      this.carregando = false;
+      this.forceUpdate();
+      
+    },2000)
 
   }
 
@@ -92,50 +100,88 @@ class Temas extends React.Component {
 
     let temas = this.temas.filter(tema => tema.mostrar);
     let tamanho = temas.filter(tema => tema.mostrar).length;
+    let lista: Array<JSX.Element> = [];
 
-    if (tamanho > 1) {
+    if(this.carregando){
 
-      return (
-        <div className={`row selecionar-tema`}>
-          <div className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
-            <LazyLoadImg img={temas[this.atual.indexAnterior].img} alt={temas[this.atual.indexAnterior].texto} />
-            <p>{temas[this.atual.indexAnterior].texto}</p>
-          </div>
-          <div className={"card card-selected"}>
-            <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
-            <p>{temas[this.atual.indexAtual].texto}</p>
-          </div>
-          <div className={"card right"} onClick={() => this.moverSelecionado("direita")}>
-            <LazyLoadImg img={temas[this.atual.indexProximo].img} alt={temas[this.atual.indexProximo].texto} />
-            <p>{temas[this.atual.indexProximo].texto}</p>
-          </div>
+      lista.push(
+        <div className={"card left skeleton"}/>
+      );
+
+      lista.push(
+        <div className={"card card-selected skeleton"}/>
+      );
+
+      lista.push(
+        <div className={"card right skeleton"} />
+      );
+
+    }
+
+    else if (tamanho > 1) {
+
+      lista.push(
+        <div className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
+          <LazyLoadImg img={temas[this.atual.indexAnterior].img} alt={temas[this.atual.indexAnterior].texto} />
+          <p>{temas[this.atual.indexAnterior].texto}</p>
         </div>
-      )
+      );
+
+      lista.push(
+        <div className={"card card-selected"}>
+          <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
+          <p>{temas[this.atual.indexAtual].texto}</p>
+        </div>
+      );
+
+      lista.push(
+        <div className={"card right"} onClick={() => this.moverSelecionado("direita")}>
+          <LazyLoadImg img={temas[this.atual.indexProximo].img} alt={temas[this.atual.indexProximo].texto} />
+          <p>{temas[this.atual.indexProximo].texto}</p>
+        </div>
+      );
 
     }
 
     else if (tamanho === 1) {
 
-      return (
-        <div className={`row selecionar-tema`}>
-          <div className={"card card-selected"}>
-            <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
-            <p>{temas[this.atual.indexAtual].texto}</p>
-          </div>
+      lista.push(
+        <div className={"card card-selected"}>
+          <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
+          <p>{temas[this.atual.indexAtual].texto}</p>
         </div>
-      )
+      );
 
     }
 
     else {
 
-      return (
-        <div className={`row selecionar-tema`}>
+      lista.push(
+        <div className={"card card-selected"}>
           <p className="sem-temas">Não foram encontrados temas referentes a busca.</p>
         </div>
-      )
+      );
 
     }
+
+    return lista;
+
+  };
+
+  mostrarArrow = () => {
+
+    return (
+      this.temas.filter(tema => tema.mostrar).length > 1  && !this.carregando ?
+        <div className={`row`}>
+          <i onClick={() => this.moverSelecionado("esquerda")}>
+            <FontAwesomeIcon icon="arrow-left" color="#7F37D9"/>
+          </i>
+          <i onClick={() => this.moverSelecionado("direita")}>
+            <FontAwesomeIcon icon="arrow-right" color="#7F37D9"/>
+          </i>
+        </div>
+      : ''
+    )
 
   };
 
@@ -219,22 +265,13 @@ class Temas extends React.Component {
             <Input nome="filtro" placeholder="Pesquise pelo seu tema..." funcState={this.setState.bind(this)}
                    onChangeFunc={this.filtrar.bind(this)} state={this.state}/>
           </div>
-          {this.mostrarTemas()}
-          <div className={`arrows-container`}>
-            {
-              this.temas.filter(tema => tema.mostrar).length > 1 ?
-                <div className={`row`}>
-                  <i onClick={() => this.moverSelecionado("esquerda")}>
-                    <FontAwesomeIcon icon="arrow-left" color="#7F37D9"/>
-                  </i>
-                  <i onClick={() => this.moverSelecionado("direita")}>
-                    <FontAwesomeIcon icon="arrow-right" color="#7F37D9"/>
-                  </i>
-                </div>
-                : ''
-            }
+          <div className={`row selecionar-tema`}>
+            { this.mostrarTemas() }
           </div>
-          <ButtonSubmit texto="Selecionar" disabled={this.temas.filter(tema => tema.mostrar).length === 0}/>
+          <div className={`arrows-container`}>
+            { this.mostrarArrow() }
+          </div>
+          <ButtonSubmit texto={this.carregando ? "Carregando" : "Selecionar"} disabled={this.temas.filter(tema => tema.mostrar).length === 0 || this.carregando}/>
         </form>
       </div>
     );

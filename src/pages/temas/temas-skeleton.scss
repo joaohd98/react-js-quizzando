@@ -1,0 +1,38 @@
+&.skeleton {
+
+
+  background-image: linear-gradient(/* shine */
+                  100deg,
+                  rgba(255, 255, 255, 0),
+                  rgba(255, 255, 255, 0.5) 50%,
+                  rgba(255, 255, 255, 0) 80%
+  ),
+  radial-gradient(lightgray 99%, transparent 0), /* IMG */
+  linear-gradient(lightgray 15px, transparent 0); /* TEMA */
+
+
+  background-repeat: no-repeat;
+
+  background-size: 50px 180px,
+  100% 70%, /* IMG */
+  60% 12.5%; /* TEMA */
+
+  background-position: 0 0, /* shine */
+  100% 0,  /* IMG */
+  50% 90%; /* TEMA */
+
+  animation: temas-skeleton 1s infinite;
+
+}
+
+@keyframes temas-skeleton {
+
+  to {
+
+    background-position: 100% 0, /* shine */
+    100% 0,  /* IMG */
+    50% 90%; /* TEMA */
+
+  }
+
+}
