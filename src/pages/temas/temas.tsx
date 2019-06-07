@@ -184,11 +184,13 @@ class Temas extends React.Component {
 
   moverSelecionado(direcao: "esquerda" | "direita") {
 
+    let temas = this.temas.filter(tema => tema.mostrar);
+
     let novoIndex = direcao === "esquerda" ? this.atual.indexAnterior : this.atual.indexProximo;
 
-    this.temas[this.atual.indexAtual].ativo = false;
-    this.temas[novoIndex].ativo = true;
-
+    temas[this.atual.indexAtual].ativo = false;
+    temas[novoIndex].ativo = true;
+    
     this.atual.definirAtuais(this.temas, this.forceUpdate.bind(this));
 
 
