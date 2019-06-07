@@ -11,6 +11,7 @@ import {Helpers} from "../../helpers/helpers";
 import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
 import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
+import {Url} from "../../constants/url";
 
 class Temas extends React.Component {
 
@@ -30,12 +31,12 @@ class Temas extends React.Component {
     };
 
     this.inicializarTema();
-
+    
     setTimeout(() => {
 
       this.carregando = false;
       this.forceUpdate();
-      
+
     },2000)
 
   }

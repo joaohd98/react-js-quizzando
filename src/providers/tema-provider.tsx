@@ -1,10 +1,15 @@
+import Axios from "axios";
+
 export class TemaProvider {
 
-  constructor(){
-
-  }
-
   pegarTemas(){
+
+    Axios.get("").then(() => {
+
+
+    }).catch(() => {
+
+    });
 
   }
 
