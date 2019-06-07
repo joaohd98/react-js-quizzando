@@ -11,16 +11,16 @@ import {Helpers} from "../../helpers/helpers";
 import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
 import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
-import {Url} from "../../constants/url";
+import {TemaProvider} from "../../providers/tema/tema-provider";
 
 class Temas extends React.Component {
 
   usuario: Usuario = Usuario.pegarUsuario();
   atual: TemasAtuais;
-  temas: Array<Tema>;
+  temas: Array<Tema> = [];
   carregando: boolean = true;
 
-  constructor(props) {
+  constructor(props){
 
     super(props);
 
@@ -30,54 +30,33 @@ class Temas extends React.Component {
       filtro: filtro
     };
 
+  }
+  componentDidMount() {
+
+
     this.inicializarTema();
-    
-    setTimeout(() => {
 
-      this.carregando = false;
-      this.forceUpdate();
-
-    },2000)
 
   }
 
   inicializarTema() {
 
-    this.temas = [
-      {
-        id: 0,
-        texto: "Cinema",
-        img: "https://www.guiabh.com.br/Repositorio/Upload/Destaque/320x320/cinema-com-desconto-em-bh-imagem.jpg",
-        ativo: true,
-        mostrar: true,
-      },
-      {
-        id: 1,
-        texto: "Quadrinhos",
-        img: "https://images.livrariasaraiva.com.br/imagemnet/imagem.aspx/?pro_id=9371883&qld=90&l=430&a=-1=1003410132",
-        mostrar: true,
-      },
-      {
-        id: 2,
-        texto: "Video games",
-        img: "https://ih0.redbubble.net/image.451897458.7410/flat,550x550,075,f.u1.jpg",
-        mostrar: true,
-      },
-      {
-        id: 3,
-        texto: "Disney",
-        img: "https://media-cdn.tripadvisor.com/media/photo-s/05/7a/36/ab/castelo-da-disney.jpg",
-        mostrar: true,
-      },
-      {
-        id: 4,
-        texto: "Futebol",
-        img: "https://assets.nike.com.br/Html/hotsites/t4content/futebol/slp-masculino/skin/img/mobile/central-cr7-cristiano-futebol-nike.jpg",
-        mostrar: true,
-      },
-    ];
+    new TemaProvider().pegarTemas().then(retorno => {
 
-    this.atual = new TemasAtuais(this.temas);
+      this.temas = retorno.data;
+      this.temas.forEach(tema => {tema.ativo = true; tema.mostrar = true});
+
+      this.atual = new TemasAtuais(this.temas);
+
+      this.carregando = false;
+
+      this.forceUpdate();
+
+    }).catch(e => {
+
+      console.log(e);
+
+    });
 
   }
 
@@ -99,44 +78,47 @@ class Temas extends React.Component {
 
   mostrarTemas = () => {
 
-    let temas = this.temas.filter(tema => tema.mostrar);
-    let tamanho = temas.filter(tema => tema.mostrar).length;
     let lista: Array<JSX.Element> = [];
 
     if(this.carregando){
 
       lista.push(
-        <div className={"card left skeleton"}/>
+        <div key="left" className={"card left skeleton"}/>
       );
 
       lista.push(
-        <div className={"card card-selected skeleton"}/>
+        <div key="center" className={"card card-selected skeleton"}/>
       );
 
       lista.push(
-        <div className={"card right skeleton"} />
+        <div key="right" className={"card right skeleton"} />
       );
+
+      return lista;
 
     }
 
-    else if (tamanho > 1) {
+    let temas = this.temas.filter(tema => tema.mostrar);
+    let tamanho = temas.filter(tema => tema.mostrar).length;
+
+    if (tamanho > 1) {
 
       lista.push(
-        <div className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
+        <div key="left" className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
           <LazyLoadImg img={temas[this.atual.indexAnterior].img} alt={temas[this.atual.indexAnterior].texto} />
           <p>{temas[this.atual.indexAnterior].texto}</p>
         </div>
       );
 
       lista.push(
-        <div className={"card card-selected"}>
+        <div key="center" className={"card card-selected"}>
           <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
           <p>{temas[this.atual.indexAtual].texto}</p>
         </div>
       );
 
       lista.push(
-        <div className={"card right"} onClick={() => this.moverSelecionado("direita")}>
+        <div key="right" className={"card right"} onClick={() => this.moverSelecionado("direita")}>
           <LazyLoadImg img={temas[this.atual.indexProximo].img} alt={temas[this.atual.indexProximo].texto} />
           <p>{temas[this.atual.indexProximo].texto}</p>
         </div>
@@ -147,7 +129,7 @@ class Temas extends React.Component {
     else if (tamanho === 1) {
 
       lista.push(
-        <div className={"card card-selected"}>
+        <div key="center" className={"card card-selected"}>
           <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
           <p>{temas[this.atual.indexAtual].texto}</p>
         </div>
@@ -158,7 +140,7 @@ class Temas extends React.Component {
     else {
 
       lista.push(
-        <div className={"card card-selected"}>
+        <div key="center" className={"card card-selected"}>
           <p className="sem-temas">Não foram encontrados temas referentes a busca.</p>
         </div>
       );
@@ -172,7 +154,7 @@ class Temas extends React.Component {
   mostrarArrow = () => {
 
     return (
-      this.temas.filter(tema => tema.mostrar).length > 1  && !this.carregando ?
+      this.temas.filter(tema => tema.mostrar).length > 1 ?
         <div className={`row`}>
           <i onClick={() => this.moverSelecionado("esquerda")}>
             <FontAwesomeIcon icon="arrow-left" color="#7F37D9"/>
@@ -223,10 +205,14 @@ class Temas extends React.Component {
 
     });
 
-    if (!valor)
-      this.temas[0].ativo = true;
+    if(this.atual) {
 
-    this.atual.definirAtuais(this.temas, this.forceUpdate.bind(this));
+      if (!valor)
+        this.temas[0].ativo = true;
+
+      this.atual.definirAtuais(this.temas, this.forceUpdate.bind(this));
+
+    }
 
   }
 
