@@ -12,7 +12,7 @@ class ButtonSubmit extends Component<ButtonSubmitInterface> {
   render() {
     return (
       <div className="button-submit-container">
-        <button disabled={this.props.disabled} onClick={this.props.func ? this.props.func : () => {}}>{this.props.texto}</button>
+        <button disabled={this.props.disabled} type={this.props.func ? "button" : "submit"} onClick={this.props.func ? this.props.func : () => {}}>{this.props.texto}</button>
       </div>
     );
   }

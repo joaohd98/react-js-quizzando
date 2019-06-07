@@ -19,6 +19,7 @@ class Temas extends React.Component {
   atual: TemasAtuais;
   temas: Array<Tema> = [];
   carregando: boolean = true;
+  erro: boolean = false;
 
   constructor(props){
 
@@ -31,11 +32,10 @@ class Temas extends React.Component {
     };
 
   }
+
   componentDidMount() {
 
-
     this.inicializarTema();
-
 
   }
 
@@ -52,9 +52,10 @@ class Temas extends React.Component {
 
       this.forceUpdate();
 
-    }).catch(e => {
+    }).catch(() => {
 
-      console.log(e);
+      this.erro = true;
+      this.forceUpdate();
 
     });
 
@@ -79,6 +80,19 @@ class Temas extends React.Component {
   mostrarTemas = () => {
 
     let lista: Array<JSX.Element> = [];
+
+    if(this.erro){
+
+      lista.push(
+        <div key="center" className="erro">
+          <div>Ooops! <br/>Aconteceu algum problema, deseja tentar novamente?</div>
+          <ButtonSubmit texto="Tentar Novamente" func={() => window.location.reload()}/>
+        </div>
+      );
+
+      return lista;
+
+    }
 
     if(this.carregando){
 
@@ -140,8 +154,8 @@ class Temas extends React.Component {
     else {
 
       lista.push(
-        <div key="center" className={"card card-selected"}>
-          <p className="sem-temas">Não foram encontrados temas referentes a busca.</p>
+        <div key="center" className="erro">
+          Não foram encontrados temas referentes a busca.
         </div>
       );
 
@@ -249,8 +263,12 @@ class Temas extends React.Component {
             <Titulo texto="TEMAS"/>
           </div>
           <div className={`row row-filtro`}>
-            <Input nome="filtro" placeholder="Pesquise pelo seu tema..." funcState={this.setState.bind(this)}
-                   onChangeFunc={this.filtrar.bind(this)} state={this.state}/>
+            {
+              this.temas.length ?
+                <Input nome="filtro" placeholder="Pesquise pelo seu tema..." funcState={this.setState.bind(this)}
+                       onChangeFunc={this.filtrar.bind(this)} state={this.state}/>
+              : ''
+            }
           </div>
           <div className={`row selecionar-tema`}>
             { this.mostrarTemas() }
@@ -258,7 +276,13 @@ class Temas extends React.Component {
           <div className={`arrows-container`}>
             { this.mostrarArrow() }
           </div>
-          <ButtonSubmit texto={this.carregando ? "Carregando" : "Selecionar"} disabled={this.temas.filter(tema => tema.mostrar).length === 0 || this.carregando}/>
+          <div className="row-button">
+            {
+              this.temas.length ?
+                <ButtonSubmit texto="Selecionar" disabled={this.temas.filter(tema => tema.mostrar).length === 0}/>
+                : ''
+            }
+          </div>
         </form>
       </div>
     );
