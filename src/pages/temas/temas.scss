@@ -1,12 +1,16 @@
 .temas {
 
   .row-sub-header {
-    margin: 0;
+
+    h1{
+      margin: 0;
+    }
+
   }
 
   .row-filtro{
 
-    height: 8vh;
+    height: 12vh;
 
   }
 
@@ -14,7 +18,7 @@
 
     justify-content: center;
     perspective: 800px;
-    height: 35vh;
+    height: 43vh;
     width: 50vh;
     max-height: 300px;
     margin-left: auto;
@@ -43,12 +47,12 @@
 
       margin-top: auto;
       margin-bottom: auto;
+      border-radius: 10px;
       height: 38vh;
       width: 38vw;
       max-width: 200px;
       max-height: 250px;
       text-align: center;
-      border-radius: 30px;
       background-color: white;
       display: inline-block;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -65,22 +69,21 @@
 
       img {
 
-        height: 85%;
+        height: 80%;
         width: 100%;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
 
       }
 
       p {
 
-        padding: 3.5%;
+        margin-top: 2.5%;
         display: block;
         height: 15%;
-        font-size: 13px;
-        font-weight: bold;
-        margin: 0;
-        letter-spacing: 2px;
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 2.5px;
 
       }
 
@@ -90,8 +93,8 @@
 
   .arrows-container {
 
-    padding-top: 30px;
-    padding-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     margin-bottom: 0;
     height: 6vh;
 
