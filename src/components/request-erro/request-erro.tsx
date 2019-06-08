@@ -3,15 +3,37 @@ import './request-erro.scss';
 import ButtonSubmit from "../button-submit/button-submit";
 
 interface RequestErroInterface {
+  texto ?: string,
+  func?: Function
 }
 
 class RequestErro extends Component<RequestErroInterface> {
 
+  texto: string;
+
+  constructor(props){
+    super(props);
+
+    this.texto = this.props.texto === undefined ? "Aconteceu algum problema." : this.props.texto;
+
+
+  }
+
+  tentar(){
+
+    if(this.props.func)
+      this.props.func();
+
+    else
+      window.location.reload();
+
+  }
+
   render() {
     return (
       <div key="center" className="erro-request">
-        <div>Ooops! <br/>Aconteceu algum problema, deseja tentar novamente?</div>
-        <ButtonSubmit texto="Tentar Novamente" func={() => window.location.reload()}/>
+        <div>Ooops! <br/>{this.texto} deseja tentar novamente</div>
+        <ButtonSubmit texto="Tentar Novamente" func={this.tentar.bind(this)}/>
       </div>
     );
   }

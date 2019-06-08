@@ -15,7 +15,8 @@ import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 export interface QuestoesInterface {
   usuario: Usuario,
   tema: Tema,
-  correta?: boolean
+  correta?: boolean,
+  inicio?: boolean
 }
 
 class Questoes extends React.Component {
@@ -32,7 +33,7 @@ class Questoes extends React.Component {
   componentWillMount(){
 
     if (this.props['location'].state === undefined || this.props['location'].state.tema === undefined)
-      this.setState({pagina_destino: '/'});
+      this.setState({ pagina_destino: '/' });
 
     else {
 

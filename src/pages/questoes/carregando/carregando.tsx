@@ -45,21 +45,7 @@ class Carregando extends React.Component {
       else
         this.correta = this.props['location'].state.correta;
 
-      let perguntaProvider: PerguntaProvider = new PerguntaProvider();
-
-      perguntaProvider.pegarPergunta(this.tema.id, this.usuario.id_respondidas).then((retorno) => {
-
-        console.log(retorno.data);
-
-        this.carregando = false;
-        this.forceUpdate();
-
-      }).catch(() => {
-
-        this.erroPagina = true;
-        this.forceUpdate();
-
-      });
+      this.carregarPergunta();
 
     }
 
@@ -75,6 +61,31 @@ class Carregando extends React.Component {
   componentWillUnmount() {
 
     window.removeEventListener('resize', () => this.forceUpdate())
+
+  }
+
+  carregarPergunta(){
+
+    this.forceUpdate();
+
+    this.carregando = true;
+    this.erroPagina = false;
+
+    let perguntaProvider: PerguntaProvider = new PerguntaProvider();
+
+    perguntaProvider.pegarPergunta(this.tema.id, this.usuario.id_respondidas).then((retorno) => {
+
+      console.log(retorno.data);
+
+      this.carregando = false;
+      this.forceUpdate();
+
+    }).catch(() => {
+
+      this.erroPagina = true;
+      this.forceUpdate();
+
+    });
 
   }
 
@@ -184,9 +195,17 @@ class Carregando extends React.Component {
   }
 
   continuar(){
+    this.usuario = this.props['location'].state.usuario;
+    this.tema    = this.props['location'].state.tema;
+
+    if(this.props['location'].state.inicio)
+      this.inicio = true;
+
+    else
+      this.correta = this.props['location'].state.correta;
 
     if(this.erroPagina)
-      return <RequestErro />;
+      return <RequestErro texto="Não foi possível buscar pergunta." func={this.carregarPergunta.bind(this)}/>;
 
     else if(this.carregando)
       return (
