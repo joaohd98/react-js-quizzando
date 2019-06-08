@@ -10,7 +10,7 @@
 
     p{
 
-      font-size: 50px;
+      font-size: 40px;
       text-align: center;
       margin-top: 30px;
       margin-bottom: 0;
@@ -223,9 +223,21 @@
 
   }
 
-  .button-submit-container {
+  .continuar-button {
 
-    margin-top: 10%;
+    height: 10vh;
+    max-height: 200px;
+    text-align: center;
+
+    p{
+      margin-bottom: 20px;
+      color: white;
+      font-size: 15px;
+    }
+
+    button{
+      margin-top: 25px;
+    }
 
   }
 

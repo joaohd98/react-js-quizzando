@@ -190,9 +190,8 @@ class Temas extends React.Component {
 
     temas[this.atual.indexAtual].ativo = false;
     temas[novoIndex].ativo = true;
-    
-    this.atual.definirAtuais(this.temas, this.forceUpdate.bind(this));
 
+    this.atual.definirAtuais(this.temas, this.forceUpdate.bind(this));
 
   }
 
@@ -242,8 +241,12 @@ class Temas extends React.Component {
 
     this.setState({
       pagina_destino: {
-        pathname: '/questoes',
-        state: { tema: tema }
+        pathname: '/questoes/carregando',
+        state: {
+          inicio: true,
+          tema: tema,
+          usuario: this.usuario,
+        }
       },
       push: true,
     });

@@ -14,13 +14,19 @@ import happy from '../../../assets/imgs/happy.png';
 import sad from '../../../assets/imgs/sad.png';
 import twitter from '../../../assets/icons/twitter.svg';
 import {Helpers} from "../../../helpers/helpers";
+import {PerguntaProvider} from "../../../providers/pergunta/pergunta-provider";
+import loading from '../../../assets/icons/loading.gif';
 
 class Carregando extends React.Component {
 
   usuario: Usuario;
   tema: Tema;
   correta: boolean;
+  inicio: boolean;
   twitter: Twitter = new Twitter();
+
+  carregando: boolean = true;
+  erroPagina: boolean = false;
 
   componentWillMount() {
 
@@ -31,10 +37,28 @@ class Carregando extends React.Component {
 
       this.usuario = this.props['location'].state.usuario;
       this.tema    = this.props['location'].state.tema;
-      this.correta = this.props['location'].state.correta;
+
+      if(this.props['location'].state.inicio)
+        this.inicio = true;
+
+      else
+        this.correta = this.props['location'].state.correta;
+
+      let perguntaProvider: PerguntaProvider = new PerguntaProvider();
+
+      perguntaProvider.pegarPergunta(this.tema.id, this.usuario.id_respondidas).then((retorno) => {
+
+        console.log(retorno.data);
+        this.carregando = false;
+        this.forceUpdate();
+
+      }).catch(() => {
+
+        this.erroPagina = true;
+
+      });
 
     }
-
 
   }
 
@@ -61,7 +85,11 @@ class Carregando extends React.Component {
           <LazyLoadImg img={this.usuario.vidas >= 3 ? happy : sad} alt='estrela' />
         </div>
         <p>
-          {this.usuario.vidas > 0 ? `${this.usuario.vidas} vida${this.usuario.vidas > 1 ? 's' : ''}` : "BOM JOGO" }
+          {
+            this.inicio ? "BOA SORTE!"
+              : this.usuario.vidas > 0 ? `${this.usuario.vidas} vida${this.usuario.vidas > 1 ? 's' : ''}`
+              : "BOM JOGO!"
+          }
         </p>
       </div>
     );
@@ -152,6 +180,23 @@ class Carregando extends React.Component {
 
   }
 
+  continuar(){
+
+    if(this.carregando){
+      return (
+
+        <div>
+          <img src={loading} width="100" height="100" alt="spinner" />
+          <p>Carregando...</p>
+        </div>
+      )
+    }
+
+    else
+      return <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao.bind(this)}/>
+
+  }
+
   irParaQuestao() {
 
     let questoesInterface: QuestoesInterface = {
@@ -199,8 +244,10 @@ class Carregando extends React.Component {
           left={<span className="span-link" onClick={this.desistir.bind(this)}>Desistir</span>}
           right={`Pontuação: ${this.usuario.qt_questoes}`}
         />
-        { this.correta ? this.sucesso() : this.erro() }
-        <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao.bind(this)}/>
+        { this.inicio ? this.erro() : this.correta ? this.sucesso() : this.erro() }
+        <div className="continuar-button">
+          { this.continuar() }
+        </div>
       </div>
     );
   }

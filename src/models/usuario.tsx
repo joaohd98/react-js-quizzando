@@ -5,7 +5,7 @@ export class Usuario {
   nome: string = "";
   vidas: number = 3;
   qt_questoes: number = 0;
-  idRespondidas: Array<number> = [];
+  id_respondidas: number[] = [];
 
   static entrar(nome: string) {
 
@@ -39,6 +39,7 @@ export class Usuario {
 
     this.vidas = 3;
     this.qt_questoes = 0;
+    this.id_respondidas = [];
 
   }
 

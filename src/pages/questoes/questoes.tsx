@@ -45,7 +45,7 @@ class Questoes extends React.Component {
       this.tema = this.props['location'].state.tema;
 
       this.questao = new Questao();
-      this.questoesProvider.pegarQuestao(this.questao, this.usuario.idRespondidas);
+      this.questoesProvider.pegarQuestao(this.questao, this.usuario.id_respondidas);
 
       this.calcularTempo();
 
@@ -241,8 +241,3 @@ class Questoes extends React.Component {
 }
 
 export default Questoes;
-
-/*
-
-
- */
