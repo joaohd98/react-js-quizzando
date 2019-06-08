@@ -66,10 +66,10 @@ class Carregando extends React.Component {
 
   carregarPergunta(){
 
-    this.forceUpdate();
-
     this.carregando = true;
     this.erroPagina = false;
+
+    this.forceUpdate();
 
     let perguntaProvider: PerguntaProvider = new PerguntaProvider();
 
@@ -210,7 +210,7 @@ class Carregando extends React.Component {
     else if(this.carregando)
       return (
         <div>
-          <img src={loading} width="100" height="100" alt="spinner" />
+          <img src="/assets/icons/loading.gif" width="100" height="100" alt="spinner" />
           <p>Carregando...</p>
         </div>
       );
