@@ -12,6 +12,7 @@ import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
 import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import {TemaProvider} from "../../providers/tema/tema-provider";
+import RequestErro from "../../components/request-erro/request-erro";
 
 class Temas extends React.Component {
 
@@ -84,10 +85,7 @@ class Temas extends React.Component {
     if(this.erro){
 
       lista.push(
-        <div key="center" className="erro">
-          <div>Ooops! <br/>Aconteceu algum problema, deseja tentar novamente?</div>
-          <ButtonSubmit texto="Tentar Novamente" func={() => window.location.reload()}/>
-        </div>
+        <RequestErro />
       );
 
       return lista;

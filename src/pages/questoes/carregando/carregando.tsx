@@ -16,6 +16,7 @@ import twitter from '../../../assets/icons/twitter.svg';
 import {Helpers} from "../../../helpers/helpers";
 import {PerguntaProvider} from "../../../providers/pergunta/pergunta-provider";
 import loading from '../../../assets/icons/loading.gif';
+import RequestErro from "../../../components/request-erro/request-erro";
 
 class Carregando extends React.Component {
 
@@ -49,12 +50,14 @@ class Carregando extends React.Component {
       perguntaProvider.pegarPergunta(this.tema.id, this.usuario.id_respondidas).then((retorno) => {
 
         console.log(retorno.data);
+
         this.carregando = false;
         this.forceUpdate();
 
       }).catch(() => {
 
         this.erroPagina = true;
+        this.forceUpdate();
 
       });
 
@@ -182,18 +185,19 @@ class Carregando extends React.Component {
 
   continuar(){
 
-    if(this.carregando){
-      return (
+    if(this.erroPagina)
+      return <RequestErro />;
 
+    else if(this.carregando)
+      return (
         <div>
           <img src={loading} width="100" height="100" alt="spinner" />
           <p>Carregando...</p>
         </div>
-      )
-    }
+      );
 
     else
-      return <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao.bind(this)}/>
+      return <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao.bind(this)}/>;
 
   }
 
