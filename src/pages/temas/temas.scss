@@ -11,6 +11,8 @@
   .row-filtro{
 
     height: 12vh;
+    width: 90vw;
+    max-width: 500px;
 
   }
 
@@ -19,8 +21,9 @@
     justify-content: center;
     perspective: 800px;
     height: 43vh;
-    width: 50vh;
+    width: 90vw;
     max-height: 300px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
 
