@@ -195,6 +195,7 @@ class Carregando extends React.Component {
   }
 
   continuar(){
+
     this.usuario = this.props['location'].state.usuario;
     this.tema    = this.props['location'].state.tema;
 
@@ -210,13 +211,13 @@ class Carregando extends React.Component {
     else if(this.carregando)
       return (
         <div>
-          <img src="/assets/icons/loading.gif" width="100" height="100" alt="spinner" />
+          <FontAwesomeIcon icon="spinner"/>
           <p>Carregando...</p>
         </div>
       );
 
     else
-      return <ButtonSubmit texto="CONTINUAR" func={this.irParaQuestao.bind(this)}/>;
+      return <ButtonSubmit texto={this.inicio ? "INICIAR" : "CONTINUAR"} func={this.irParaQuestao.bind(this)}/>;
 
   }
 

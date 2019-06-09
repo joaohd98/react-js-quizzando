@@ -7,10 +7,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
     fas, faArrowLeft, faArrowRight,
     faSignOutAlt, faClock, faRetweet,
-    faHeart, faComment
+    faHeart, faComment, faSpinner
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fas, faSignOutAlt, faArrowLeft, faArrowRight, faClock, faRetweet, faHeart, faComment);
+library.add(fas, faSignOutAlt, faArrowLeft, faArrowRight, faClock, faRetweet, faHeart, faComment, faSpinner);
 
 ReactDOM.render(
     <Layout />,
