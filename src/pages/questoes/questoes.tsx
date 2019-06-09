@@ -5,7 +5,6 @@ import {Tema} from "../../models/tema";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Usuario} from "../../models/usuario";
 import {Alternativa, Questao} from "../../models/questao";
-import {QuestoesProvider} from "../../providers/questoes-provider";
 import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
 import {PerguntaProvider} from "../../providers/pergunta/pergunta-provider";
@@ -23,8 +22,6 @@ class Questoes extends React.Component {
   usuario: Usuario;
   tema: Tema;
   questao: Questao;
-
-  questoesProvider: QuestoesProvider = new QuestoesProvider();
 
   tempo: number = 10;
   finalizado: boolean = false;

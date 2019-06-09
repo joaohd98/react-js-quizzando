@@ -2,73 +2,130 @@
 
   @import url('https://fonts.googleapis.com/css?family=Sacramento');
 
-  table {
+  .titulo-tema{
 
-    font-family: 'Sacramento', cursive;
-    background-color: white;
-    border-collapse: collapse;
-    width: 90vw;
-    max-width: 900px;
-    text-align: center;
-    margin: auto;
-    border-radius: 15px;
+    height: 5vh;
 
-  }
-
-  th{
-
-    width: 40%;
-    padding: 5px;
-    text-align: center;
-    color: var(--color-primary);
-    font-size: 35px;
-    border-bottom: 1px solid var(--color-danger);
-
-  }
-
-  th:first-child{
-
-    width: 10%;
-    min-width: 40px;
-    border-right: 1px solid var(--color-danger);
-
-  }
-
-  th:last-child{
-
-    border-left: 1px solid var(--color-danger);
-
-  }
-
-  tr{
-
-    &.usuario{
-
-      background-color: var(--color-twitter-background);
-
-    }
-
-    td{
-
-      padding: 10px 5px;
-      font-size: 25px;
-
-    }
-
-    td:first-child{
-      border-right: 1px solid var(--color-danger);
-
-    }
-
-    td:last-child{
-      border-left: 1px solid var(--color-danger);
+    h1{
+      font-size: 20px;
     }
 
   }
 
-  button{
+  .tabela-container{
 
-    margin-top: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    height: 80vh;
+    max-height: 450px;
+    display: flex;
+
+    .carregando{
+
+      margin-top: auto;
+      margin-bottom: auto;
+      text-align: center;
+
+      p{
+
+        color: white;
+        font-size: 40px;
+
+      }
+
+      svg {
+
+        font-size: 120px;
+        color: white;
+        -webkit-animation: fa-spin 700ms infinite linear;
+        animation: fa-spin 700ms infinite linear;
+      }
+
+    }
+
+    .erro-request{
+
+      margin-top: auto;
+      margin-bottom: auto;
+
+      button{
+        background-color: red;
+      }
+
+    }
+
+    table {
+
+      font-family: 'Sacramento', cursive;
+      background-color: white;
+      border-collapse: collapse;
+      width: 90vw;
+      max-width: 900px;
+      text-align: center;
+      margin: auto;
+      border-radius: 15px;
+
+      th{
+
+        width: 40%;
+        padding: 5px;
+        text-align: center;
+        color: var(--color-primary);
+        font-size: 35px;
+        border-bottom: 1px solid var(--color-danger);
+
+      }
+
+      th:first-child{
+
+        width: 10%;
+        min-width: 40px;
+        border-right: 1px solid var(--color-danger);
+
+      }
+
+      th:last-child{
+
+        border-left: 1px solid var(--color-danger);
+
+      }
+
+      tr{
+
+        &.usuario{
+
+          background-color: var(--color-twitter-background);
+
+        }
+
+        td{
+
+          padding: 10px 5px;
+          font-size: 25px;
+
+        }
+
+        td:first-child{
+          border-right: 1px solid var(--color-danger);
+
+        }
+
+        td:last-child{
+          border-left: 1px solid var(--color-danger);
+        }
+
+      }
+
+    }
+
+  }
+
+
+  .button-jogaer-novamente{
+
+    margin-top: 2vh;
+    height: 5vh;
 
   }
 

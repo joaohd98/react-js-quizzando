@@ -32,7 +32,7 @@ class RequestErro extends Component<RequestErroInterface> {
   render() {
     return (
       <div key="center" className="erro-request">
-        <div>Ooops! <br/>{this.texto} deseja tentar novamente</div>
+        <div>Ooops! <br/>{this.texto} deseja tentar novamente?</div>
         <ButtonSubmit texto="Tentar Novamente" func={this.tentar.bind(this)}/>
       </div>
     );

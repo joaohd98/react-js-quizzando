@@ -15,6 +15,7 @@ import {Helpers} from "../../../helpers/helpers";
 import {PerguntaProvider} from "../../../providers/pergunta/pergunta-provider";
 import RequestErro from "../../../components/request-erro/request-erro";
 import {Questao} from "../../../models/questao";
+import {RankingProvider, RankingRequestInterace} from "../../../providers/ranking/ranking-provider";
 
 class Carregando extends React.Component {
 
@@ -23,6 +24,7 @@ class Carregando extends React.Component {
   questao: Questao;
   correta: boolean;
   inicio: boolean;
+  id_ranking: number;
   twitter: Twitter = new Twitter();
 
   carregando: boolean = true;
@@ -44,7 +46,11 @@ class Carregando extends React.Component {
       else
         this.correta = this.props['location'].state.correta;
 
-      this.carregarPergunta();
+      if(this.usuario.vidas > 0)
+        this.carregarPergunta();
+
+      else
+        this.adicionarRanking()
 
     }
 
@@ -87,6 +93,52 @@ class Carregando extends React.Component {
     });
 
   }
+
+  adicionarRanking(){
+
+    this.carregando = true;
+    this.erroPagina = false;
+
+    this.forceUpdate();
+
+    let request: RankingRequestInterace = {
+      id_tema: this.tema.id,
+      nome: this.usuario.nome,
+      qt_questoes: this.usuario.qt_questoes
+    };
+
+    new RankingProvider().adicionarRanking(request).then(retorno => {
+
+      this.id_ranking = retorno.data;
+
+      this.carregando = false;
+      this.forceUpdate();
+
+    }, () => {
+
+      this.erroPagina = true;
+      this.forceUpdate();
+
+    });
+
+  }
+
+  desistir() {
+
+    let alertProvider: AlertProvider = new AlertProvider();
+
+    alertProvider.desistir(() => {
+
+      this.setState({
+        pagina_destino: `/`,
+        push: false,
+        state: {
+          desistir: true,
+        }
+      })
+
+    });
+  };
 
   erro() {
 
@@ -205,7 +257,7 @@ class Carregando extends React.Component {
       this.correta = this.props['location'].state.correta;
 
     if(this.erroPagina)
-      return <RequestErro texto="Não foi possível buscar pergunta." func={this.carregarPergunta.bind(this)}/>;
+      return <RequestErro texto="Não foi possível buscar pergunta." func={this.usuario.vidas > 0 ? this.carregarPergunta.bind(this) : this.adicionarRanking.bind(this)}/>;
 
     else if(this.carregando)
       return (
@@ -216,7 +268,7 @@ class Carregando extends React.Component {
       );
 
     else
-      return <ButtonSubmit texto={this.inicio ? "INICIAR" : "CONTINUAR"} func={this.irParaQuestao.bind(this)}/>;
+      return <ButtonSubmit texto={this.inicio ? "INICIAR" : this.usuario.vidas > 0 ? "CONTINUAR" : "Ranking"} func={this.usuario.vidas === 0 ? this.irParaRanking.bind(this) :this.irParaQuestao.bind(this)}/>;
 
   }
 
@@ -230,11 +282,9 @@ class Carregando extends React.Component {
       questao: this.questao
     };
 
-    let pathname = (this.usuario.vidas === 0) ? "/ranking" : "/questoes";
-
     this.setState({
       pagina_destino: {
-        pathname: pathname,
+        pathname: "/questoes",
         state: questoesInterface
       },
       push: false,
@@ -242,22 +292,21 @@ class Carregando extends React.Component {
 
   };
 
-  desistir() {
+  irParaRanking(){
 
-    let alertProvider: AlertProvider = new AlertProvider();
-
-    alertProvider.desistir(() => {
-
-      this.setState({
-        pagina_destino: `/`,
-        push: false,
+    this.setState({
+      pagina_destino: {
+        pathname: "/ranking",
         state: {
-          desistir: true,
+          id_ranking: this.id_ranking,
+          tema: this.tema
         }
-      })
-
+      },
+      push: false,
     });
-  };
+
+  }
+
 
   render() {
 
