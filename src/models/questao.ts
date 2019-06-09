@@ -10,6 +10,7 @@ export class Alternativa{
 
   id: number;
   texto: string;
-  selecionada: boolean = false;
+  selecionada: boolean;
+  correta: boolean;
 
 }

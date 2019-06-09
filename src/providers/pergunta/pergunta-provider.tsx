@@ -11,10 +11,10 @@ export class PerguntaProvider {
 
   }
 
-  verificarRespostaCerta(id_questao: number, id_respondida: number): AxiosPromise<any>{
+  verificarRespostaCerta(id_questao: number): AxiosPromise<any>{
 
     return axios.post(EndPoints.verificarResposta, {
-      id_questao, id_respondida
+      id_questao
     });
 
   }

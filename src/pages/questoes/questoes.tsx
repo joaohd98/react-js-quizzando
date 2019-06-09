@@ -8,6 +8,7 @@ import {Alternativa, Questao} from "../../models/questao";
 import {QuestoesProvider} from "../../providers/questoes-provider";
 import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
+import {PerguntaProvider} from "../../providers/pergunta/pergunta-provider";
 
 export interface QuestoesInterface {
   usuario: Usuario,
@@ -35,16 +36,9 @@ class Questoes extends React.Component {
 
     else {
 
-      if(this.props['location'].state.usuario !== undefined)
-        this.usuario = this.props['location'].state.usuario;
-
-      else
-        this.usuario = Usuario.pegarUsuario();
-
-      this.tema = this.props['location'].state.tema;
-
-      this.questao = new Questao();
-      this.questoesProvider.pegarQuestao(this.questao, this.usuario.id_respondidas);
+      this.usuario = this.props['location'].state.usuario;
+      this.tema    = this.props['location'].state.tema;
+      this.questao = this.props['location'].state.questao;
 
       this.calcularTempo();
 
@@ -60,10 +54,8 @@ class Questoes extends React.Component {
 
   gerarAlternativas(){
 
-
     let definirClasse = (alternativa: Alternativa) => {
 
-      /*
       if(this.finalizado){
 
         if(alternativa.selecionada) {
@@ -84,8 +76,7 @@ class Questoes extends React.Component {
       }
 
       else
-  */
-      return alternativa.selecionada ? 'alternativa-selecionada' : ''
+        return alternativa.selecionada ? 'alternativa-selecionada' : ''
 
     };
 
@@ -123,6 +114,24 @@ class Questoes extends React.Component {
 
   }
 
+  desistir() {
+
+    let alertProvider: AlertProvider = new AlertProvider();
+
+    alertProvider.desistir(() => {
+
+      this.setState({
+        pagina_destino: `/`,
+        push: false,
+        state: {
+          desistir: true,
+        }
+      })
+
+    });
+
+  };
+
   calcularTempo(){
 
     let interval = setInterval(() => {
@@ -144,33 +153,59 @@ class Questoes extends React.Component {
 
   finalizarJogada(index = -1){
 
-    if(index > -1) {
-
+    if(index > -1)
       this.questao.alternativas[index].selecionada = true;
 
-    }
+    new PerguntaProvider().verificarRespostaCerta(this.questao.id).then(retorno => {
 
-    setTimeout(() => {
-
+      let id_correta: number = retorno.data;
       let correta = false;
 
       this.questao.alternativas.forEach((alternativa: Alternativa) => {
 
-       // if(alternativa.selecionada && alternativa.correta)
-         // correta = true;
+        alternativa.correta = alternativa.id === id_correta;
+
+        if(alternativa.selecionada && alternativa.correta)
+          correta = true;
 
       });
 
-      if(correta)
-        this.usuario.pontuar();
+      this.forceUpdate();
 
-      else
-        this.usuario.perderVida();
+      setTimeout(() => {
+
+        if(correta)
+          this.usuario.pontuar();
+
+        else
+          this.usuario.perderVida();
+
+        let questoesInterface: QuestoesInterface = {
+          usuario: this.usuario,
+          tema: this.tema,
+          correta: correta
+        };
+
+        this.setState({
+          pagina_destino: {
+            pathname: '/questoes/carregando',
+            state: questoesInterface
+          },
+          push: false,
+        });
+
+      }, 2500);
+
+    }, () => {
+
+      let alertProvider = new AlertProvider();
+
+      alertProvider.erro_questao_responder();
 
       let questoesInterface: QuestoesInterface = {
         usuario: this.usuario,
         tema: this.tema,
-        correta: correta
+        correta: false
       };
 
       this.setState({
@@ -181,29 +216,11 @@ class Questoes extends React.Component {
         push: false,
       });
 
-    }, 2500);
+    });
 
     this.finalizado = true;
 
   }
-
-  desistir() {
-
-    let alertProvider: AlertProvider = new AlertProvider();
-
-    alertProvider.desistir(() => {
-
-      this.setState({
-        pagina_destino: `/`,
-        push: false,
-        state: {
-          desistir: true,
-        }
-      })
-
-    });
-
-  };
 
   render() {
 
@@ -226,7 +243,7 @@ class Questoes extends React.Component {
             <span>
               Pontuação: {this.usuario.qt_questoes}
             </span>
-            <span style={{color: (this.tempo <= 3 ? "var(--color-danger)" : "white")}}>
+            <span style={{color: (this.tempo <= 3 ? "red" : "white")}}>
               {this.tempo + "s"}
               <FontAwesomeIcon icon="clock" />
             </span>

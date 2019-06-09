@@ -53,14 +53,18 @@ export class AlertProvider {
 
   }
 
+  erro_questao_responder(){
+
+    this.swal.fire({
+      type: "error",
+      title: 'Erro',
+      html: "Não foi possível verificar se a resposta está correta. Iremos te passar para a próxima pergunta,",
+      confirmButtonText: "OK",
+      confirmButtonColor: "var(--color-success)",
+      heightAuto: false,
+    });
+
+  }
+
 }
 
-/*
-(confirmado: boolean) => {
-  if (isConfirm) {
-    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-  } else {
-    swal("Cancelled", "Your imaginary file is safe :)", "error");
-  }
-}
-*/
