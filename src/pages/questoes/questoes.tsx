@@ -132,8 +132,8 @@ class Questoes extends React.Component {
       if(this.tempo <= 0)
         this.finalizarJogada();
 
-  //     else
-//        this.tempo--;
+      else
+        this.tempo--;
 
       this.forceUpdate();
 
