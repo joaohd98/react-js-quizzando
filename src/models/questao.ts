@@ -1,5 +1,6 @@
 export class Questao{
 
+  id: number;
   texto: string;
   alternativas: Array<Alternativa>;
 
@@ -7,8 +8,8 @@ export class Questao{
 
 export class Alternativa{
 
+  id: number;
   texto: string;
-  correta: boolean;
   selecionada: boolean = false;
 
 }

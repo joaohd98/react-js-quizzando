@@ -50,4 +50,9 @@ export class Usuario {
   perderVida() {
     this.vidas--;
   }
+
+  adicionarRespondida(id: number) {
+    this.id_respondidas.push(id);
+  }
+
 }

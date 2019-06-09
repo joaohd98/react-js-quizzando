@@ -2,19 +2,17 @@ import * as React from 'react';
 import './questoes.scss';
 import {Redirect} from "react-router";
 import {Tema} from "../../models/tema";
-import happy_mini from '../../assets/imgs/happy-mini.png';
-import sad_mini from '../../assets/imgs/sad-mini.png';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Usuario} from "../../models/usuario";
 import {Alternativa, Questao} from "../../models/questao";
 import {QuestoesProvider} from "../../providers/questoes-provider";
 import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
-import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 
 export interface QuestoesInterface {
   usuario: Usuario,
   tema: Tema,
+  questao?: Questao,
   correta?: boolean,
   inicio?: boolean
 }
@@ -62,8 +60,10 @@ class Questoes extends React.Component {
 
   gerarAlternativas(){
 
+
     let definirClasse = (alternativa: Alternativa) => {
 
+      /*
       if(this.finalizado){
 
         if(alternativa.selecionada) {
@@ -84,7 +84,8 @@ class Questoes extends React.Component {
       }
 
       else
-        return alternativa.selecionada ? 'alternativa-selecionada' : ''
+  */
+      return alternativa.selecionada ? 'alternativa-selecionada' : ''
 
     };
 
@@ -155,8 +156,8 @@ class Questoes extends React.Component {
 
       this.questao.alternativas.forEach((alternativa: Alternativa) => {
 
-        if(alternativa.selecionada && alternativa.correta)
-          correta = true;
+       // if(alternativa.selecionada && alternativa.correta)
+         // correta = true;
 
       });
 

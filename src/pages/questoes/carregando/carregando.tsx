@@ -10,18 +10,17 @@ import {QuestoesInterface} from "../questoes";
 import Header from "../../../components/header/header";
 import {AlertProvider} from "../../../providers/alert-provider";
 import LazyLoadImg from "../../../components/lazy-load-img/lazy-load-img";
-import happy from '../../../assets/imgs/happy.png';
-import sad from '../../../assets/imgs/sad.png';
 import twitter from '../../../assets/icons/twitter.svg';
 import {Helpers} from "../../../helpers/helpers";
 import {PerguntaProvider} from "../../../providers/pergunta/pergunta-provider";
-import loading from '../../../assets/icons/loading.gif';
 import RequestErro from "../../../components/request-erro/request-erro";
+import {Questao} from "../../../models/questao";
 
 class Carregando extends React.Component {
 
   usuario: Usuario;
   tema: Tema;
+  questao: Questao;
   correta: boolean;
   inicio: boolean;
   twitter: Twitter = new Twitter();
@@ -75,7 +74,7 @@ class Carregando extends React.Component {
 
     perguntaProvider.pegarPergunta(this.tema.id, this.usuario.id_respondidas).then((retorno) => {
 
-      console.log(retorno.data);
+      this.questao = retorno.data;
 
       this.carregando = false;
       this.forceUpdate();
@@ -223,9 +222,12 @@ class Carregando extends React.Component {
 
   irParaQuestao() {
 
+    this.usuario.adicionarRespondida(this.questao.id);
+
     let questoesInterface: QuestoesInterface = {
       usuario: this.usuario,
       tema: this.tema,
+      questao: this.questao
     };
 
     let pathname = (this.usuario.vidas === 0) ? "/ranking" : "/questoes";
