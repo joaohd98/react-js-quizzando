@@ -1,4 +1,4 @@
-export class Ranking{
+export class RankingModel{
 
   id: number;
   nome: string;

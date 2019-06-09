@@ -7,10 +7,11 @@ import {RankingProvider} from "../../providers/ranking/ranking-provider";
 import {Tema} from "../../models/tema";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RequestErro from "../../components/request-erro/request-erro";
+import {RankingModel} from "../../models/ranking-model";
 
 class Ranking extends React.Component {
 
-  ranking: Ranking[];
+  ranking: RankingModel[];
   tema: Tema;
   id_ranking: number;
 
@@ -49,6 +50,7 @@ class Ranking extends React.Component {
 
   }
 
+
   gerarTabela(){
 
     if(this.erro_pagina)
@@ -69,34 +71,32 @@ class Ranking extends React.Component {
           <tr>
             <th>˚</th>
             <th>Nome</th>
-            <th>Pontuação</th>
+            <th>Pontos</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>1</td>
-            <td>Peter Parker o nme</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Lois</td>
-            <td>150</td>
-          </tr>
-          <tr className="usuario">
-            <td>3</td>
-            <td>Joe</td>
-            <td>300</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Cleveland</td>
-            <td>250</td>
-          </tr>
+            { this.gerarLinhasTabela() }
           </tbody>
         </table>
       )
 
+  }
+
+  gerarLinhasTabela(){
+
+    let list: JSX.Element[] = [];
+
+    this.ranking.forEach( (ranking_linha: RankingModel, index: number) => {
+      list.push(
+        <tr key={index} className={this.id_ranking === ranking_linha.id ? "usuario" : ""}>
+          <td>{index + 1}</td>
+          <td>{ranking_linha.nome}</td>
+          <td>{ranking_linha.qt_questoes}</td>
+        </tr>
+      )
+    });
+    
+    return list;
   }
 
   irParaTemas(){
