@@ -8,7 +8,6 @@ import {Tema} from "../../models/tema";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RequestErro from "../../components/request-erro/request-erro";
 import {RankingModel} from "../../models/ranking-model";
-import {useRef} from "react";
 
 class Ranking extends React.Component {
 
@@ -33,7 +32,7 @@ class Ranking extends React.Component {
 
   componentDidUpdate(){
 
-    if(this.ranking)
+    if(this.refPosicaoRanking.current)
       this.refPosicaoRanking.current.scrollIntoView();
 
   }
@@ -95,6 +94,15 @@ class Ranking extends React.Component {
   gerarLinhasTabela(){
 
     let list: JSX.Element[] = [];
+
+    for(let i= 0; i < 10; i++)
+      list.push(
+        <tr key={i}>
+          <td>{i + 1}</td>
+          <td>ranking_linha.nome</td>
+          <td>5</td>
+        </tr>
+      );
 
     this.ranking.forEach( (ranking_linha: RankingModel, index: number) => {
       list.push(

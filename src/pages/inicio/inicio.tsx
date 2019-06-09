@@ -66,7 +66,7 @@ class Inicio extends React.Component {
           <div className="img-container">
             <LazyLoadImg img={logo} alt="logo"/>
           </div>
-          <Titulo texto="Quizzando"/>
+          <Titulo texto="Quizzando" subtitulo="English Edition"/>
           <Input state={this.state} funcState={this.setState.bind(this)} nome="nome" placeholder="Digite o seu nome"/>
           <ButtonSubmit texto="JOGAR"/>
         </form>
