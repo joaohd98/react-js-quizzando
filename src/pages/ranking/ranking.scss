@@ -104,7 +104,7 @@
 
       th{
 
-        width: calc(60% - 25px);
+        width: calc(70% - 31px);
         padding: 5px;
         text-align: center;
         color: var(--color-primary);
@@ -115,7 +115,7 @@
 
       th:first-child{
 
-        width: 10%;
+        width: calc(10% - 4px);
         min-width: 40px;
         border-right: 1px solid var(--color-danger);
 
@@ -123,7 +123,7 @@
 
       th:last-child{
 
-        width: 30%;
+        width: 20%;
         border-left: 1px solid var(--color-danger);
 
       }
@@ -141,7 +141,7 @@
 
         td{
 
-          width: 60%;
+          width: 70%;
           padding: 10px 5px;
           font-size: 28px;
 
@@ -157,7 +157,7 @@
         }
 
         td:last-child{
-          width: 30%;
+          width: 20%;
           border-left: 1px solid var(--color-danger);
         }
 

@@ -8,12 +8,14 @@ import {Tema} from "../../models/tema";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RequestErro from "../../components/request-erro/request-erro";
 import {RankingModel} from "../../models/ranking-model";
+import {useRef} from "react";
 
 class Ranking extends React.Component {
 
   ranking: RankingModel[];
   tema: Tema;
   id_ranking: number;
+  refPosicaoRanking: React.RefObject<any>;
 
   carregando: boolean = true;
   erro_pagina: boolean = false;
@@ -23,7 +25,16 @@ class Ranking extends React.Component {
     this.tema = this.props['location'].state.tema;
     this.id_ranking = this.props['location'].state.id_ranking;
 
+    this.refPosicaoRanking = React.createRef();
+
     this.pegarRanking();
+
+  }
+
+  componentDidUpdate(){
+
+    if(this.ranking)
+      this.refPosicaoRanking.current.scrollIntoView();
 
   }
 
@@ -49,7 +60,6 @@ class Ranking extends React.Component {
     })
 
   }
-
 
   gerarTabela(){
 
@@ -88,7 +98,7 @@ class Ranking extends React.Component {
 
     this.ranking.forEach( (ranking_linha: RankingModel, index: number) => {
       list.push(
-        <tr key={index} className={this.id_ranking === ranking_linha.id ? "usuario" : ""}>
+        <tr key={index} ref={this.id_ranking === ranking_linha.id ? this.refPosicaoRanking : ''} className={this.id_ranking === ranking_linha.id ? "usuario" : ""}>
           <td>{index + 1}</td>
           <td>{ranking_linha.nome}</td>
           <td>{ranking_linha.qt_questoes}</td>
