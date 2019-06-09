@@ -95,7 +95,7 @@ class Ranking extends React.Component {
         </tr>
       )
     });
-    
+
     return list;
   }
 
