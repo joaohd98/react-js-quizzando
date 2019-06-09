@@ -14,7 +14,6 @@
   color: white;
 
   p{
-    margin-top: 0;
     width: 50%;
   }
 
@@ -26,15 +25,34 @@
     text-align: right;
   }
 
-  a{
+  svg{
+
+    margin-top: 10px;
+    margin-right: 5px;
+
+    &.fa-heart{
+      color: red;
+    }
+
+    &.fa-skull-crossbones{
+      color: white;
+    }
+
+  }
+
+  .span-link{
 
     text-decoration: underline;
     cursor: pointer;
 
     svg{
       margin-right: 10px;
+      margin-top: 0;
     }
 
   }
+
+
+
 
 }

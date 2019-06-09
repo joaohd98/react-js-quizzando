@@ -94,9 +94,9 @@ class Carregando extends React.Component {
     return (
       <div className="erro">
         <div>
-          <LazyLoadImg img={this.usuario.vidas >= 1 ? happy : sad} alt='estrela'/>
-          <LazyLoadImg img={this.usuario.vidas >= 2 ? happy : sad} alt='estrela' />
-          <LazyLoadImg img={this.usuario.vidas >= 3 ? happy : sad} alt='estrela' />
+          <FontAwesomeIcon icon={this.usuario.vidas >= 1 ? 'heart' : 'skull-crossbones'} />
+          <FontAwesomeIcon icon={this.usuario.vidas >= 2 ? 'heart' : 'skull-crossbones'} />
+          <FontAwesomeIcon icon={this.usuario.vidas >= 3 ? 'heart' : 'skull-crossbones'} />
         </div>
         <p>
           {

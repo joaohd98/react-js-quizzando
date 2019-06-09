@@ -19,12 +19,19 @@
 
     }
 
-    img {
+    svg {
 
-      width: 30%;
-      height: 30%;
-      max-width: 200px;
-      max-height: 200px;
+      width: 25%;
+      height: 25%;
+      margin: 5px;
+
+      &.fa-heart{
+        color: red;
+      }
+
+      &.fa-skull-crossbones{
+        color: white;
+      }
 
     }
 

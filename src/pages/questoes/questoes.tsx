@@ -113,8 +113,8 @@ class Questoes extends React.Component {
     let vidasElement: Array<JSX.Element> = [];
 
     for(let i = 3; i > 0; i--){
-      vidasElement.push(
-        <LazyLoadImg key={i} img={this.usuario.vidas >= i ? happy_mini : sad_mini} alt="sad-face"/>
+      vidasElement.unshift(
+        <FontAwesomeIcon key={i} icon={this.usuario.vidas >= i ? 'heart' : 'skull-crossbones'} />
       )
     }
 
@@ -132,8 +132,8 @@ class Questoes extends React.Component {
       if(this.tempo <= 0)
         this.finalizarJogada();
 
-      else
-        this.tempo--;
+  //     else
+//        this.tempo--;
 
       this.forceUpdate();
 
