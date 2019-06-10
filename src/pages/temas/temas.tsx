@@ -113,6 +113,8 @@ class Temas extends React.Component {
     let temas = this.temas.filter(tema => tema.mostrar);
     let tamanho = temas.filter(tema => tema.mostrar).length;
 
+    this.atual.definirAtuais(this.temas);
+
     if (tamanho > 1) {
 
       lista.push(
@@ -182,14 +184,26 @@ class Temas extends React.Component {
 
   moverSelecionado(direcao: "esquerda" | "direita") {
 
-    let temas = this.temas.filter(tema => tema.mostrar);
-
     let novoIndex = direcao === "esquerda" ? this.atual.indexAnterior : this.atual.indexProximo;
+    let indexMostrar = 0;
 
-    temas[this.atual.indexAtual].ativo = false;
-    temas[novoIndex].ativo = true;
+    this.temas.forEach(tema => {
 
-    this.atual.definirAtuais(this.temas, this.forceUpdate.bind(this));
+      if(tema.mostrar){
+
+        if(indexMostrar == novoIndex)
+          tema.ativo = true;
+
+        else if(indexMostrar == this.atual.indexAtual)
+          tema.ativo = false;
+
+        indexMostrar++;
+
+      }
+
+    });
+
+    this.forceUpdate();
 
   }
 
@@ -197,35 +211,29 @@ class Temas extends React.Component {
 
     let primeiro = true;
 
-    this.temas.map((tema: Tema) => {
+    this.temas.forEach((tema: Tema) => {
 
       if (valor) {
 
         tema.mostrar = Helpers.removerAcentosMinusculo(tema.texto).includes(Helpers.removerAcentosMinusculo(valor));
 
-        if (tema.mostrar) {
+        if (tema.mostrar && primeiro) {
 
-          tema.ativo = primeiro;
+          tema.ativo = true;
           primeiro = false;
 
-        } else
+        }
+
+        else
           tema.ativo = false;
 
-      } else
-        tema.mostrar = true;
+      }
 
-      return true;
+      else
+        tema.mostrar = true;
 
     });
 
-    if(this.atual) {
-
-      if (!valor)
-        this.temas[0].ativo = true;
-
-      this.atual.definirAtuais(this.temas, this.forceUpdate.bind(this));
-
-    }
 
   }
 
