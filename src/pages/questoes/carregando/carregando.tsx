@@ -27,7 +27,7 @@ class Carregando extends React.Component {
   id_ranking: number;
   twitter: Twitter = new Twitter();
 
-  carregando: boolean = true;
+  carregando: boolean = false;
   erroPagina: boolean = false;
 
   componentWillMount() {
@@ -45,12 +45,6 @@ class Carregando extends React.Component {
 
       else
         this.correta = this.props['location'].state.correta;
-
-      if(this.usuario.vidas > 0)
-        this.carregarPergunta();
-
-      else
-        this.adicionarRanking()
 
     }
 
@@ -82,8 +76,21 @@ class Carregando extends React.Component {
 
       this.questao = retorno.data;
 
-      this.carregando = false;
-      this.forceUpdate();
+      this.usuario.adicionarRespondida(this.questao.id);
+
+      let questoesInterface: QuestoesInterface = {
+        usuario: this.usuario,
+        tema: this.tema,
+        questao: this.questao
+      };
+
+      this.setState({
+        pagina_destino: {
+          pathname: "/questoes",
+          state: questoesInterface
+        },
+        push: false,
+      });
 
     }).catch(() => {
 
@@ -111,8 +118,16 @@ class Carregando extends React.Component {
 
       this.id_ranking = retorno.data;
 
-      this.carregando = false;
-      this.forceUpdate();
+      this.setState({
+        pagina_destino: {
+          pathname: "/ranking",
+          state: {
+            id_ranking: this.id_ranking,
+            tema: this.tema
+          }
+        },
+        push: false,
+      });
 
     }, () => {
 
@@ -268,45 +283,9 @@ class Carregando extends React.Component {
       );
 
     else
-      return <ButtonSubmit texto={this.inicio ? "INICIAR" : this.usuario.vidas > 0 ? "CONTINUAR" : "Ranking"} func={this.usuario.vidas === 0 ? this.irParaRanking.bind(this) :this.irParaQuestao.bind(this)}/>;
+      return <ButtonSubmit texto={this.inicio ? "INICIAR" : this.usuario.vidas > 0 ? "CONTINUAR" : "Ranking"} func={this.usuario.vidas === 0 ? this.adicionarRanking.bind(this) :this.carregarPergunta.bind(this)}/>;
 
   }
-
-  irParaQuestao() {
-
-    this.usuario.adicionarRespondida(this.questao.id);
-
-    let questoesInterface: QuestoesInterface = {
-      usuario: this.usuario,
-      tema: this.tema,
-      questao: this.questao
-    };
-
-    this.setState({
-      pagina_destino: {
-        pathname: "/questoes",
-        state: questoesInterface
-      },
-      push: false,
-    });
-
-  };
-
-  irParaRanking(){
-
-    this.setState({
-      pagina_destino: {
-        pathname: "/ranking",
-        state: {
-          id_ranking: this.id_ranking,
-          tema: this.tema
-        }
-      },
-      push: false,
-    });
-
-  }
-
 
   render() {
 
