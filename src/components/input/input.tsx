@@ -52,6 +52,20 @@ class Input extends Component<InputInterface> {
       this.validar();
 
   };
+
+  mostrarValidacao = () => {
+
+    const nome = this.props.nome;
+    const state: StateInterface = this.props.state[nome];
+    state.mostrarValidacao = true;
+
+    this.props.funcState({
+      [nome]: state
+    });
+
+    this.validar();
+
+  };
   
   mudarInput = (event: any) => {
 
@@ -64,9 +78,7 @@ class Input extends Component<InputInterface> {
       [nome]: state
     });
 
-    if(state.mostrarValidacao || state.class !== "")
-      this.validar();
-
+    this.validar();
     this.pegarClasseInput();
 
     if(this.props.onChangeFunc)
@@ -81,8 +93,11 @@ class Input extends Component<InputInterface> {
     if(state.valido === null || state.validations === undefined)
       state.class = "";
 
+    else if(state.valido)
+      state.class = "input-valido";
+
     else
-      state.class = state.valido ? "input-valido" : "input-invalido";
+      state.class = state.mostrarValidacao ? "input-invalido" : "";
 
   };
 
@@ -107,7 +122,6 @@ class Input extends Component<InputInterface> {
 
     }
 
-    state.mostrarValidacao = true;
     state.valido = valido;
 
     this.props.funcState({
@@ -122,7 +136,7 @@ class Input extends Component<InputInterface> {
 
     return (
       <div className="input-container">
-        <input className={this.props.state[this.props.nome].class} ref={this.props.state[this.props.nome].ref} onBlur={this.validar} type={this.props.tipo} name={this.props.nome} autoComplete="off" onChange={this.mudarInput} value={this.props.state[this.props.nome].valor} placeholder={this.props.placeholder}/>
+        <input className={this.props.state[this.props.nome].class} ref={this.props.state[this.props.nome].ref} onBlur={this.mostrarValidacao} type={this.props.tipo} name={this.props.nome} autoComplete="off" onChange={this.mudarInput} value={this.props.state[this.props.nome].valor} placeholder={this.props.placeholder}/>
         { this.props.state[this.props.nome].class && this.props.state[this.props.nome].class.startsWith('input-invalido') ? (<span>{this.props.state[this.props.nome].erro_mensagem}</span>) : ''}
       </div>
     );
