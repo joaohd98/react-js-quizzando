@@ -191,10 +191,10 @@ class Temas extends React.Component {
 
       if(tema.mostrar){
 
-        if(indexMostrar == novoIndex)
+        if(indexMostrar === novoIndex)
           tema.ativo = true;
 
-        else if(indexMostrar == this.atual.indexAtual)
+        else if(indexMostrar === this.atual.indexAtual)
           tema.ativo = false;
 
         indexMostrar++;
