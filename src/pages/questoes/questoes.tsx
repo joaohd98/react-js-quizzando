@@ -151,13 +151,14 @@ class Questoes extends React.Component {
       if(this.finalizado || this.tempo <= 0)
         clearInterval(interval);
 
+      else
+        this.tempo--;
+
       if(this.tempo <= 0)
         this.finalizarJogada();
 
       else
-        this.tempo--;
-
-      this.forceUpdate();
+        this.forceUpdate();
 
     }, 1000);
 
@@ -165,8 +166,14 @@ class Questoes extends React.Component {
 
   finalizarJogada(index = -1){
 
-    if(index > -1)
+    let selecionado = false;
+
+    if(index > -1) {
+
       this.questao.alternativas[index].selecionada = true;
+      selecionado = true;
+
+    }
 
     this.finalizado = true;
     this.carregando = true;
@@ -193,7 +200,7 @@ class Questoes extends React.Component {
 
         this.forceUpdate();
 
-      }, 1000);
+      }, selecionado ? 1000 : 0);
 
       setTimeout(() => {
 
