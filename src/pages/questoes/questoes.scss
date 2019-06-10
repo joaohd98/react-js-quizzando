@@ -63,6 +63,34 @@
 
     display: block;
     max-width: 600px;
+    height: 80vh;
+    max-height: 300px;
+    margin: auto;
+
+    .carregando{
+
+      height: 100%;
+      padding-top: 20px;
+      margin-top: auto;
+      margin-bottom: auto;
+      text-align: center;
+
+      p{
+
+        color: white;
+        font-size: 40px;
+
+      }
+
+      svg {
+
+        font-size: 100px;
+        color: white;
+        -webkit-animation: fa-spin 700ms infinite linear;
+        animation: fa-spin 700ms infinite linear;
+      }
+
+    }
 
     .alternativa {
 

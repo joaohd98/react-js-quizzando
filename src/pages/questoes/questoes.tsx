@@ -24,7 +24,9 @@ class Questoes extends React.Component {
   questao: Questao;
 
   tempo: number = 10;
+
   finalizado: boolean = false;
+  carregando: boolean = false;
 
   componentWillMount(){
 
@@ -51,49 +53,62 @@ class Questoes extends React.Component {
 
   gerarAlternativas(){
 
-    let definirClasse = (alternativa: Alternativa) => {
+    if(this.carregando)
+      return (
+        <div className="carregando">
+          <FontAwesomeIcon icon="spinner"/>
+          <p>Carregando...</p>
+        </div>
+      );
 
-      if(this.finalizado){
+    else{
 
-        if(alternativa.selecionada) {
+      let definirClasse = (alternativa: Alternativa) => {
 
-          if(alternativa.correta)
+        if(this.finalizado){
+
+          if(alternativa.selecionada) {
+
+            if(alternativa.correta)
+              return 'alternativa-certa';
+
+            else
+              return 'alternativa-errada';
+
+          }
+
+          else if(alternativa.correta)
             return 'alternativa-certa';
 
-          else
-            return 'alternativa-errada';
+          return '';
 
         }
 
-        else if(alternativa.correta)
-          return 'alternativa-certa';
+        else
+          return alternativa.selecionada ? 'alternativa-selecionada' : ''
 
-        return '';
+      };
 
-      }
+      let listaAlternativas: Array<JSX.Element> = [];
+      let pointer: "none" | "auto" = this.finalizado ? "none" : "auto";
 
-      else
-        return alternativa.selecionada ? 'alternativa-selecionada' : ''
+      this.questao.alternativas.forEach((alternativa: Alternativa, index) => {
 
-    };
+        listaAlternativas.push(
+          <div key={alternativa.texto}
+               className={`alternativa ${definirClasse(alternativa)}`}
+               style={{pointerEvents: pointer}}
+               onClick={() => this.finalizarJogada(index)}>
+            <p>{alternativa.texto}</p>
+          </div>
+        );
 
-    let listaAlternativas: Array<JSX.Element> = [];
-    let pointer: "none" | "auto" = this.finalizado ? "none" : "auto";
+      });
 
-    this.questao.alternativas.forEach((alternativa: Alternativa, index) => {
+      return listaAlternativas;
 
-      listaAlternativas.push(
-        <div key={alternativa.texto}
-             className={`alternativa ${definirClasse(alternativa)}`}
-             style={{pointerEvents: pointer}}
-             onClick={() => this.finalizarJogada(index)}>
-          <p>{alternativa.texto}</p>
-        </div>
-      )
+    }
 
-    });
-
-    return listaAlternativas;
 
   }
 
@@ -153,6 +168,11 @@ class Questoes extends React.Component {
     if(index > -1)
       this.questao.alternativas[index].selecionada = true;
 
+    this.finalizado = true;
+    this.carregando = true;
+
+    this.forceUpdate();
+
     new PerguntaProvider().verificarRespostaCerta(this.questao.id).then(retorno => {
 
       let id_correta: number = retorno.data;
@@ -167,7 +187,13 @@ class Questoes extends React.Component {
 
       });
 
-      this.forceUpdate();
+      this.carregando = false;
+
+      setTimeout(() => {
+
+        this.forceUpdate();
+
+      }, 1000);
 
       setTimeout(() => {
 
@@ -215,7 +241,6 @@ class Questoes extends React.Component {
 
     });
 
-    this.finalizado = true;
 
   }
 

@@ -95,15 +95,6 @@ class Ranking extends React.Component {
 
     let list: JSX.Element[] = [];
 
-    for(let i= 0; i < 10; i++)
-      list.push(
-        <tr key={i}>
-          <td>{i + 1}</td>
-          <td>ranking_linha.nome</td>
-          <td>5</td>
-        </tr>
-      );
-
     this.ranking.forEach( (ranking_linha: RankingModel, index: number) => {
       list.push(
         <tr key={index} ref={this.id_ranking === ranking_linha.id ? this.refPosicaoRanking : ''} className={this.id_ranking === ranking_linha.id ? "usuario" : ""}>
