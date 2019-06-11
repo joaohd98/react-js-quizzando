@@ -12,32 +12,32 @@ export class Validations{
 
   }
 
-  static validarFormulario(state: any, funcState: Function){
+  static validarFormulario(states: {nome: string, campo: StateInterface}[]){
 
     let formularioValido = true;
-    let retorno:any = {};
+    let retorno: null | object = {};
 
-    for(let chave in state){
+    for(let chave in states){
 
-      let campo: StateInterface = state[chave];
+      let state = states[chave];
       let valido = true;
 
-      retorno[chave] = campo.valor;
+      retorno[state.nome] = state.campo.valor;
 
-      for(let i = 0; campo.validations && i < campo.validations.length; i++){
+      for(let i = 0; state.campo.validations && i < state.campo.validations.length; i++){
 
-        let validation = campo.validations[i];
+        let validation = state.campo.validations[i];
 
-        if(!Validations.validarCampo(validation.regra, campo.valor, validation.paramtros)){
+        if(!Validations.validarCampo(validation.regra, state.campo.valor, validation.paramtros)){
 
           if(formularioValido) {
 
-            campo.ref.current.focus();
-            campo.class = 'input-invalido-formulario';
+            state.campo.ref.current.focus();
+            state.campo.class = 'input-invalido-formulario';
 
           }
 
-          campo.erro_mensagem = validation.texto;
+          state.campo.erro_mensagem = validation.texto;
 
           valido = false;
           formularioValido = false;
@@ -48,11 +48,7 @@ export class Validations{
 
       }
 
-      campo.valido = valido;
-
-      funcState({
-        [chave]: campo
-      });
+      state.campo.valido = valido;
 
     }
 

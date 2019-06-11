@@ -17,8 +17,7 @@ export interface StateInterface {
 }
 
 interface InputInterface {
-  state: any,
-  funcState: Function,
+  field: StateInterface,
   nome: string,
   tipo?: "text",
   placeholder: string
@@ -36,32 +35,22 @@ class Input extends Component<InputInterface> {
 
   inicializar = () => {
 
-    let state: StateInterface = this.props.state[this.props.nome];
+    this.props.field.class = "";
+    this.props.field.valido = null;
+    this.props.field.mostrarValidacao = false;
+    this.props.field.ref = React.createRef();
 
-    state.class = "";
-    state.valido = null;
-    state.mostrarValidacao = false;
-    state.ref = React.createRef();
+    if(!this.props.field.valor)
+      this.props.field.valor = "";
 
-    if(!state.valor)
-      state.valor = "";
-
-    this.props.state[this.props.nome] = state;
-
-    if(this.props.state[this.props.nome].valor)
+    if(this.props.field.valor)
       this.validar();
 
   };
 
   mostrarValidacao = () => {
 
-    const nome = this.props.nome;
-    const state: StateInterface = this.props.state[nome];
-    state.mostrarValidacao = true;
-
-    this.props.funcState({
-      [nome]: state
-    });
+    this.props.field.mostrarValidacao = true;
 
     this.validar();
 
@@ -69,51 +58,42 @@ class Input extends Component<InputInterface> {
   
   mudarInput = (event: any) => {
 
-    const nome = this.props.nome;
-
-    let state: StateInterface = this.props.state[nome];
-    state.valor = event.target.value;
-
-    this.props.funcState({
-      [nome]: state
-    });
+    this.props.field.valor = event.target.value;
 
     this.validar();
     this.pegarClasseInput();
 
     if(this.props.onChangeFunc)
-      this.props.onChangeFunc(event.target.value)
+      this.props.onChangeFunc(event.target.value);
+
+    this.forceUpdate();
 
   };
 
   pegarClasseInput = () => {
 
-    let state: StateInterface = this.props.state[this.props.nome];
+    if(this.props.field.valido === null || this.props.field.validations === undefined)
+      this.props.field.class = "";
 
-    if(state.valido === null || state.validations === undefined)
-      state.class = "";
-
-    else if(state.valido)
-      state.class = "input-valido";
+    else if(this.props.field.valido)
+      this.props.field.class = "input-valido";
 
     else
-      state.class = state.mostrarValidacao ? "input-invalido" : "";
+      this.props.field.class = this.props.field.mostrarValidacao ? "input-invalido" : "";
 
   };
 
   validar = () => {
 
-    const nome = this.props.nome;
-    let state: StateInterface = this.props.state[nome];
     let valido = true;
 
-    for(let i = 0; state.validations && i < state.validations.length; i++){
+    for(let i = 0; this.props.field.validations && i < this.props.field.validations.length; i++){
 
-      let validation = state.validations[i];
+      let validation = this.props.field.validations[i];
 
-      if(!Validations.validarCampo(validation.regra, state.valor, validation.paramtros)){
+      if(!Validations.validarCampo(validation.regra, this.props.field.valor, validation.paramtros)){
 
-        state.erro_mensagem = validation.texto;
+        this.props.field.erro_mensagem = validation.texto;
         valido = false;
 
         break;
@@ -122,11 +102,7 @@ class Input extends Component<InputInterface> {
 
     }
 
-    state.valido = valido;
-
-    this.props.funcState({
-      [nome]: state
-    });
+    this.props.field.valido = valido;
 
     this.pegarClasseInput();
 
@@ -136,8 +112,8 @@ class Input extends Component<InputInterface> {
 
     return (
       <div className="input-container">
-        <input className={this.props.state[this.props.nome].class} ref={this.props.state[this.props.nome].ref} onBlur={this.mostrarValidacao} type={this.props.tipo} name={this.props.nome} autoComplete="off" onChange={this.mudarInput} value={this.props.state[this.props.nome].valor} placeholder={this.props.placeholder}/>
-        { this.props.state[this.props.nome].class && this.props.state[this.props.nome].class.startsWith('input-invalido') ? (<span>{this.props.state[this.props.nome].erro_mensagem}</span>) : ''}
+        <input className={this.props.field.class} ref={this.props.field.ref} onBlur={this.mostrarValidacao} type={this.props.tipo} name={this.props.nome} autoComplete="off" onChange={this.mudarInput} placeholder={this.props.placeholder}/>
+        { this.props.field.class && this.props.field.class.startsWith('input-invalido') ? (<span>{this.props.field.erro_mensagem}</span>) : ''}
       </div>
     );
 

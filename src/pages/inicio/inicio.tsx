@@ -2,41 +2,42 @@ import * as React from 'react';
 import './inicio.scss';
 import logo from '../../assets/icons/logo.svg';
 import Titulo from "../../components/titulo/titulo";
-import Input from "../../components/input/input";
+import Input, {StateInterface} from "../../components/input/input";
 import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
-import {Redirect} from "react-router";
 import {Usuario} from "../../models/usuario";
 import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import { connect } from 'react-redux';
+import {LOGAR} from "../../redux/actions/action-types";
+import { push } from 'connected-react-router'
 
-const mapStateToProps = state => (
-  state.loginReducer
-);
+interface InicioInterface {
+  nome: StateInterface
+}
 
-class Inicio extends React.Component {
+class Inicio extends React.Component<InicioInterface> {
 
   comecarJogo(event){
 
     event.preventDefault();
 
-    let retorno = Validations.validarFormulario(this.props, this.setState.bind(this));
+    let retorno = Validations.validarFormulario([{
+      nome:  'nome',
+      campo: this.props.nome
+    }]);
 
-    if(!retorno)
-      return;
+    this.forceUpdate();
 
-    Usuario.entrar(retorno["nome"]);
+    if(retorno){
 
-    this.setState({
-      'pagina_destino': "/"
-    });
+      Usuario.entrar(retorno["nome"]);
+      push('/');
+
+    }
 
   }
 
   render() {
-
-    if(this.state && this.state['pagina_destino'])
-      return <Redirect to={this.state['pagina_destino']}/>;
 
     return (
       <div className="inicio">
@@ -45,7 +46,7 @@ class Inicio extends React.Component {
             <LazyLoadImg img={logo} alt="logo"/>
           </div>
           <Titulo texto="Quizzando" subtitulo="English Edition"/>
-          <Input state={this.state} funcState={this.setState.bind(this)} nome="nome" placeholder="Digite o seu nome"/>
+          <Input field={this.props.nome} nome="nome" placeholder="Digite o seu nome"/>
           <ButtonSubmit texto="JOGAR"/>
         </form>
       </div>
@@ -55,4 +56,12 @@ class Inicio extends React.Component {
 
 }
 
-export default connect(mapStateToProps)(Inicio);
+const mapStateToProps = state => ({
+  nome: state.loginReducer.nome
+});
+
+const mapDispatchToProps = dispatch => ({
+  entrar: () => dispatch({type: LOGAR}),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Inicio);

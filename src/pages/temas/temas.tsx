@@ -6,7 +6,7 @@ import Titulo from "../../components/titulo/titulo";
 import ButtonSubmit from "../../components/button-submit/button-submit";
 import {Tema, TemasAtuais} from "../../models/tema";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Input, {StateInterface} from "../../components/input/input";
+import {StateInterface} from "../../components/input/input";
 import {Helpers} from "../../helpers/helpers";
 import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
@@ -276,8 +276,11 @@ class Temas extends React.Component {
           <div className={`row row-filtro`}>
             {
               this.temas.length ?
-                <Input nome="filtro" placeholder="Pesquise pelo seu tema..." funcState={this.setState.bind(this)}
+
+                /*<Input nome="filtro" placeholder="Pesquise pelo seu tema..." funcState={this.setState.bind(this)}
                        onChangeFunc={this.filtrar.bind(this)} state={this.state}/>
+                */
+                ''
               : ''
             }
           </div>
