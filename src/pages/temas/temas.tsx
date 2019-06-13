@@ -10,9 +10,8 @@ import Input, {StateInterface} from "../../components/input/input";
 import {Helpers} from "../../helpers/helpers";
 import {AlertProvider} from "../../providers/alert-provider";
 import Header from "../../components/header/header";
-import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import {TemaProvider} from "../../providers/tema/tema-provider";
-import RequestErro from "../../components/request-erro/request-erro";
+import {TemaCard} from "./componentes/tema-card/tema-card";
 
 class Temas extends React.Component {
 
@@ -78,93 +77,6 @@ class Temas extends React.Component {
 
   };
 
-  mostrarTemas = () => {
-
-    let lista: Array<JSX.Element> = [];
-
-    if(this.erro){
-
-      lista.push(
-        <RequestErro />
-      );
-
-      return lista;
-
-    }
-
-    if(this.carregando){
-
-      lista.push(
-        <div key="left" className={"card left skeleton"}/>
-      );
-
-      lista.push(
-        <div key="center" className={"card card-selected skeleton"}/>
-      );
-
-      lista.push(
-        <div key="right" className={"card right skeleton"} />
-      );
-
-      return lista;
-
-    }
-
-    let temas = this.temas.filter(tema => tema.mostrar);
-    let tamanho = temas.filter(tema => tema.mostrar).length;
-
-    this.atual.definirAtuais(this.temas);
-
-    if (tamanho > 1) {
-
-      lista.push(
-        <div key="left" className={"card left"} onClick={() => this.moverSelecionado("esquerda")}>
-          <LazyLoadImg img={temas[this.atual.indexAnterior].img} alt={temas[this.atual.indexAnterior].texto} />
-          <p>{temas[this.atual.indexAnterior].texto}</p>
-        </div>
-      );
-
-      lista.push(
-        <div key="center" className={"card card-selected"}>
-          <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
-          <p>{temas[this.atual.indexAtual].texto}</p>
-        </div>
-      );
-
-      lista.push(
-        <div key="right" className={"card right"} onClick={() => this.moverSelecionado("direita")}>
-          <LazyLoadImg img={temas[this.atual.indexProximo].img} alt={temas[this.atual.indexProximo].texto} />
-          <p>{temas[this.atual.indexProximo].texto}</p>
-        </div>
-      );
-
-    }
-
-    else if (tamanho === 1) {
-
-      lista.push(
-        <div key="center" className={"card card-selected"}>
-          <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
-          <p>{temas[this.atual.indexAtual].texto}</p>
-        </div>
-      );
-
-    }
-
-    else {
-
-      lista.push(
-        <div key="center" className="erro">
-          Não foram encontrados temas referentes a busca.
-        </div>
-      );
-
-    }
-
-    return lista;
-
-  };
-
   mostrarArrow = () => {
 
     return (
@@ -213,27 +125,20 @@ class Temas extends React.Component {
 
     this.temas.forEach((tema: Tema) => {
 
-      if (valor) {
-
+      if (valor)
         tema.mostrar = Helpers.removerAcentosMinusculo(tema.texto).includes(Helpers.removerAcentosMinusculo(valor));
-
-        if (tema.mostrar && primeiro) {
-
-          tema.ativo = true;
-          primeiro = false;
-
-        }
-
-        else
-          tema.ativo = false;
-
-      }
 
       else
         tema.mostrar = true;
 
-    });
+      if(tema.mostrar) {
 
+        tema.ativo = primeiro;
+        primeiro = false;
+
+      }
+
+    });
 
   }
 
@@ -281,11 +186,9 @@ class Temas extends React.Component {
                 : ''
             }
           </div>
-          <div className={`row selecionar-tema`}>
-            { this.mostrarTemas() }
-          </div>
+          <TemaCard temas={this.temas} carregando={this.carregando} erro={this.erro} atual={this.atual} moverFunc={this.moverSelecionado.bind(this)}/>
           <div className={`arrows-container`}>
-            { this.mostrarArrow() }
+          { this.mostrarArrow() }
           </div>
           <div className="row-button">
             {
