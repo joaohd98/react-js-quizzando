@@ -78,14 +78,6 @@ class Temas extends React.Component {
 
   };
 
-  scrollMudarTema = (e) =>{
-
-    let centro = document.documentElement.clientWidth / 2;
-
-   // this.moverSelecionado(e.changedTouches[0].clientX > centro ? "direita" : "esquerda");
-    
-  };
-
   mostrarTemas = () => {
 
     let lista: Array<JSX.Element> = [];
@@ -133,7 +125,7 @@ class Temas extends React.Component {
       );
 
       lista.push(
-        <div key="center" className={"card card-selected"} onTouchMove={(e) => this.scrollMudarTema(e)}>
+        <div key="center" className={"card card-selected"}>
           <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
           <p>{temas[this.atual.indexAtual].texto}</p>
         </div>
@@ -185,7 +177,7 @@ class Temas extends React.Component {
             <FontAwesomeIcon icon="arrow-right" color="#7F37D9"/>
           </i>
         </div>
-      : ''
+        : ''
     )
 
   };
@@ -286,7 +278,7 @@ class Temas extends React.Component {
               this.temas.length ?
                 <Input nome="filtro" placeholder="Pesquise pelo seu tema..." funcState={this.setState.bind(this)}
                        onChangeFunc={this.filtrar.bind(this)} state={this.state}/>
-              : ''
+                : ''
             }
           </div>
           <div className={`row selecionar-tema`}>
