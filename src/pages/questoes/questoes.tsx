@@ -23,7 +23,7 @@ class Questoes extends React.Component {
   tema: Tema;
   questao: Questao;
 
-  tempo: number = 10;
+  tempo: number = 20;
 
   finalizado: boolean = false;
   carregando: boolean = false;
