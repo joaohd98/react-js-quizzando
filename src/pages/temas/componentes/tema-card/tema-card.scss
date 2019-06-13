@@ -1,5 +1,9 @@
 .selecionar-tema {
 
+  div:first-child{
+    display: inherit;
+  }
+  
   justify-content: center;
   perspective: 800px;
   height: 43vh;
