@@ -295,7 +295,7 @@ class Carregando extends React.Component {
     return (
       <div className="carregando">
         <Header
-          left={<span className="span-link" onClick={this.desistir.bind(this)}>Desistir</span>}
+          left={this.usuario.vidas > 0 ? <span className="span-link" onClick={this.desistir.bind(this)}>Desistir</span> : ''}
           right={`Pontuação: ${this.usuario.qt_questoes}`}
         />
         { this.inicio ? this.erro() : this.correta ? this.sucesso() : this.erro() }

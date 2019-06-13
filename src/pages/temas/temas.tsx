@@ -78,6 +78,14 @@ class Temas extends React.Component {
 
   };
 
+  scrollMudarTema = (e) =>{
+
+    let centro = document.documentElement.clientWidth / 2;
+
+   // this.moverSelecionado(e.changedTouches[0].clientX > centro ? "direita" : "esquerda");
+    
+  };
+
   mostrarTemas = () => {
 
     let lista: Array<JSX.Element> = [];
@@ -125,7 +133,7 @@ class Temas extends React.Component {
       );
 
       lista.push(
-        <div key="center" className={"card card-selected"}>
+        <div key="center" className={"card card-selected"} onTouchMove={(e) => this.scrollMudarTema(e)}>
           <LazyLoadImg img={temas[this.atual.indexAtual].img} alt={temas[this.atual.indexAtual].texto} />
           <p>{temas[this.atual.indexAtual].texto}</p>
         </div>
