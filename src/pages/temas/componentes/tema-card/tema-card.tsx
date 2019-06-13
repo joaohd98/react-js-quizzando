@@ -46,7 +46,7 @@ export class TemaCard extends Component<TemaCardInterface>{
   gerarCarregando(){
 
     return (
-      <Swipe>
+      <Swipe className="swipe">
         <div key="left" className={"card left skeleton"}/>
         <div key="center" className={"card card-selected skeleton"}/>
         <div key="right" className={"card right skeleton"} />
@@ -72,7 +72,7 @@ export class TemaCard extends Component<TemaCardInterface>{
 
     if(tamanho > 1)
       return (
-        <Swipe
+        <Swipe className="swipe"
           onSwipeLeft={() => this.props.moverFunc("direita")}
           onSwipeRight={() => this.props.moverFunc("esquerda")}>
           <div key="left" className={"card left"}>
@@ -92,7 +92,7 @@ export class TemaCard extends Component<TemaCardInterface>{
 
     else
       return (
-        <Swipe>
+        <Swipe className="swipe">
           <div key="center" className={"card card-selected"}>
             <LazyLoadImg img={temas[atual.indexAtual].img} alt={temas[atual.indexAtual].texto} />
             <p>{temas[atual.indexAtual].texto}</p>
