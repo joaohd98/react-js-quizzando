@@ -5,14 +5,14 @@ import Titulo from "../../components/titulo/titulo";
 import Input, {StateInterface} from "../../components/input/input";
 import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
-import {Usuario} from "../../models/usuario";
 import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import { connect } from 'react-redux';
-import {LOGAR} from "../../redux/actions/action-types";
-import { push } from 'connected-react-router'
+import {LOGAR_SUCESSO} from "../../redux/actions/action-types";
+import {Usuario} from "../../models/usuario";
 
 interface InicioInterface {
-  nome: StateInterface
+  nome: StateInterface,
+  entrar: Function
 }
 
 class Inicio extends React.Component<InicioInterface> {
@@ -28,13 +28,13 @@ class Inicio extends React.Component<InicioInterface> {
 
     this.forceUpdate();
 
-    if(retorno){
+    if(retorno) {
 
-      Usuario.entrar(retorno["nome"]);
-      push('/');
+
+
+      this.props.entrar(this.props.nome.valor);
 
     }
-
   }
 
   render() {
@@ -61,7 +61,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  entrar: () => dispatch({type: LOGAR}),
+  entrar: (type: string , nome: string) => dispatch({type: type, nome: nome}),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inicio);
