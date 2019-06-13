@@ -148,11 +148,10 @@ class Questoes extends React.Component {
 
     let interval = setInterval(() => {
 
+      this.tempo--;
+
       if(this.finalizado || this.tempo <= 0)
         clearInterval(interval);
-
-      else
-        this.tempo--;
 
       if(this.tempo <= 0)
         this.finalizarJogada();
