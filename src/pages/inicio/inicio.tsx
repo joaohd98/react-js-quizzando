@@ -7,11 +7,12 @@ import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
 import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import { connect } from 'react-redux';
+import {mudar_input_login} from "../../redux/actions/login-action";
 
 interface InicioInterface {
   nome: StateInterface,
   teste: StateInterface,
-  entrar: Function
+  mudar_input: Function
 }
 
 class Inicio extends React.Component<InicioInterface> {
@@ -29,13 +30,15 @@ class Inicio extends React.Component<InicioInterface> {
 
     let retorno = Validations.validarFormulario([{
       nome:  'nome',
-      campo: this.props.nome
+      campo: this.props.nome,
+      dispatch: this.props.mudar_input.bind(this)
     }]);
 
-    if(retorno) {
+
+  //  if(retorno) {
+
      // this.props.entrar(this.props.nome.valor);
-      alert(0);
-    }
+    //}
   }
 
   render() {
@@ -63,6 +66,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   entrar: (type: string , nome: string) => dispatch({type: type, nome: nome}),
+  mudar_input: (inputField: StateInterface) => dispatch(mudar_input_login(inputField)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inicio);

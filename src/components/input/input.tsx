@@ -44,17 +44,12 @@ class Input extends Component<InputInterface> {
     else {
 
       this.validar();
+
       this.props.mudar_input({
         ...this.input
       });
 
     }
-
-  }
-
-  componentDidUpdate(){
-
-    this.input = this.props.field;
 
   }
 

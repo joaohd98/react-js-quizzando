@@ -12,17 +12,19 @@ export class Validations{
 
   }
 
-  static validarFormulario(states: {nome: string, campo: StateInterface}[]){
+  static validarFormulario(states: {nome: string, campo: StateInterface, dispatch: Function}[]){
 
     let formularioValido = true;
     let retorno: null | object = {};
 
     for(let chave in states){
 
-      let state = states[chave];
       let valido = true;
+      let state = states[chave];
 
       retorno[state.nome] = state.campo.valor;
+
+      state.campo.mostrarValidacao = true;
 
       for(let i = 0; state.campo.validations && i < state.campo.validations.length; i++){
 
@@ -49,6 +51,8 @@ export class Validations{
       }
 
       state.campo.valido = valido;
+
+      state.dispatch({...state.campo});
 
     }
 
