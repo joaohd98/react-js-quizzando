@@ -7,15 +7,21 @@ import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
 import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import { connect } from 'react-redux';
-import {LOGAR_SUCESSO} from "../../redux/actions/action-types";
-import {Usuario} from "../../models/usuario";
 
 interface InicioInterface {
   nome: StateInterface,
+  teste: StateInterface,
   entrar: Function
 }
 
 class Inicio extends React.Component<InicioInterface> {
+
+  constructor(props){
+    super(props);
+
+    this.comecarJogo = this.comecarJogo.bind(this);
+
+  }
 
   comecarJogo(event){
 
@@ -26,14 +32,9 @@ class Inicio extends React.Component<InicioInterface> {
       campo: this.props.nome
     }]);
 
-    this.forceUpdate();
-
     if(retorno) {
-
-
-
-      this.props.entrar(this.props.nome.valor);
-
+     // this.props.entrar(this.props.nome.valor);
+      alert(0);
     }
   }
 
@@ -41,7 +42,7 @@ class Inicio extends React.Component<InicioInterface> {
 
     return (
       <div className="inicio">
-        <form onSubmit={this.comecarJogo.bind(this)} method="post">
+        <form onSubmit={this.comecarJogo} method="post">
           <div className="img-container">
             <LazyLoadImg img={logo} alt="logo"/>
           </div>
@@ -57,7 +58,7 @@ class Inicio extends React.Component<InicioInterface> {
 }
 
 const mapStateToProps = state => ({
-  nome: state.loginReducer.nome
+  nome: state.loginReducer.nome,
 });
 
 const mapDispatchToProps = dispatch => ({

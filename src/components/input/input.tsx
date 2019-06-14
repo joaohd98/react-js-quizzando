@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './input.scss';
 import {Validations} from "../../validations/validations";
+import { connect } from 'react-redux';
+import {mudar_input_login} from "../../redux/actions/login-action";
 
 export interface StateInterface {
   valor?: string,
@@ -21,65 +23,65 @@ interface InputInterface {
   nome: string,
   tipo?: "text",
   placeholder: string
-  onChangeFunc?: Function
+  onChangeFunc?: Function,
+  mudar_input: Function
 }
 
 class Input extends Component<InputInterface> {
 
-  constructor(props: any){
-    super(props);
+  input: StateInterface = this.props.field;
 
-    this.inicializar();
+  componentWillMount() {
+
+    this.input.class = "";
+    this.input.valido = null;
+    this.input.mostrarValidacao = false;
+    this.input.ref = React.createRef();
+
+    if(!this.input.valor)
+      this.input.valor = "";
+
+    else {
+
+      this.validar();
+      this.props.mudar_input({
+        ...this.input
+      });
+
+    }
 
   }
 
-  inicializar = () => {
+  componentDidUpdate(){
 
-    this.props.field.class = "";
-    this.props.field.valido = null;
-    this.props.field.mostrarValidacao = false;
-    this.props.field.ref = React.createRef();
+    this.input = this.props.field;
 
-    if(!this.props.field.valor)
-      this.props.field.valor = "";
-
-    if(this.props.field.valor)
-      this.validar();
-
-  };
+  }
 
   mostrarValidacao = () => {
 
-    this.props.field.mostrarValidacao = true;
+    this.input.mostrarValidacao = true;
 
     this.validar();
+
+    this.props.mudar_input({
+      ...this.input
+    });
 
   };
   
   mudarInput = (event: any) => {
 
-    this.props.field.valor = event.target.value;
-
-    this.validar();
-    this.pegarClasseInput();
+    this.input.valor = event.target.value;
 
     if(this.props.onChangeFunc)
-      this.props.onChangeFunc(event.target.value);
+     this.props.onChangeFunc(this.input.valor);
 
-    this.forceUpdate();
+    this.validar();
 
-  };
-
-  pegarClasseInput = () => {
-
-    if(this.props.field.valido === null || this.props.field.validations === undefined)
-      this.props.field.class = "";
-
-    else if(this.props.field.valido)
-      this.props.field.class = "input-valido";
-
-    else
-      this.props.field.class = this.props.field.mostrarValidacao ? "input-invalido" : "";
+    this.props.mudar_input({
+      ...this.input
+    });
 
   };
 
@@ -87,13 +89,13 @@ class Input extends Component<InputInterface> {
 
     let valido = true;
 
-    for(let i = 0; this.props.field.validations && i < this.props.field.validations.length; i++){
+    for(let i = 0; this.input.validations && i < this.input.validations.length; i++){
 
-      let validation = this.props.field.validations[i];
+      let validation = this.input.validations[i];
 
-      if(!Validations.validarCampo(validation.regra, this.props.field.valor, validation.paramtros)){
+      if(!Validations.validarCampo(validation.regra, this.input.valor, validation.paramtros)){
 
-        this.props.field.erro_mensagem = validation.texto;
+        this.input.erro_mensagem = validation.texto;
         valido = false;
 
         break;
@@ -102,9 +104,22 @@ class Input extends Component<InputInterface> {
 
     }
 
-    this.props.field.valido = valido;
+    this.input.valido = valido;
 
     this.pegarClasseInput();
+
+  };
+
+  pegarClasseInput = () => {
+
+    if(this.input.valido === null || this.input.validations === undefined)
+      this.input.class = "";
+
+    else if(this.input.valido)
+      this.input.class = "input-valido";
+
+    else
+      this.input.class = this.input.mostrarValidacao ? "input-invalido" : "";
 
   };
 
@@ -112,8 +127,8 @@ class Input extends Component<InputInterface> {
 
     return (
       <div className="input-container">
-        <input className={this.props.field.class} ref={this.props.field.ref} onBlur={this.mostrarValidacao} type={this.props.tipo} name={this.props.nome} autoComplete="off" onChange={this.mudarInput} placeholder={this.props.placeholder}/>
-        { this.props.field.class && this.props.field.class.startsWith('input-invalido') ? (<span>{this.props.field.erro_mensagem}</span>) : ''}
+        <input className={this.input.class} ref={this.input.ref} onBlur={this.mostrarValidacao} type={this.props.tipo} name={this.props.nome} value={this.input.valor} autoComplete="off" onChange={this.mudarInput} placeholder={this.props.placeholder}/>
+        { this.input.class && this.input.class.startsWith('input-invalido') ? (<span>{this.input.erro_mensagem}</span>) : ''}
       </div>
     );
 
@@ -121,4 +136,9 @@ class Input extends Component<InputInterface> {
 
 }
 
-export default Input;
+const mapDispatchToProps = dispatch => ({
+  mudar_input: (inputField: StateInterface) => dispatch(mudar_input_login(inputField)),
+});
+
+
+export default connect(null, mapDispatchToProps) (Input);

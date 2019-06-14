@@ -1,4 +1,5 @@
 import {StateInterface} from "../../components/input/input";
+import {MUDAR_INPUT_LOGIN} from "../actions/login-action";
 
 const initialState: { nome: StateInterface } = {
   nome: {
@@ -24,6 +25,9 @@ export const loginReducer = (state = initialState, action) => {
 
   switch (action.type) {
 
+    case MUDAR_INPUT_LOGIN: return ({
+      nome: action.payload.state
+    });
     default:
       return state
 
