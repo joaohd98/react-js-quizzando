@@ -44,7 +44,10 @@ class Temas extends React.Component {
     new TemaProvider().pegarTemas().then(retorno => {
 
       this.temas = retorno.data;
-      this.temas.forEach(tema => {tema.ativo = true; tema.mostrar = true});
+      this.temas.forEach(tema => {tema.ativo = false; tema.mostrar = true});
+
+      if(this.temas[0])
+        this.temas[0].ativo = true;
 
       this.atual = new TemasAtuais(this.temas);
 
@@ -99,6 +102,7 @@ class Temas extends React.Component {
     let novoIndex = direcao === "esquerda" ? this.atual.indexAnterior : this.atual.indexProximo;
     let indexMostrar = 0;
 
+
     this.temas.forEach(tema => {
 
       if(tema.mostrar){
@@ -112,6 +116,10 @@ class Temas extends React.Component {
         indexMostrar++;
 
       }
+
+      else
+        tema.ativo = false;
+
 
     });
 
