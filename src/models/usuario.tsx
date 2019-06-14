@@ -22,6 +22,8 @@ export class Usuario {
 
     LocalStorage.apagarDados("usuario");
 
+    browserHistory.replace("/login")
+
   }
 
   static pegarUsuario(){

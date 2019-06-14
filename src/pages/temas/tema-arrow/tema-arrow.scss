@@ -1,0 +1,38 @@
+.arrows-container {
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 0;
+  height: 6vh;
+
+  svg {
+
+    padding: 8px;
+    font-size: 25px;
+    border: 1px solid white;
+    background-color: white;
+    color: var(--color-principal);
+    cursor: pointer;
+
+  }
+
+  svg:first-child {
+
+    margin-right: 7.5px;
+
+  }
+
+  svg:last-child {
+
+    margin-left: 7.5px;
+
+  }
+
+  i:active {
+
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+
+  }
+
+}
