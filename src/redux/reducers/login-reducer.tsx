@@ -1,7 +1,4 @@
-import {LOGAR,} from '../actions/action-types';
 import {StateInterface} from "../../components/input/input";
-import {Usuario} from "../../models/usuario";
-import {push} from "connected-react-router";
 
 const initialState: { nome: StateInterface } = {
   nome: {
@@ -27,14 +24,6 @@ export const loginReducer = (state = initialState, action) => {
 
   switch (action.type) {
 
-    case LOGAR: return {
-
-      entrar: (nome: string) => {
-
-
-      },
-      ...state
-    };
     default:
       return state
 
