@@ -1,4 +1,5 @@
 import {LocalStorage} from "../helpers/LocalStorage";
+import browserHistory from "../redux/store/browserHistory";
 
 export class Usuario {
 
@@ -12,6 +13,8 @@ export class Usuario {
     LocalStorage.salvarDados("usuario", {
       nome: nome
     });
+
+    browserHistory.replace("/")
 
   }
 

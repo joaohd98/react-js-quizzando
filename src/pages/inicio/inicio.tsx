@@ -7,7 +7,8 @@ import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
 import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import { connect } from 'react-redux';
-import {mudar_input_login} from "../../redux/actions/login-action";
+import { mudar_input_login } from "../../redux/actions/login-action";
+import {Usuario} from "../../models/usuario";
 
 interface InicioInterface {
   nome: StateInterface,
@@ -34,11 +35,9 @@ class Inicio extends React.Component<InicioInterface> {
       dispatch: this.props.mudar_input.bind(this)
     }]);
 
+    if(retorno)
+      Usuario.entrar(retorno['nome']);
 
-  //  if(retorno) {
-
-     // this.props.entrar(this.props.nome.valor);
-    //}
   }
 
   render() {

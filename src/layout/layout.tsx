@@ -8,17 +8,17 @@ import Questoes from "../pages/questoes/questoes";
 import Carregando from "../pages/questoes/carregando/carregando";
 import Ranking from "../pages/ranking/ranking";
 import { Provider } from 'react-redux';
-import configureStore, { history } from "../redux/store/store";
+import configureStore from "../redux/store/store";
 import { ConnectedRouter } from 'connected-react-router'
+import browserHistory from "../redux/store/browserHistory";
 
+export const store = configureStore();
 
 function Layout() {
 
-  const store = configureStore();
-
   return (
       <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <ConnectedRouter history={browserHistory}>
           <Switch>
             <LoggedRoute path={"/"} pathRedirect={"/login"} exact component={Temas} />
             <LoggedRoute path={"/questoes"} pathRedirect={"/login"} exact component={Questoes} />
