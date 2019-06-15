@@ -4,13 +4,10 @@ import {Usuario} from "../../models/usuario";
 import Titulo from "../../components/titulo/titulo";
 import {Tema, TemasAtuais} from "../../models/tema";
 import {StateInterface} from "../../components/input/input";
-import {Helpers} from "../../helpers/helpers";
-import {TemaProvider} from "../../providers/tema/tema-provider";
 import {TemaHeader} from "./tema-header/tema-header";
 import {TemaFiltro} from "./tema-filtro/tema-filtro";
-import { mudar_input_login } from "../../redux/actions/login-action";
 import { connect } from 'react-redux';
-import {filtrar_tema, pegar_temas} from "../../redux/actions/tema-action";
+import { pegar_temas} from "../../redux/actions/tema-action";
 import {TemaCard} from "./tema-card/tema-card";
 import {TemaArrow} from "./tema-arrow/tema-arrow";
 import {TemaButton} from "./tema-button/tema-button";
@@ -127,12 +124,13 @@ class Temas extends React.Component<TemasInterface> {
             <Titulo texto="TEMAS"/>
           </div>
           <TemaFiltro filtro={props.filtro} mostrar={props.temas.length > 0} />
-          <TemaCard temas={props.temas} carregando={props.carregando} erro={props.erro} atual={this.atual} moverFunc={() => {} /*this.moverSelecionado.bind(this) */}/>
+          <TemaCard temas={props.temas} carregando={props.carregando} erro={props.erro} erroFunc={props.carregarTemas} atual={this.atual} moverFunc={() => {} /*this.moverSelecionado.bind(this) */}/>
           <TemaArrow mostrar={false}/>
           <TemaButton texto="SELECIONAR" mostrar={props.temas.length > 0} disabled={false}/>
         </form>
       </div>
     );
+
   }
 
 }

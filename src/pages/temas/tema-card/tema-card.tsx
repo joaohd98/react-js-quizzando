@@ -8,6 +8,7 @@ import LazyLoadImg from "../../../components/lazy-load-img/lazy-load-img";
 
 interface TemaCardInterface {
   erro: boolean;
+  erroFunc: Function
   carregando: boolean;
   temas: Tema[];
   atual: TemasAtuais;
@@ -39,7 +40,7 @@ export class TemaCard extends Component<TemaCardInterface>{
 
   gerarErro() {
 
-    return <RequestErro/>;
+    return <RequestErro func={this.props.erroFunc}/>;
 
   }
 
