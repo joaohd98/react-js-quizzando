@@ -73,7 +73,7 @@ class Carregando extends React.Component {
 
     perguntaProvider.pegarPergunta(this.tema.id, this.usuario.id_respondidas).then((retorno) => {
 
-      this.questao = retorno.data;
+      //this.questao = retorno.data;
 
       this.usuario.adicionarRespondida(this.questao.id);
 
@@ -115,7 +115,7 @@ class Carregando extends React.Component {
 
     new RankingProvider().adicionarRanking(request).then(retorno => {
 
-      this.id_ranking = retorno.data;
+      //this.id_ranking = retorno.data;
 
       this.setState({
         pagina_destino: {

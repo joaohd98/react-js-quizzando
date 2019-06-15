@@ -1,5 +1,3 @@
-import {AxiosPromise} from "axios";
-import axios from "axios";
 import {EndPoints} from "../../constants/end-points";
 
 export interface RankingRequestInterace {
@@ -10,15 +8,18 @@ export interface RankingRequestInterace {
 
 export class RankingProvider{
 
-  verRanking(id_tema: number): AxiosPromise<any>{
+  verRanking(id_tema: number){
 
-    return axios(EndPoints.verRanking + id_tema);
+    return fetch(EndPoints.verRanking + id_tema);
 
   }
 
-  adicionarRanking(request: RankingRequestInterace): AxiosPromise<any>{
+  adicionarRanking(request: RankingRequestInterace){
 
-    return axios.post(EndPoints.adicionarRanking, request);
+    return fetch(EndPoints.adicionarRanking, {
+      method: "post",
+      body: JSON.stringify(request)
+    });
 
   }
 

@@ -1,20 +1,21 @@
-import axios, {AxiosPromise} from 'axios';
 import {EndPoints} from "../../constants/end-points";
 
 export class PerguntaProvider {
 
-  pegarPergunta(id_tema: number, id_respondidas: number[]): AxiosPromise<any>{
+  pegarPergunta(id_tema: number, id_respondidas: number[]){
 
-    return axios.post(EndPoints.pegarPergunta, {
-      id_tema, id_respondidas
+    return fetch(EndPoints.pegarPergunta, {
+      method: "post",
+      body: JSON.stringify({ id_tema, id_respondidas })
     });
 
   }
 
-  verificarRespostaCerta(id_questao: number): AxiosPromise<any>{
+  verificarRespostaCerta(id_questao: number){
 
-    return axios.post(EndPoints.verificarResposta, {
-      id_questao
+    return fetch(EndPoints.verificarResposta, {
+      method: "post",
+      body: JSON.stringify({ id_questao })
     });
 
   }

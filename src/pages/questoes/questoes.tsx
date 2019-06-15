@@ -182,7 +182,8 @@ class Questoes extends React.Component {
 
     new PerguntaProvider().verificarRespostaCerta(this.questao.id).then(retorno => {
 
-      let id_correta: number = retorno.data;
+      //let id_correta: number = retorno.data;
+      let id_correta = 0;
       let correta = false;
 
       this.questao.alternativas.forEach((alternativa: Alternativa) => {

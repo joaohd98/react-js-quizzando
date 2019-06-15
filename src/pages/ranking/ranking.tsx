@@ -46,7 +46,7 @@ class Ranking extends React.Component {
 
     new RankingProvider().verRanking(this.tema.id).then(retorno => {
 
-      this.ranking = retorno.data;
+      //this.ranking = retorno.data;
 
       this.carregando = false;
       this.forceUpdate();
