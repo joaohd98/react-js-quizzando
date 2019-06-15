@@ -5,8 +5,8 @@
   width: 90vw;
   max-height: 300px;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
+
 
   .erro {
 
@@ -20,8 +20,7 @@
 
   .card {
 
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: auto;
     border-radius: 10px;
 
     width: 30vw;
@@ -45,6 +44,9 @@
 
       margin-left: -5vw;
       margin-right: -5vw;
+      border: 1px solid;
+      background-color: black;
+      color: white;
 
     }
 
