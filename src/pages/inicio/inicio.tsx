@@ -5,7 +5,6 @@ import Titulo from "../../components/titulo/titulo";
 import Input, {StateInterface} from "../../components/input/input";
 import {Validations} from "../../validations/validations";
 import ButtonSubmit from "../../components/button-submit/button-submit";
-import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import { connect } from 'react-redux';
 import { mudar_input_login } from "../../redux/actions/login-action";
 import {Usuario} from "../../models/usuario";
@@ -46,7 +45,7 @@ class Inicio extends React.Component<InicioInterface> {
       <div className="inicio">
         <form onSubmit={this.comecarJogo} method="post">
           <div className="img-container">
-            <LazyLoadImg img={logo} alt="logo"/>
+            <img src={logo} alt="logo"/>
           </div>
           <Titulo texto="Quizzando" subtitulo="English Edition"/>
           <Input field={this.props.nome} nome="nome" placeholder="Digite o seu nome"/>

@@ -1,10 +1,8 @@
 import * as React from "react";
 import "./tema-card.scss"
-import Swipe from 'react-easy-swipe';
 import {Component} from "react";
 import {Tema, TemasAtuais} from "../../../models/tema";
 import RequestErro from "../../../components/request-erro/request-erro";
-import LazyLoadImg from "../../../components/lazy-load-img/lazy-load-img";
 
 interface TemaCardInterface {
   erro: boolean;
@@ -29,10 +27,9 @@ export class TemaCard extends Component<TemaCardInterface>{
 
 //      this.props.atual.definirAtuais(this.props.temas);
 
-      let temas = this.props.temas.filter(tema => tema.mostrar);
-      let tamanho = temas.filter(tema => tema.mostrar).length;
+      let tamanho = this.props.temas.length;
 
-      return tamanho === 0 ? this.gerarSemCard() : this.gerarCards(temas, tamanho);
+      return tamanho === 0 ? this.gerarSemCard() : this.gerarCards(this.props.temas, tamanho);
 
     }
 
@@ -46,13 +43,21 @@ export class TemaCard extends Component<TemaCardInterface>{
 
   gerarCarregando(){
 
-    return (
-      <Swipe className="swipe">
-        <div key="left" className={"card left skeleton"}/>
-        <div key="center" className={"card card-selected skeleton"}/>
-        <div key="right" className={"card right skeleton"} />
-      </Swipe>
+    let lista: JSX.Element[] = [];
+
+    lista.push(
+      <div key="left" className={"card left skeleton"}/>
     );
+
+    lista.push(
+      <div key="center" className={"card card-selected skeleton"}/>
+    );
+
+    lista.push(
+      <div key="right" className={"card right skeleton"} />
+    );
+
+    return lista;
 
   }
 
@@ -68,37 +73,34 @@ export class TemaCard extends Component<TemaCardInterface>{
 
   gerarCards(temas: Tema[], tamanho: number) {
 
-    let atual = this.props.atual;
-    atual.definirAtuais(this.props.temas);
+    if(tamanho > 1){
 
-    if(tamanho > 1)
+      let lista: JSX.Element[] = [];
+
+      for(let i =  0; i < tamanho; i++){
+        lista.push(
+          <div key={i} className={"card"}>
+            <img src={temas[i].img} alt={temas[i].texto} />
+            <p>{temas[i].texto}</p>
+          </div>
+        )
+      }
+
       return (
-        <Swipe className="swipe"
-               onSwipeLeft={() => this.props.moverFunc("direita")}
-               onSwipeRight={() => this.props.moverFunc("esquerda")}>
-          <div key="left" className={"card left"}>
-            <LazyLoadImg img={temas[atual.indexAnterior].img} alt={temas[atual.indexAnterior].texto} />
-            <p>{temas[atual.indexAnterior].texto}</p>
-          </div>
-          <div key="center" className={"card card-selected"}>
-            <LazyLoadImg img={temas[atual.indexAtual].img} alt={temas[atual.indexAtual].texto} />
-            <p>{temas[atual.indexAtual].texto}</p>
-          </div>
-          <div key="right" className={"card right"}>
-            <LazyLoadImg img={temas[atual.indexProximo].img} alt={temas[atual.indexProximo].texto} />
-            <p>{temas[atual.indexProximo].texto}</p>
-          </div>
-        </Swipe>
+
+        <div className="lista-container">
+          { lista }
+        </div>
       );
+
+    }
 
     else
       return (
-        <Swipe className="swipe">
           <div key="center" className={"card card-selected"}>
-            <LazyLoadImg img={temas[atual.indexAtual].img} alt={temas[atual.indexAtual].texto} />
-            <p>{temas[atual.indexAtual].texto}</p>
+            <img src={temas[0].img} alt={temas[0].texto} />
+            <p>{temas[0].texto}</p>
           </div>
-        </Swipe>
       );
 
   }

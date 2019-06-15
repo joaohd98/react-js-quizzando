@@ -125,7 +125,7 @@ class Temas extends React.Component<TemasInterface> {
           </div>
           <TemaFiltro filtro={props.filtro} mostrar={props.temas.length > 0} />
           <TemaCard temas={props.temas} carregando={props.carregando} erro={props.erro} erroFunc={props.carregarTemas} atual={this.atual} moverFunc={() => {} /*this.moverSelecionado.bind(this) */}/>
-          <TemaArrow mostrar={false}/>
+          <TemaArrow mostrar={props.temas.length > 0}/>
           <TemaButton texto="SELECIONAR" mostrar={props.temas.length > 0} disabled={false}/>
         </form>
       </div>

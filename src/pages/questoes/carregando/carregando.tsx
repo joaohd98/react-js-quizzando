@@ -9,7 +9,6 @@ import {Tema} from "../../../models/tema";
 import {QuestoesInterface} from "../questoes";
 import Header from "../../../components/header/header";
 import {AlertProvider} from "../../../providers/alert-provider";
-import LazyLoadImg from "../../../components/lazy-load-img/lazy-load-img";
 import twitter from '../../../assets/icons/twitter.svg';
 import {Helpers} from "../../../helpers/helpers";
 import {PerguntaProvider} from "../../../providers/pergunta/pergunta-provider";
@@ -209,13 +208,13 @@ class Carregando extends React.Component {
       <div className="acerto">
         <div className="twitter-box">
           <div className="header-twitter">
-            <LazyLoadImg img={this.twitter.foto} alt={this.twitter.nome} classe="perfil"/>
+            <img src={this.twitter.foto} alt={this.twitter.nome} className="perfil"/>
             <div>
               <span className="nome">{this.twitter.nome}</span>
               <br/>
               <span className="hashtag">{this.twitter.hashtag}</span>
             </div>
-            <LazyLoadImg img={twitter}  alt="twitter"/>
+            <img src={twitter}  alt="twitter"/>
           </div>
           <div className="content-twitter">
             {this.twitter.mensagem}
