@@ -7,7 +7,7 @@ import {StateInterface} from "../../components/input/input";
 import {TemaHeader} from "./tema-header/tema-header";
 import {TemaFiltro} from "./tema-filtro/tema-filtro";
 import { connect } from 'react-redux';
-import { pegar_temas} from "../../redux/actions/tema-action";
+import {filtrar_tema, pegar_temas} from "../../redux/actions/tema-action";
 import {TemaCard} from "./tema-card/tema-card";
 import {TemaArrow} from "./tema-arrow/tema-arrow";
 import {TemaButton} from "./tema-button/tema-button";
@@ -20,7 +20,8 @@ interface TemasInterface {
   erro: boolean
 
   //funcoes
-  carregarTemas: Function
+  carregarTemas: Function,
+  filtrar: Function,
 }
 
 class Temas extends React.Component<TemasInterface> {
@@ -59,35 +60,6 @@ class Temas extends React.Component<TemasInterface> {
 
   }
 
-  filtrar(valor: string) {
-
-    let primeiro = true;
-
-    this.temas.forEach((tema: Tema) => {
-
-      if (valor) {
-
-        tema.mostrar = Helpers.removerAcentosMinusculo(tema.texto).includes(Helpers.removerAcentosMinusculo(valor));
-
-        if (tema.mostrar && primeiro) {
-
-          tema.ativo = true;
-          primeiro = false;
-
-        }
-
-        else
-          tema.ativo = false;
-
-      }
-
-      else
-        tema.mostrar = true;
-
-    });
-
-
-  }
 
   selecionadoTema = (e) => {
 
@@ -123,7 +95,7 @@ class Temas extends React.Component<TemasInterface> {
           <div className={`row row-sub-header`}>
             <Titulo texto="TEMAS"/>
           </div>
-          <TemaFiltro filtro={props.filtro} mostrar={props.temas.length > 0} />
+          <TemaFiltro filtro={props.filtro} filtrar={props.filtrar} mostrar={props.temas.length > 0} />
           <TemaCard temas={props.temas} carregando={props.carregando} erro={props.erro} erroFunc={props.carregarTemas} atual={this.atual} moverFunc={() => {} /*this.moverSelecionado.bind(this) */}/>
           <TemaArrow mostrar={props.temas.length > 0}/>
           <TemaButton texto="SELECIONAR" mostrar={props.temas.length > 0} disabled={false}/>
@@ -145,7 +117,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   carregarTemas: () => (pegar_temas(dispatch)),
-  //filtrar: (filtro: string) => dispatch(filtrar_tema(filtro)),
+  filtrar: (filtro: string) => dispatch(filtrar_tema(filtro)),
   ///mover: (inputField: StateInterface) => dispatch(mudar_input_login(inputField)),
 });
 

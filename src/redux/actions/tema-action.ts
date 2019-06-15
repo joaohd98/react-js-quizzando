@@ -1,6 +1,6 @@
 import {TemaProvider} from "../../providers/tema/tema-provider";
 
-export const FILTRAR_TEMA = 'LOGAR_SUCESSO';
+export const FILTRAR_TEMA = 'FILTRAR_TEMA';
 export const MOVER_TEMA = 'MOVER_TEMA';
 export const TEMA_SUCESSO = 'TEMA_SUCESSO';
 export const TEMA_ERRO = 'TEMA_ERRO';

@@ -42,8 +42,7 @@
       width: 45vw !important;
       max-width: 300px !important;
 
-      margin-left: -70px;
-      margin-right: -70px;
+      margin: 0 -70px;
 
       @media (max-width: 450px)  {
 
@@ -56,6 +55,12 @@
       border: 1px solid;
       background-color: black;
       color: white;
+
+    }
+
+    &.swiper-unique{
+
+      margin: 0;
 
     }
 

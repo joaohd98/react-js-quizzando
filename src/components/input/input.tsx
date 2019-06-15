@@ -131,9 +131,4 @@ class Input extends Component<InputInterface> {
 
 }
 
-const mapDispatchToProps = dispatch => ({
-  mudar_input: (inputField: StateInterface) => dispatch(mudar_input_login(inputField)),
-});
-
-
-export default connect(null, mapDispatchToProps) (Input);
+export default (Input);

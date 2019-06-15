@@ -48,7 +48,7 @@ class Inicio extends React.Component<InicioInterface> {
             <img src={logo} alt="logo"/>
           </div>
           <Titulo texto="Quizzando" subtitulo="English Edition"/>
-          <Input field={this.props.nome} nome="nome" placeholder="Digite o seu nome"/>
+          <Input field={this.props.nome} mudar_input={this.props.mudar_input} nome="nome" placeholder="Digite o seu nome"/>
           <ButtonSubmit texto="JOGAR"/>
         </form>
       </div>

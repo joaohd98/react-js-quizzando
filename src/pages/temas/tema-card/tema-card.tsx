@@ -26,9 +26,11 @@ export class TemaCard extends Component<TemaCardInterface>{
 
     else {
 
-      let tamanho = this.props.temas.length;
+      let temas = this.props.temas.filter(tema => tema.mostrar == undefined || tema.mostrar);
 
-      return tamanho === 0 ? this.gerarSemCard() : this.gerarCards(this.props.temas, tamanho);
+      let tamanho = temas.length;
+
+      return tamanho === 0 ? this.gerarSemCard() : this.gerarCards(temas, tamanho);
 
     }
 
@@ -103,10 +105,10 @@ export class TemaCard extends Component<TemaCardInterface>{
 
     else
       return (
-          <div key="center" className={"card card-selected"}>
-            <img src={temas[0].img} alt={temas[0].texto} />
-            <p>{temas[0].texto}</p>
-          </div>
+        <div key="center" className={"card swiper-slide-active swiper-unique"}>
+          <img src={temas[0].img} alt={temas[0].texto} />
+          <p>{temas[0].texto}</p>
+        </div>
       );
 
   }
