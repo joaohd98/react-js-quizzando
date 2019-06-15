@@ -4,9 +4,17 @@ import {Tema} from "../../models/tema";
 
 export class TemaProvider {
 
+  /*
   pegarTemas(): AxiosPromise<Tema[]>{
 
     return axios(EndPoints.pegarTemas);
 
   }
+  */
+  pegarTemas(){
+
+    return fetch(EndPoints.pegarTemas);
+
+  }
 }
+

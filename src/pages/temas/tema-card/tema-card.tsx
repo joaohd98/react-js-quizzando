@@ -26,7 +26,7 @@ export class TemaCard extends Component<TemaCardInterface>{
 
     else {
 
-      this.props.atual.definirAtuais(this.props.temas);
+//      this.props.atual.definirAtuais(this.props.temas);
 
       let temas = this.props.temas.filter(tema => tema.mostrar);
       let tamanho = temas.filter(tema => tema.mostrar).length;
@@ -37,7 +37,7 @@ export class TemaCard extends Component<TemaCardInterface>{
 
   }
 
-  gerarErro(){
+  gerarErro() {
 
     return <RequestErro/>;
 
@@ -65,7 +65,7 @@ export class TemaCard extends Component<TemaCardInterface>{
 
   }
 
-  gerarCards(temas: Tema[], tamanho: number){
+  gerarCards(temas: Tema[], tamanho: number) {
 
     let atual = this.props.atual;
     atual.definirAtuais(this.props.temas);
@@ -106,7 +106,7 @@ export class TemaCard extends Component<TemaCardInterface>{
 
     return (
       <div className={`row selecionar-tema`}>
-        {this.gerarConteudo()}
+        { this.gerarConteudo() }
       </div>
     );
 

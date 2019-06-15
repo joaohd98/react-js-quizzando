@@ -2,70 +2,41 @@ import * as React from 'react';
 import './temas.scss';
 import {Usuario} from "../../models/usuario";
 import Titulo from "../../components/titulo/titulo";
-import ButtonSubmit from "../../components/button-submit/button-submit";
 import {Tema, TemasAtuais} from "../../models/tema";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Input, {StateInterface} from "../../components/input/input";
+import {StateInterface} from "../../components/input/input";
 import {Helpers} from "../../helpers/helpers";
-import LazyLoadImg from "../../components/lazy-load-img/lazy-load-img";
 import {TemaProvider} from "../../providers/tema/tema-provider";
-import RequestErro from "../../components/request-erro/request-erro";
 import {TemaHeader} from "./tema-header/tema-header";
 import {TemaFiltro} from "./tema-filtro/tema-filtro";
-import {mudar_input_login} from "../../redux/actions/login-action";
+import { mudar_input_login } from "../../redux/actions/login-action";
 import { connect } from 'react-redux';
-import {filtrar_tema} from "../../redux/actions/tema-action";
+import {filtrar_tema, pegar_temas} from "../../redux/actions/tema-action";
 import {TemaCard} from "./tema-card/tema-card";
 import {TemaArrow} from "./tema-arrow/tema-arrow";
 import {TemaButton} from "./tema-button/tema-button";
 
 interface TemasInterface {
-  filtro: StateInterface
+  usuario: Usuario,
+  temas: Tema[],
+  filtro: StateInterface,
+  carregando: boolean,
+  erro: boolean
+
+  //funcoes
+  carregarTemas: Function
 }
 
 class Temas extends React.Component<TemasInterface> {
 
-  usuario: Usuario = Usuario.pegarUsuario();
   atual: TemasAtuais;
-  temas: Array<Tema> = [];
-  carregando: boolean = true;
-  erro: boolean = false;
-
-  constructor(props){
-
-    super(props);
-
-  }
 
   componentDidMount() {
 
-    this.inicializarTema();
+    this.props.carregarTemas();
 
   }
 
-  inicializarTema() {
-
-    new TemaProvider().pegarTemas().then(retorno => {
-
-      this.temas = retorno.data;
-      this.temas.forEach(tema => {tema.ativo = true; tema.mostrar = true});
-
-      this.atual = new TemasAtuais(this.temas);
-
-      this.carregando = false;
-
-      this.forceUpdate();
-
-    }).catch(() => {
-
-      this.erro = true;
-      this.forceUpdate();
-
-    });
-
-  }
-
-
+  /*
   moverSelecionado(direcao: "esquerda" | "direita") {
 
     let novoIndex = direcao === "esquerda" ? this.atual.indexAnterior : this.atual.indexProximo;
@@ -127,7 +98,7 @@ class Temas extends React.Component<TemasInterface> {
 
     let tema = this.temas.filter(tema => tema.mostrar)[this.atual.indexAtual];
 
-    this.usuario.iniciarJogo();
+    this.props.usuario.iniciarJogo();
 
     this.setState({
       pagina_destino: {
@@ -135,27 +106,30 @@ class Temas extends React.Component<TemasInterface> {
         state: {
           inicio: true,
           tema: tema,
-          usuario: this.usuario,
+          usuario: this.props.usuario,
         }
       },
       push: true,
     });
 
   };
+  */
 
   render() {
 
+    let props = this.props;
+
     return (
       <div className="temas">
-        <form onSubmit={this.selecionadoTema} method="post">
-          <TemaHeader nome={this.usuario.nome}/>
+        <form onSubmit={() => {}} method="post">
+          <TemaHeader nome={props.usuario.nome}/>
           <div className={`row row-sub-header`}>
             <Titulo texto="TEMAS"/>
           </div>
-          <TemaFiltro filtro={this.props.filtro} mostrar={this.temas.length > 0} />
-          <TemaCard temas={this.temas} carregando={this.carregando} erro={this.erro} atual={this.atual} moverFunc={this.moverSelecionado.bind(this)}/>
-          <TemaArrow mostrar={this.temas.filter(tema => tema.mostrar).length > 1}/>
-          <TemaButton texto="SELECIONAR" mostrar={this.temas.length > 0} disabled={this.temas.filter(tema => tema.mostrar).length === 0}/>
+          <TemaFiltro filtro={props.filtro} mostrar={props.temas.length > 0} />
+          <TemaCard temas={props.temas} carregando={props.carregando} erro={props.erro} atual={this.atual} moverFunc={() => {} /*this.moverSelecionado.bind(this) */}/>
+          <TemaArrow mostrar={false}/>
+          <TemaButton texto="SELECIONAR" mostrar={props.temas.length > 0} disabled={false}/>
         </form>
       </div>
     );
@@ -164,12 +138,17 @@ class Temas extends React.Component<TemasInterface> {
 }
 
 const mapStateToProps = state => ({
-  filtro: state.temaReducer.filtro,
+  usuario: state.temaReducer.usuario,
+  temas:   state.temaReducer.temas,
+  filtro:  state.temaReducer.filtro,
+  carregando: state.temaReducer.carregando,
+  erro: state.temaReducer.erro,
 });
 
 const mapDispatchToProps = dispatch => ({
-  filtrar: (filtro: string) => dispatch(filtrar_tema(filtro)),
-  mover: (inputField: StateInterface) => dispatch(mudar_input_login(inputField)),
+  carregarTemas: () => (pegar_temas(dispatch)),
+  //filtrar: (filtro: string) => dispatch(filtrar_tema(filtro)),
+  ///mover: (inputField: StateInterface) => dispatch(mudar_input_login(inputField)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Temas);
