@@ -1,22 +1,12 @@
 .selecionar-tema {
 
-
   justify-content: center;
-  perspective: 800px;
   height: 43vh;
   width: 90vw;
   max-height: 300px;
-  max-width: 500px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-
-  .lista-container{
-
-    display: -webkit-box;
-    overflow-x: hidden;
-    width: 100%;
-
-  }
 
   .erro {
 
@@ -33,24 +23,52 @@
     margin-top: auto;
     margin-bottom: auto;
     border-radius: 10px;
-    height: 35vh;
+
     width: 30vw;
+    height: 40vh;
+
     max-width: 200px;
     max-height: 250px;
+
     text-align: center;
     background-color: white;
-    display: block;
+
+
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
     @import "tema-card.skeleton";
 
+    &.swiper-slide-active {
+
+      z-index: 10;
+      width: 45vw !important;
+
+      margin-left: -5vw;
+      margin-right: -5vw;
+
+    }
+
+    &.swiper-slide-prev{
+
+      width: 27.5vw !important;
+
+    }
+
+    &.swiper-slide-next{
+
+      width: 27.5vw !important;
+
+
+    }
+
     &.card-selected {
 
       transform: translateZ(150px);
-      margin-left: -60px;
-      margin-right: -60px;
+      margin-left: -30px;
+      margin-right: -30px;
 
     }
+
 
     img {
 

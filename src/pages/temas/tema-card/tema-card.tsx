@@ -3,6 +3,7 @@ import "./tema-card.scss"
 import {Component} from "react";
 import {Tema, TemasAtuais} from "../../../models/tema";
 import RequestErro from "../../../components/request-erro/request-erro";
+import Swiper from 'react-id-swiper';
 
 interface TemaCardInterface {
   erro: boolean;
@@ -24,8 +25,6 @@ export class TemaCard extends Component<TemaCardInterface>{
       return this.gerarCarregando();
 
     else {
-
-//      this.props.atual.definirAtuais(this.props.temas);
 
       let tamanho = this.props.temas.length;
 
@@ -79,19 +78,26 @@ export class TemaCard extends Component<TemaCardInterface>{
 
       for(let i =  0; i < tamanho; i++){
         lista.push(
-          <div key={i} className={"card"}>
+          <div key={i} className={"card swiper-slide"}>
             <img src={temas[i].img} alt={temas[i].texto} />
             <p>{temas[i].texto}</p>
           </div>
         )
       }
 
-      return (
+      const params = {
+        loop: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        autoHeight: true,
 
-        <div className="lista-container">
-          { lista }
-        </div>
-      );
+      };
+
+      return (
+        <Swiper {...params}>
+            { lista }
+        </Swiper>
+      )
 
     }
 
