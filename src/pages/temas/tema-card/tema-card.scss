@@ -4,7 +4,7 @@
   height: 43vh;
   width: 90vw;
   max-height: 300px;
-  max-width: 600px;
+  max-width: 500px;
   margin: auto;
 
 
@@ -26,12 +26,11 @@
     width: 30vw;
     height: 40vh;
 
-    max-width: 200px;
+    max-width: 150px;
     max-height: 250px;
 
     text-align: center;
     background-color: white;
-
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
@@ -41,36 +40,31 @@
 
       z-index: 10;
       width: 45vw !important;
+      max-width: 300px !important;
 
-      margin-left: -5vw;
-      margin-right: -5vw;
+      margin-left: -70px;
+      margin-right: -70px;
+
+      @media (max-width: 450px)  {
+
+        margin-left: -5vw;
+        margin-right: -5vw;
+
+      }
+
+
       border: 1px solid;
       background-color: black;
       color: white;
 
     }
 
-    &.swiper-slide-prev{
+    &.swiper-slide-prev, &.swiper-slide-next{
 
       width: 27.5vw !important;
+      max-width: 150px !important;
 
     }
-
-    &.swiper-slide-next{
-
-      width: 27.5vw !important;
-
-
-    }
-
-    &.card-selected {
-
-      transform: translateZ(150px);
-      margin-left: -30px;
-      margin-right: -30px;
-
-    }
-
 
     img {
 
