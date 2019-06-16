@@ -1,0 +1,36 @@
+.erro {
+
+  text-align: center;
+  max-height: 200px;
+  width: 90vw;
+  max-width: 600px;
+
+  p{
+
+    font-size: 40px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+
+  }
+
+  svg {
+
+    width: 25% !important;
+    height: 25% !important;
+    margin: 5px;
+
+    &.fa-heart{
+      color: red;
+    }
+
+    &.fa-skull-crossbones{
+      color: white;
+    }
+
+  }
+
+}

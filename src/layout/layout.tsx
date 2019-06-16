@@ -5,7 +5,7 @@ import {GuestRoute, LoggedRoute} from "../guard/guard";
 import Inicio from "../pages/inicio/inicio";
 import Erro404 from "../pages/erros/erro-404/erro-404";
 import Questoes from "../pages/questoes/questoes";
-import Carregando from "../pages/questoes/carregando/carregando";
+import Carregando from "../pages/carregando/carregando";
 import Ranking from "../pages/ranking/ranking";
 import { Provider } from 'react-redux';
 import configureStore from "../redux/store/store";

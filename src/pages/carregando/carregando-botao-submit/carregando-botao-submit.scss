@@ -1,0 +1,24 @@
+.continuar-button {
+
+  margin-top: 15%;
+  text-align: center;
+  height: 100px;
+
+
+  p{
+
+    margin-bottom: 20px;
+    color: white;
+    font-size: 20px;
+
+  }
+
+  svg {
+
+    font-size: 60px;
+    color: white;
+    -webkit-animation: fa-spin 700ms infinite linear;
+    animation: fa-spin 700ms infinite linear;
+  }
+
+}

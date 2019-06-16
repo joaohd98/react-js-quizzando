@@ -1,0 +1,191 @@
+.acerto {
+
+  width: 90vw;
+  max-width: 600px;
+  margin: auto;
+
+  p{
+    font-size: 18px;
+  }
+
+  .twitter-box {
+
+    margin-top: 25px;
+    border: 1px solid var(--color-twitter-background);
+    background-color: white;
+    border-radius: 5px;
+
+    .header-twitter {
+
+      display: flex;
+      margin: 5px;
+
+      .perfil {
+
+        border-radius: 50%;
+        margin-right: 10px;
+        width: 48px;
+        height: 48px;
+
+      }
+
+      div {
+
+        margin-top: 2.5px;
+        margin-right: 5px;
+
+        .nome {
+
+          font-size: 18px;
+          font-weight: bold;
+          word-break: break-all;
+          color: #14171a;
+
+        }
+
+        .hashtag {
+
+          font-size: 14px;
+          color: #657786;
+
+        }
+
+      }
+
+    }
+
+    .content-twitter {
+
+      margin: 10px 10px 10px 65px;
+      font-size: 20px;
+      line-height: 32px;
+      letter-spacing: .01em;
+      word-wrap: break-word;
+      color: #14171a;
+      font-weight: 300;
+
+    }
+
+    .time-twitter {
+
+      margin: 10px 10px 10px 65px;
+      font-size: 14px;
+      line-height: 24px;
+      color: #657786;
+
+    }
+
+    .footer-twitter {
+
+      margin: 10px 35px 10px 65px;
+
+      ul, li {
+
+        display: inline-flex;
+        margin: 0;
+        padding: 0;
+
+      }
+
+      li {
+
+        border-bottom: 1px solid #e6ecf0;
+        border-top: 1px solid #e6ecf0;
+
+
+      }
+
+      li:first-child {
+
+        padding: 7px 5px 7px 0;
+
+        strong {
+
+          color: #14171a;
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 20px;
+          padding-right: 5px;
+
+        }
+
+        color: #657786;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 16px;
+
+        span:last-child {
+
+          padding-left: 10px;
+
+        }
+
+      }
+
+      li:nth-child(2){
+        border-left: 1px solid #e6ecf0;
+      }
+
+      li:not(first-child){
+
+        img {
+
+          margin: 5px;
+          border-radius: 50%;
+          width: 24px;
+          height: 24px;
+
+        }
+
+      }
+
+    }
+
+    .footer-button-twitter{
+
+      margin: 10px 10px 10px 65px;
+
+      ul, li {
+
+        display: inline-flex;
+        margin: 0;
+        padding: 0;
+
+      }
+
+      li {
+
+        color: #657786;
+        font-size: 12px;
+
+        strong{
+
+          padding-right: 5px;
+
+        }
+
+        @media (min-width: 350px) {
+
+          font-size: 16px;
+
+        }
+
+        padding: 0 2px;
+        margin-right: 12px;
+
+        svg{
+
+          padding-right: 6px;
+
+        }
+
+
+
+      }
+
+
+    }
+
+  }
+
+}
