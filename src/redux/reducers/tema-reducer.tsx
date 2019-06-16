@@ -1,13 +1,14 @@
 import {StateInterface} from "../../components/input/input";
 import {Usuario} from "../../models/usuario";
-import {FILTRAR_TEMA, TEMA_CARREGANDO, TEMA_ERRO, TEMA_SUCESSO} from "../actions/tema-action";
+import {FILTRAR_TEMA, INICIALIZAR_SLIDE_TEMA, TEMA_CARREGANDO, TEMA_ERRO, TEMA_SUCESSO} from "../actions/tema-action";
 import {Helpers} from "../../helpers/helpers";
 import {Tema} from "../../models/tema";
 
-const initialState: { usuario: Usuario, temas: Tema[], filtro: StateInterface, carregando: boolean, erro: boolean } = {
+const initialState: { usuario: Usuario, temas: Tema[], filtro: StateInterface, swiper: object | null, carregando: boolean, erro: boolean } = {
   usuario: Usuario.pegarUsuario(),
-  filtro: {},
   temas: [],
+  filtro: {},
+  swiper: null,
   carregando: true,
   erro: false,
 };
@@ -31,6 +32,11 @@ export const temaReducer = (state = initialState, action) => {
       ...state,
       erro: true,
       carregando: false,
+    };
+
+    case INICIALIZAR_SLIDE_TEMA: return {
+      ...state,
+      swiper: action.payload.swiper,
     };
     case FILTRAR_TEMA: {
 

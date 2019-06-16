@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './input.scss';
 import {Validations} from "../../validations/validations";
-import { connect } from 'react-redux';
-import {mudar_input_login} from "../../redux/actions/login-action";
 
 export interface StateInterface {
   valor?: string,
@@ -131,4 +129,4 @@ class Input extends Component<InputInterface> {
 
 }
 
-export default (Input);
+export default Input;

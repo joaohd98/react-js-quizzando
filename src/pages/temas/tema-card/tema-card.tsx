@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./tema-card.scss"
 import {Component} from "react";
-import {Tema, TemasAtuais} from "../../../models/tema";
+import {Tema} from "../../../models/tema";
 import RequestErro from "../../../components/request-erro/request-erro";
 import Swiper from 'react-id-swiper';
 
@@ -10,8 +10,7 @@ interface TemaCardInterface {
   erroFunc: Function
   carregando: boolean;
   temas: Tema[];
-  atual: TemasAtuais;
-  moverFunc: Function
+  inicializar_slide: Function
 }
 
 export class TemaCard extends Component<TemaCardInterface>{
@@ -26,7 +25,7 @@ export class TemaCard extends Component<TemaCardInterface>{
 
     else {
 
-      let temas = this.props.temas.filter(tema => tema.mostrar == undefined || tema.mostrar);
+      let temas = this.props.temas.filter(tema => tema.mostrar === undefined || tema.mostrar);
 
       let tamanho = temas.length;
 
@@ -104,12 +103,11 @@ export class TemaCard extends Component<TemaCardInterface>{
         centeredSlides: true,
         slidesPerView: 'auto',
         autoHeight: true,
-
       };
 
       return (
-        <Swiper key="lista-completa" {...params}>
-            { lista }
+        <Swiper key="lista-completa" getSwiper={(swiper) => this.props.inicializar_slide(swiper)} {...params}>
+          { lista }
         </Swiper>
       )
 
@@ -125,6 +123,8 @@ export class TemaCard extends Component<TemaCardInterface>{
 
   }
 
+
+
   render() {
 
     return (
@@ -134,5 +134,4 @@ export class TemaCard extends Component<TemaCardInterface>{
     );
 
   }
-
 }

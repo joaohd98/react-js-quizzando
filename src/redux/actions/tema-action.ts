@@ -1,5 +1,6 @@
 import {TemaProvider} from "../../providers/tema/tema-provider";
 
+export const INICIALIZAR_SLIDE_TEMA = 'INICIALIZAR_SLIDE_TEMA';
 export const FILTRAR_TEMA = 'FILTRAR_TEMA';
 export const MOVER_TEMA = 'MOVER_TEMA';
 export const TEMA_SUCESSO = 'TEMA_SUCESSO';
@@ -18,6 +19,16 @@ export function pegar_temas(dispatch) {
   );
 
 }
+
+export const inicializar_slide__tema = (swiper: object) => {
+  return {
+    type: INICIALIZAR_SLIDE_TEMA,
+    payload: {
+      swiper
+    }
+
+  }
+};
 
 export const filtrar_tema = (filtro: string) => {
   return {

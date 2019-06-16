@@ -2,12 +2,12 @@ import * as React from 'react';
 import './temas.scss';
 import {Usuario} from "../../models/usuario";
 import Titulo from "../../components/titulo/titulo";
-import {Tema, TemasAtuais} from "../../models/tema";
+import {Tema} from "../../models/tema";
 import {StateInterface} from "../../components/input/input";
 import {TemaHeader} from "./tema-header/tema-header";
 import {TemaFiltro} from "./tema-filtro/tema-filtro";
 import { connect } from 'react-redux';
-import {filtrar_tema, pegar_temas} from "../../redux/actions/tema-action";
+import {filtrar_tema, inicializar_slide__tema, pegar_temas} from "../../redux/actions/tema-action";
 import {TemaCard} from "./tema-card/tema-card";
 import {TemaArrow} from "./tema-arrow/tema-arrow";
 import {TemaButton} from "./tema-button/tema-button";
@@ -16,73 +16,23 @@ interface TemasInterface {
   usuario: Usuario,
   temas: Tema[],
   filtro: StateInterface,
+  swiper: object,
   carregando: boolean,
   erro: boolean
 
   //funcoes
   carregarTemas: Function,
   filtrar: Function,
+  inicializar_slide: Function,
 }
 
 class Temas extends React.Component<TemasInterface> {
-
-  atual: TemasAtuais;
 
   componentDidMount() {
 
     this.props.carregarTemas();
 
   }
-
-  /*
-  moverSelecionado(direcao: "esquerda" | "direita") {
-
-    let novoIndex = direcao === "esquerda" ? this.atual.indexAnterior : this.atual.indexProximo;
-    let indexMostrar = 0;
-
-    this.temas.forEach(tema => {
-
-      if(tema.mostrar){
-
-        if(indexMostrar === novoIndex)
-          tema.ativo = true;
-
-        else if(indexMostrar === this.atual.indexAtual)
-          tema.ativo = false;
-
-        indexMostrar++;
-
-      }
-
-    });
-
-    this.forceUpdate();
-
-  }
-
-
-  selecionadoTema = (e) => {
-
-    e.preventDefault();
-
-    let tema = this.temas.filter(tema => tema.mostrar)[this.atual.indexAtual];
-
-    this.props.usuario.iniciarJogo();
-
-    this.setState({
-      pagina_destino: {
-        pathname: '/questoes/carregando',
-        state: {
-          inicio: true,
-          tema: tema,
-          usuario: this.props.usuario,
-        }
-      },
-      push: true,
-    });
-
-  };
-  */
 
   render() {
 
@@ -96,8 +46,8 @@ class Temas extends React.Component<TemasInterface> {
             <Titulo texto="TEMAS"/>
           </div>
           <TemaFiltro filtro={props.filtro} filtrar={props.filtrar} mostrar={props.temas.length > 0} />
-          <TemaCard temas={props.temas} carregando={props.carregando} erro={props.erro} erroFunc={props.carregarTemas} atual={this.atual} moverFunc={() => {} /*this.moverSelecionado.bind(this) */}/>
-          <TemaArrow mostrar={props.temas.length > 0}/>
+          <TemaCard temas={props.temas} inicializar_slide={props.inicializar_slide} carregando={props.carregando} erro={props.erro} erroFunc={props.carregarTemas}/>
+          <TemaArrow mostrar={props.swiper != null} swiper={props.swiper}/>
           <TemaButton texto="SELECIONAR" mostrar={props.temas.length > 0} disabled={false}/>
         </form>
       </div>
@@ -111,6 +61,7 @@ const mapStateToProps = state => ({
   usuario: state.temaReducer.usuario,
   temas:   state.temaReducer.temas,
   filtro:  state.temaReducer.filtro,
+  swiper:  state.temaReducer.swiper,
   carregando: state.temaReducer.carregando,
   erro: state.temaReducer.erro,
 });
@@ -118,7 +69,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   carregarTemas: () => (pegar_temas(dispatch)),
   filtrar: (filtro: string) => dispatch(filtrar_tema(filtro)),
-  ///mover: (inputField: StateInterface) => dispatch(mudar_input_login(inputField)),
+  inicializar_slide: (swiper: object) => dispatch(inicializar_slide__tema(swiper)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Temas);
