@@ -47,18 +47,30 @@ export class TemaCard extends Component<TemaCardInterface>{
     let lista: JSX.Element[] = [];
 
     lista.push(
-      <div key="left" className={"card left skeleton"}/>
+      <div key="left" className={"card skeleton"}/>
     );
 
     lista.push(
-      <div key="center" className={"card card-selected skeleton"}/>
+      <div key="center" className={"card skeleton"}/>
     );
 
     lista.push(
-      <div key="right" className={"card right skeleton"} />
+      <div key="right" className={"card skeleton"} />
     );
 
-    return lista;
+    const params = {
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      autoHeight: true,
+      allowTouchMove: false
+    };
+
+    return (
+      <Swiper key="carregamento" {...params}>
+        { lista }
+      </Swiper>
+    )
 
   }
 
@@ -96,7 +108,7 @@ export class TemaCard extends Component<TemaCardInterface>{
       };
 
       return (
-        <Swiper {...params}>
+        <Swiper key="lista-completa" {...params}>
             { lista }
         </Swiper>
       )
