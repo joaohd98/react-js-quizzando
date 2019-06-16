@@ -25,11 +25,9 @@ export class TemaCard extends Component<TemaCardInterface>{
 
     else {
 
-      let temas = this.props.temas.filter(tema => tema.mostrar === undefined || tema.mostrar);
+      let tamanho = this.props.temas.length;
 
-      let tamanho = temas.length;
-
-      return tamanho === 0 ? this.gerarSemCard() : this.gerarCards(temas, tamanho);
+      return tamanho === 0 ? this.gerarSemCard() : this.gerarCards(this.props.temas, tamanho);
 
     }
 
@@ -110,6 +108,7 @@ export class TemaCard extends Component<TemaCardInterface>{
           { lista }
         </Swiper>
       )
+
 
     }
 

@@ -34,21 +34,37 @@ class Temas extends React.Component<TemasInterface> {
 
   }
 
+  pegarTemasFiltrado(){
+
+    return this.props.temas.filter(tema => tema.mostrar === undefined || tema.mostrar)
+
+  }
+
+  selecionarTema(e){
+
+    e.preventDefault();
+
+    let tema: Tema = this.pegarTemasFiltrado()[this.props.swiper['realIndex']];
+
+    console.log(tema);
+
+  }
+
   render() {
 
     let props = this.props;
 
     return (
       <div className="temas">
-        <form onSubmit={() => {}} method="post">
+        <form onSubmit={(e) => this.selecionarTema(e)} method="post">
           <TemaHeader nome={props.usuario.nome}/>
           <div className={`row row-sub-header`}>
             <Titulo texto="TEMAS"/>
           </div>
           <TemaFiltro filtro={props.filtro} filtrar={props.filtrar} mostrar={props.temas.length > 0} />
-          <TemaCard temas={props.temas} inicializar_slide={props.inicializar_slide} carregando={props.carregando} erro={props.erro} erroFunc={props.carregarTemas}/>
+          <TemaCard temas={this.pegarTemasFiltrado()} inicializar_slide={props.inicializar_slide} carregando={props.carregando} erro={props.erro} erroFunc={props.carregarTemas}/>
           <TemaArrow mostrar={props.swiper != null} swiper={props.swiper}/>
-          <TemaButton texto="SELECIONAR" mostrar={props.temas.length > 0} disabled={false}/>
+          <TemaButton texto="SELECIONAR" mostrar={props.temas.length > 0} disabled={this.pegarTemasFiltrado().length === 0}/>
         </form>
       </div>
     );
