@@ -31,28 +31,11 @@ class Carregando extends React.Component {
 
   componentWillMount() {
 
-    if (this.props['location'].state === undefined || this.props['location'].state.tema === undefined)
-      this.setState({pagina_destino: '/'});
-
-    else {
-
-      this.usuario = this.props['location'].state.usuario;
-      this.tema    = this.props['location'].state.tema;
-
-      if(this.props['location'].state.inicio)
-        this.inicio = true;
-
-      else
-        this.correta = this.props['location'].state.correta;
-
-    }
-
   }
 
   componentDidMount() {
 
-    window.history.replaceState({}, '/questoes/carregando');
-    window.addEventListener('resize', () => this.forceUpdate())
+    //window.addEventListener('resize', () => this.forceUpdate())
 
   }
 

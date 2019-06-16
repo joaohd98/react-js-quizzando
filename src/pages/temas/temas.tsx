@@ -11,8 +11,11 @@ import {filtrar_tema, inicializar_slide__tema, pegar_temas} from "../../redux/ac
 import {TemaCard} from "./tema-card/tema-card";
 import {TemaArrow} from "./tema-arrow/tema-arrow";
 import {TemaButton} from "./tema-button/tema-button";
+import {definir_tema} from "../../redux/actions/questoes-carregando-action";
+import browserHistory from "../../redux/store/browserHistory";
 
 interface TemasInterface {
+
   usuario: Usuario,
   temas: Tema[],
   filtro: StateInterface,
@@ -24,6 +27,8 @@ interface TemasInterface {
   carregarTemas: Function,
   filtrar: Function,
   inicializar_slide: Function,
+  selecionar_tema: Function,
+  definido_tema: Function
 }
 
 class Temas extends React.Component<TemasInterface> {
@@ -46,7 +51,9 @@ class Temas extends React.Component<TemasInterface> {
 
     let tema: Tema = this.pegarTemasFiltrado()[this.props.swiper['realIndex']];
 
-    console.log(tema);
+    this.props.definido_tema(tema);
+
+    browserHistory.push("/questoes/carregando")
 
   }
 
@@ -78,14 +85,15 @@ const mapStateToProps = state => ({
   temas:   state.temaReducer.temas,
   filtro:  state.temaReducer.filtro,
   swiper:  state.temaReducer.swiper,
+  erro:    state.temaReducer.erro,
   carregando: state.temaReducer.carregando,
-  erro: state.temaReducer.erro,
 });
 
 const mapDispatchToProps = dispatch => ({
   carregarTemas: () => (pegar_temas(dispatch)),
   filtrar: (filtro: string) => dispatch(filtrar_tema(filtro)),
   inicializar_slide: (swiper: object) => dispatch(inicializar_slide__tema(swiper)),
+  definido_tema: (tema: Tema) => dispatch(definir_tema(tema)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Temas);

@@ -1,8 +1,8 @@
 import {TemaProvider} from "../../providers/tema/tema-provider";
 
+export const SELECIONAR_TEMA = 'SELECIONAR_TEMA';
 export const INICIALIZAR_SLIDE_TEMA = 'INICIALIZAR_SLIDE_TEMA';
 export const FILTRAR_TEMA = 'FILTRAR_TEMA';
-export const MOVER_TEMA = 'MOVER_TEMA';
 export const TEMA_SUCESSO = 'TEMA_SUCESSO';
 export const TEMA_ERRO = 'TEMA_ERRO';
 export const TEMA_CARREGANDO = 'TEMA_CARREGANDO';
@@ -35,14 +35,6 @@ export const filtrar_tema = (filtro: string) => {
     type: FILTRAR_TEMA,
     payload: {
       filtro
-    }
-  }
-};
-export const mover_tema = (direcao: "esquerda" | "direita") => {
-  return {
-    type: MOVER_TEMA,
-    payload: {
-      direcao
     }
   }
 };
