@@ -7,6 +7,7 @@ import {CarregandoAcerto} from "./carregando-acerto/carregando-acerto";
 import {CarregandoErro} from "./carregando-erro/carregando-erro";
 import {CarregandoBotaoSubmit} from "./carregando-botao-submit/carregando-botao-submit";
 import { connect } from 'react-redux';
+import browserHistory from "../../redux/store/browserHistory";
 
 interface CarregandoInterface{
   usuario: Usuario,
@@ -17,6 +18,13 @@ interface CarregandoInterface{
 }
 
 class Carregando extends React.Component<CarregandoInterface> {
+
+  componentWillMount() {
+
+    if(this.props.tema === null)
+      browserHistory.replace("/temas");
+
+  }
 
   /*
   carregarPergunta(){
@@ -115,6 +123,7 @@ class Carregando extends React.Component<CarregandoInterface> {
         <CarregandoBotaoSubmit usuario={props.usuario} motivo={props.motivo} erro={props.erro} carregando={props.carregando} />
       </div>
     );
+
   }
 
 }

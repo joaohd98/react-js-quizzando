@@ -1,0 +1,18 @@
+
+.row-pergunta {
+
+  text-align: left;
+  background-color: white;
+  border-radius: 15px;
+  height: 20vh;
+  max-width: 600px;
+
+  p {
+
+    font-weight: bold;
+    padding: 0 10px;
+    color: var(--color-secondary);
+
+  }
+
+}

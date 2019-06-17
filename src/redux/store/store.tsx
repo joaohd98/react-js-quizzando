@@ -1,5 +1,5 @@
 import {applyMiddleware, createStore} from 'redux'
-import createRootReducer from '../reducers/reducers'
+import createRootReducer from '../reducers'
 import logger from 'redux-logger'
 import browserHistory from "./browserHistory";
 import thunk from "redux-thunk";

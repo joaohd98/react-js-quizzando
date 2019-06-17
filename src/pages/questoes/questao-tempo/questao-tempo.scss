@@ -1,0 +1,32 @@
+.row-tempo {
+
+  max-width: 600px;
+  border-radius: 5px;
+
+  span{
+
+    width: 50%;
+    font-size: 20px;
+    font-weight: bold;
+
+  }
+
+  span:first-child{
+
+    color: white;
+    text-align: left;
+
+  }
+
+  span:last-child {
+
+    text-align: right;
+    margin-right: 7px;
+
+    svg {
+      padding-left: 5px;
+    }
+
+  }
+
+}
