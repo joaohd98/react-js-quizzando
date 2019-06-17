@@ -4,7 +4,7 @@ import ButtonSubmit from "../button-submit/button-submit";
 
 interface RequestErroInterface {
   texto ?: string,
-  func?: Function
+  func?: Function,
 }
 
 class RequestErro extends Component<RequestErroInterface> {
@@ -32,7 +32,7 @@ class RequestErro extends Component<RequestErroInterface> {
   render() {
     return (
       <div key="center" className="erro-request">
-        <div>Ooops! <br/>{this.texto} deseja tentar novamente?</div>
+        <p>Ooops! <br/>{this.texto} deseja tentar novamente?</p>
         <ButtonSubmit texto="Tentar Novamente" func={this.tentar.bind(this)}/>
       </div>
     );

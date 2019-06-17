@@ -8,13 +8,16 @@ import {CarregandoErro} from "./carregando-erro/carregando-erro";
 import {CarregandoBotaoSubmit} from "./carregando-botao-submit/carregando-botao-submit";
 import { connect } from 'react-redux';
 import browserHistory from "../../redux/store/browserHistory";
+import {pegar_questao} from "../../redux/actions/questoes-carregando-action";
 
 interface CarregandoInterface{
   usuario: Usuario,
-  tema: Tema | null,
+  tema: Tema,
   motivo: 'inicio' | 'perdeu' | 'acertou',
   carregando: boolean,
-  erro: boolean
+  erro: boolean,
+  //funcoes
+  pegarQuestao: Function
 }
 
 class Carregando extends React.Component<CarregandoInterface> {
@@ -22,7 +25,7 @@ class Carregando extends React.Component<CarregandoInterface> {
   componentWillMount() {
 
     if(this.props.tema === null)
-      browserHistory.replace("/temas");
+      browserHistory.replace("/");
 
   }
 
@@ -102,7 +105,7 @@ class Carregando extends React.Component<CarregandoInterface> {
 
   */
 
-  gerarConteudo(){
+  gerarConteudo() {
 
     if(this.props.motivo === "acertou")
      return <CarregandoAcerto/>;
@@ -120,7 +123,8 @@ class Carregando extends React.Component<CarregandoInterface> {
       <div className="carregando">
         <CarregandoHeader usuario={props.usuario}/>
         { this.gerarConteudo() }
-        <CarregandoBotaoSubmit usuario={props.usuario} motivo={props.motivo} erro={props.erro} carregando={props.carregando} />
+        <CarregandoBotaoSubmit usuario={props.usuario} motivo={props.motivo} erro={props.erro} carregando={props.carregando}
+                               pegarQuestao={() => props.pegarQuestao(props.tema.id, props.usuario.id_respondidas)} />
       </div>
     );
 
@@ -136,6 +140,10 @@ const mapStateToProps = state => ({
   erro:       state.questoesCarregandoReducer.erro,
 });
 
+const mapDispatchToProps = dispatch => ({
+  pegarQuestao: (id_tema: number, id_respondidas: number[]) => (pegar_questao(id_tema, id_respondidas, dispatch))
+});
 
-export default connect(mapStateToProps, null)(Carregando);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Carregando);
 

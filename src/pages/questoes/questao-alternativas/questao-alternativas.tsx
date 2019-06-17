@@ -69,9 +69,8 @@ export class QuestaoAlternativas extends React.Component<QuestaoAlternativasInte
     this.props.questao.alternativas.forEach((alternativa: Alternativa, index) => {
 
       listaAlternativas.push(
-        <div key={alternativa.texto}
+        <div key={alternativa.texto} style={{pointerEvents: pointer}}
              className={`alternativa ${this.definirClasse(alternativa)}`}
-             style={{pointerEvents: pointer}}
              onClick={() => {}}>
           <p>{alternativa.texto}</p>
         </div>
@@ -82,7 +81,7 @@ export class QuestaoAlternativas extends React.Component<QuestaoAlternativasInte
 
   }
 
-  gerarConteudo(){
+  gerarConteudo() {
 
     if(this.props.erro)
       this.mostrarErro();

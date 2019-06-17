@@ -19,7 +19,7 @@ interface QuestoesInterface {
 
 class Questoes extends React.Component<QuestoesInterface> {
 
-  componentWillMount(){
+  componentWillMount() {
 
     if (this.props.questao === null)
       browserHistory.push('/');

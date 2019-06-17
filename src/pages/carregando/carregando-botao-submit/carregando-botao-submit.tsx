@@ -10,13 +10,14 @@ interface BotaoSubmitInterface {
   motivo: 'inicio' | 'perdeu' | 'acertou',
   carregando: boolean,
   erro: boolean,
+  pegarQuestao: Function
 }
 
 export class CarregandoBotaoSubmit extends React.Component<BotaoSubmitInterface> {
 
   funcChamda(){
 
-    return this.props.usuario.vidas > 0 ? () => {} : () => {} /* TODO this.carregarPergunta.bind(this) : this.adicionarRanking.bind(this) */
+    return this.props.usuario.vidas > 0 ? () => this.props.pegarQuestao() : () => {} /* TODO this.carregarPergunta.bind(this) : this.adicionarRanking.bind(this) */
 
   }
 
