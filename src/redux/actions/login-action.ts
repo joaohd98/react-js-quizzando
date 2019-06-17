@@ -11,6 +11,7 @@ export const entrar = (nome: string) => {
     }
   }
 };
+
 export const mudar_input_login = (state: StateInterface) => {
   return {
     type: MUDAR_INPUT_LOGIN,

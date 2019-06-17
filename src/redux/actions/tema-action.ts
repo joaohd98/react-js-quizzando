@@ -1,6 +1,5 @@
 import {TemaProvider} from "../../providers/tema/tema-provider";
 
-export const SELECIONAR_TEMA = 'SELECIONAR_TEMA';
 export const INICIALIZAR_SLIDE_TEMA = 'INICIALIZAR_SLIDE_TEMA';
 export const FILTRAR_TEMA = 'FILTRAR_TEMA';
 export const TEMA_SUCESSO = 'TEMA_SUCESSO';
