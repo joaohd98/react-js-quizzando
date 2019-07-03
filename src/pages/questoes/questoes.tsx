@@ -7,6 +7,7 @@ import {QuestaoHeader} from "./questao-header/questao-header";
 import {QuestaoTexto} from "./questao-texto/questao-texto";
 import {QuestaoTempo} from "./questao-tempo/questao-tempo";
 import {QuestaoAlternativas} from "./questao-alternativas/questao-alternativas";
+import { connect } from 'react-redux';
 
 interface QuestoesInterface {
   usuario: Usuario,
@@ -21,7 +22,7 @@ class Questoes extends React.Component<QuestoesInterface> {
 
   componentWillMount() {
 
-    if (this.props.questao === null)
+    if (this.props.questao == null)
       browserHistory.push('/');
 
   }
@@ -30,19 +31,36 @@ class Questoes extends React.Component<QuestoesInterface> {
 
     let props = this.props;
 
-    return (
-      <div className="questoes">
-        <form>
-          <QuestaoHeader usuario={props.usuario} />
-          <QuestaoTexto questao={props.questao}/>
-          <QuestaoTempo usuario={props.usuario} tempo={props.tempo} />
-          <QuestaoAlternativas questao={props.questao} carregando={props.carregando} erro={props.erro} finalizado={props.finalizado}  />
-        </form>
-      </div>
-    );
+    if(this.props.questao)
+      return (
+        <div className="questoes">
+          <form>
+            <QuestaoHeader usuario={props.usuario} />
+            <QuestaoTexto questao={props.questao}/>
+            <QuestaoTempo usuario={props.usuario} tempo={props.tempo} />
+            <QuestaoAlternativas questao={props.questao} carregando={props.carregando} erro={props.erro} finalizado={props.finalizado}  />
+          </form>
+        </div>
+      );
+
+    else
+      return <div/>
 
   }
 
 }
 
-export default Questoes;
+const mapStateToProps = state => ({
+  usuario: state.questoesReducer.usuario,
+  questao: state.questoesReducer.questao,
+  tempo: state.questoesReducer.tempo,
+  erro: state.questoesReducer.erro,
+  carregando: state.questoesReducer.carregando
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Questoes);
+

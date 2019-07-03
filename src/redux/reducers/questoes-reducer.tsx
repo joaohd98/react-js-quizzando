@@ -2,7 +2,7 @@ import {Usuario} from "../../models/usuario";
 import {Questao} from "../../models/questao";
 import {DEFINIR_QUESTAO} from "../actions/questoes-action";
 
-interface initial_interface {
+export interface QuestoesReduxInterface {
   usuario: Usuario,
   questao: Questao | null,
   tempo: number,
@@ -10,7 +10,7 @@ interface initial_interface {
   carregando: boolean
 }
 
-const initialState: initial_interface = {
+const initialState: QuestoesReduxInterface = {
   usuario: Usuario.pegarUsuario(),
   questao: null,
   tempo: 15,

@@ -1,6 +1,7 @@
 import {Tema} from "../../models/tema";
 import {PerguntaProvider} from "../../providers/pergunta/pergunta-provider";
 import {DEFINIR_QUESTAO} from "./questoes-action";
+import browserHistory from "../store/browserHistory";
 
 export const DEFINIDO_TEMA = 'DEFINIDO_TEMA';
 export const DEFINIDO_MOTIVO = 'DEFINIDO_MOTIVO';
@@ -14,7 +15,12 @@ export function pegar_questao(id_tema: number, id_respondidas: number[], dispatc
   dispatch({type: QUESTOES_CARREGANDO});
 
   api.then(res => res.json()).then(
-    questao => dispatch({type: DEFINIR_QUESTAO, payload: {questao}}),
+    questao => {
+
+      dispatch({type: DEFINIR_QUESTAO, payload: {questao}});
+      browserHistory.push("/questoes");
+
+    },
     () => dispatch({type: QUESTOES_ERRO})
   );
 
@@ -26,7 +32,6 @@ export const definir_motivo = (motivo: string) => {
     payload: {
       motivo
     }
-
   }
 };
 
